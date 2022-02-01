@@ -7,5 +7,5 @@ setup(name='iat',
       author='David Albert',
       author_email='david.albert@insa-lyon.fr',
       packages=[],
-      install_requires=['gym[classic_control]==0.18.0', 'gym[box2d]==0.18.0', 'gym[atari]==0.18.0', 'gym[board_game]==0.18.0', 'numpy', 'matplotlib']
+      install_requires=['scikit-build','gym[classic_control]==0.18.0', 'gym[box2d]==0.18.0', 'gym[atari]==0.18.0', 'gym[board_game]==0.18.0', 'numpy', 'matplotlib']
 )

@@ -8,3 +8,6 @@ class AgentInterface:
         Select an action given the current policy and a state
         """
         pass
+
+    def select_greedy_action(self, state):
+        return self.select_action(state)

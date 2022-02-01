@@ -4,6 +4,7 @@ import time
 
 from agent import AgentInterface
 from agent.qagent import QAgent
+from agent.viagent import VIAgent
 from epsilon_profile import EpsilonProfile
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
@@ -43,7 +44,7 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 def main():
 
-    env = Maze(7, 7, 10)
+    env = Maze(15, 15, 30)
 
     print(env.maze)
     print('num_actions:', env.action_space.n)
@@ -51,8 +52,8 @@ def main():
     print('starting point:', env.init_state)
     print('goal:', env.terminal_state)
 
-    n_episodes = 30
-    max_steps = 500
+    n_episodes = 1000
+    max_steps = 2000
     alpha = 0.2
     gamma = 1.0
     eps_profile = EpsilonProfile(1., 1., 0., 0.)
@@ -62,6 +63,29 @@ def main():
     agent.learn(env, n_episodes, max_steps)
 
     test_maze(env, agent, max_steps, speed=0.1, display=True)
+
+
+    # n_episodes = 30
+    # max_steps = 500
+    # gamma = 1.0
+
+    # env = DeterministicMazeModel(15, 15, 30)
+
+    # print(env.maze)
+    # print('num_actions:', env.action_space.n)
+    # print('length of shortest path:', env.shortest_length)
+    # print('starting point:', env.init_state)
+    # print('goal:', env.terminal_state)
+
+    # viagent = VIAgent(env, gamma)
+    # viagent.solve(0.01)
+    # print(viagent.V)
+    # test_maze(env, viagent, max_steps, speed=0.1, display=True)
+
+
+    # randagent = RandomAgent(env.action_space.n)
+    # test_maze(env, randagent, max_steps, speed=0.1, display=True)
+
 
     # env = DeterministicMazeModel()
 
