@@ -1,17 +1,10 @@
-# Sujet : TP 2
+# TP 2 : Résolution des labyrinthes
+
+Dans ce problème, on s'intéresse à la résolution de toutes les instances de labyrinthe de taille fixé.
 
 ## Partie 1 : Théorie
-
-1. Calculer fonction de valeur V(s) associer au labyrinthe suivant
-  - parameters : gamma = 1.0
-  - R_t(s, a) = -1 pour tout s, pour tout a, et pour tout t
-  - Transition déterministes
-
-2. Calculer fonction de valeur V(s) associer au labyrinthe suivant
-  - parameters : gamma = 1.0
-  - R_t(s, a) = -1 pour tout s, pour tout a, et pour tout t
-  - Transition stochastiques (modèle à définir) 
+Explication de l'intérêt de la représentation de Q par un réseau de neurones (nombre d'états trop grands (potentiellement infini) donc nécessité de généraliser).
 
 ## Partie 2 : DQN 
-- Lire et compléter le fichier Value Iteration (agent/viagent.py)
+- Lire et compléter le fichier Value Iteration (agent/dqn_agent.py)
 
