@@ -104,8 +104,7 @@ class QAgent(AgentInterface):
         :return: L'action 
         """
         if np.random.rand() < self.epsilon:
-            a = np.random.randint(
-                self.maze.action_space.n)      # random action
+            a = np.random.randint(self.maze.action_space.n)      # random action
         else:
             a = self.select_greedy_action(state)
         return a
