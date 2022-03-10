@@ -1,10 +1,9 @@
 import numpy as np
 import gym
-
 from agent import AgentInterface
 from world.maze import Maze
 from epsilon_profile import EpsilonProfile
-
+import pandas as pd
 
 class QAgent(AgentInterface):
     """ 
@@ -37,6 +36,7 @@ class QAgent(AgentInterface):
 
         self.gamma = gamma
         self.alpha = alpha
+        self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
 
     def learn(self, env, n_episodes, max_steps):
         """Cette méthode exécute l'algorithme de q-learning. 
@@ -76,14 +76,24 @@ class QAgent(AgentInterface):
                 state = next_state
                 epsilon = max(self.epsilon - self.eps_profile.dec_step, self.eps_profile.final)
 
-            if n_episodes > 0:
+            if n_episodes >= 0:
                 self.epsilon = max(epsilon - self.eps_profile.dec_episode / (n_episodes - 1.), self.eps_profile.final)
                 state = env.reset_using_existing_maze()
+                #self.qvalues.append(self.Q[state[0],state[1], self.select_greedy_action(state)]);
+                #print(self.qvalues)
+                self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
 
             # test_n_steps[episode], test_sum_rewards[episode] = Q_test_maze(
             #     env, Q, max_steps)
-
+        #print("qvalues : ",self.qvalues)
+        '''
+        f = open("log.txt", "w")
+        for x in range(len(self.qvalues)):
+            f.write("\n Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]))
+            '''
+        print(self.qvalues)
+        self.qvalues.to_csv('log.csv')
     def updateQ(self, state, action, reward, next_state):
         """À COMPLÉTER!
         Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 
