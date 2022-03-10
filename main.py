@@ -36,15 +36,18 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 
 def main(agent, opt):
-
-    env = Maze(7, 7, 14)
-    # env = DeterministicMazeModel(15, 15, 30)
+# 
+    env = Maze(7, 7, min_shortest_path=14)
+    # env = Maze(9, 9, min_shortest_path=20) # Create a 9x9 maze
+    # env = Maze(15, 15, min_shortest_path=40) # Create a 15x15 maze
+    # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
+    # env = DeterministicMazeModel(15, 15, min_shortest_path=30) # Create a deterministic maze model
         
-    n_episodes = 30
-    max_steps = 500
+    n_episodes = 200
+    max_steps = 60
     alpha = 0.2
     gamma = 1.0
-    eps_profile = EpsilonProfile(1., 1., 0., 0.)
+    eps_profile = EpsilonProfile(1., 0.1, 1., 0.)
 
     print(env.maze)
     print('num_actions:', env.action_space.n)
@@ -67,6 +70,11 @@ def main(agent, opt):
 
 
 if __name__ == '__main__':
+    """ Usage : python main.py [ARGS]
+    - First argument (str) : the name of the agent (i.e. 'random', 'vi', 'qlearning', 'dqn')
+    - Second argument (int) : the maze hight
+    - Third argument (int) : the maze width
+    """
     if (len(sys.argv) > 2):
         main(sys.argv[1], sys.argv[2:])
     if (len(sys.argv) > 1):

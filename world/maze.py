@@ -17,21 +17,27 @@ from .maze_generator import MazeGenerator
 class Maze(gym.Env):
     """
     Description:
-        Un robot recherche la sortie d'un labyrinthe.
+        Un robot recherche un objet dans un labyrinthe.
+        Ce code n'a pas besoin d'être compris. On prendra simplement
+        le soin savoir manipuler l'environnement "Maze" via ses méthodes:
+            - __init__ (constructeur de Maze)
+            - reset
+            - reset_using_existing_maze
+            - step
+            - render
+            - from_file (crée un labyrinthe depuis un fichier)
     Observation:
         Type: Box(4)
-        Num	Observation                                 Min         Max
-        0	Bird X Distance to next platform            -Inf        Inf
-        1	Bird Y Distance to next platform            -Inf        Inf
-        2	Bird X Velocity                             -Inf        Inf
-        3	Bird Y Velocity                             -Inf        Inf
+        Num	    Observation         Min     Max
+        y	    Y coordinate        0       ny
+        x	    X coordinate        0       nx
     Actions:
         Type: Discrete(4)
-        Num	Action
-        0	Up
-        1	Down
-        2	Left
-        3	Right
+        Num	    Action
+        0	    Up
+        1	    Down
+        2	    Left
+        3	    Right
     """
     URL_ROBOT = os.path.join(os.path.dirname(assets.__file__), "robot.png")
 
@@ -88,6 +94,47 @@ class Maze(gym.Env):
                    self.terminal_state[1], 2] = 1   # goal location
             return np.copy(self.s)
 
+    @classmethod
+    def from_file(cls, filename: str):
+        """ Load a maze describes in a file. 
+        
+        Description:
+            - P : Path 
+            - W : Wall
+            - S : Starting
+            - G : Goal
+
+        Exemple : 
+            WWWWWWW
+            WSPPPPW
+            WWWWWPW
+            WPPGWPW
+            WPWWWPW
+            WPPPPPW
+            WWWWWWW
+
+        :param filename: name of the file
+        :type filename: str
+        """
+        file = open(filename, 'r')
+        grid = file.readlines()
+        maze_ = Maze(len(grid[0])-1, len(grid))
+        for y, line in enumerate(grid):
+            for x, val in enumerate(line):
+                if (val not in {'\n', '\t', ' ', '\r'}):
+                    print(x," - ",y, " = ", val)
+                    if val in {"W"}:
+                        maze_.maze[y,x] = 1
+                    elif val in {"P", "S", "G"}:
+                        maze_.maze[y,x] = 0
+                    else:
+                        raise ValueError("When parsing, bad symbole were found : {} ".format(val))
+                    if val is "G":
+                        maze_.terminal_state = (y, x)
+                    if val is "S":
+                        maze_.init_state = (y, x)
+        return maze_
+                
     def step(self, action):      # take action and returns next state, reward, terminal
         if self.terminal:
             print(
