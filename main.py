@@ -8,6 +8,7 @@ from agent.qagent import QAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from epsilon_profile import EpsilonProfile
+from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
 
@@ -57,16 +58,22 @@ def main(agent, opt):
 
     if (agent == "random"):
         agent = RandomAgent(env.action_space.n)
+        test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "vi"):
         agent = VIAgent(env, gamma)
         agent.solve(0.01)
+        test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
+        test_maze(env, agent, max_steps, speed=0.1, display=True)
+    elif (agent=="logAnalysis"):
+        agent = logAnalysis(opt)
+        agent.printCurves()
     else:
         print("Error : Unknown agent name (" + agent + ").")
     
-    test_maze(env, agent, max_steps, speed=0.1, display=True)
+    
 
 
 if __name__ == '__main__':

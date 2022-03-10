@@ -4,34 +4,38 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 ## Partie 1 : Théorie (30min)
 
-1. Rappeler les équations de Bellman pour V
+1. Rappeler les équations d'optimalité de Bellman pour V^*
 
-2. Calculer fonction de valeur V(s) associer au labyrinthe suivant (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
+2. Calculer fonction de valeur V^* associer au labyrinthe suivant (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
   - parameters : gamma = 1.0
-  - R_t(s, a) = -1 pour tout s, pour tout a, et pour tout t
+  - R(s, a) = -1 pour tout s, pour tout a
   - **Transition déterministes** 
 
 3. Calculer fonction de valeur V(s) associer au même labyrinthe (cette fois le modèle de transition est stochastique)
   - parameters : gamma = 1.0
-  - R_t(s, a) = -1 pour tout s, pour tout a, et pour tout t
+  - R(s, a) = -1 pour tout s, pour tout a
   - **Transition stochastiques** (modèle à définir) 
 
-## Partie 2 : Value Iteration (30min)
+## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
-**Intro** : Quand on connait le modèle de la dynamique (T et R), on peut utiliser un algorithme de planification 
-pour déterminer la politique d'action optimale.
+**Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
+pour déterminer la politique optimale.
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
-- Lancer la programme principal avec comme parametre VI et le chemin vers le laryrinthe en txt
+- Lancer la programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
   - `python main.py vi ./assets/maze_exo1.txt`
   - `python main.py vi ./assets/maze_exo1.txt --stochastic`
 - Comparer les résultats obtenus au résultats théoriques
-- **Bonus** : Algo d'évaluation de la valeur ou TD-learning ou Monte-Carlo
+- **Bonus** : Implémenter l'algorithme d'évaluation de la valeur ou TD-learning ou Monte-Carlo
 
-## Partie 3 : Q-Learning (40min)
+## Partie 2.5 : Visualisation
 
-**Intro** : Parfois, le modèle de la dynamique (T et R) est inconnu. On peut simplement échantilloner interagir avec le problème et récupérer 
-des informations au fil de l'eau. On parle d'algorithmes d'apprentissage (par renforcement).
+- A tout moment, python3 main.py logAnalysis peut être lancé pour afficher dans un navigateur un graphe montrant l'évolution de la Q-valeur du dernier algorithme lancé.
+
+## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
+
+**Intro** : Parfois, les modèles de la dynamique (T et R) sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer 
+des informations au fil de l'eau, il est alors possible d'implementer des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
 
 1. Lire et compléter le fichier Q-learning (agent/qagent.py)
 2. Lancer le fichier main.py pour vérifier les résultats `python main.py qlearning`
@@ -42,7 +46,7 @@ des informations au fil de l'eau. On parle d'algorithmes d'apprentissage (par re
   - Analyser les résultats
   - Quel est l'intérêt de faire décroître ce paramètre ?
   
-**Bonus**: Ici on pourrait comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
+**Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
 ## Partie 3 : Reinforce (Complémentaire)
 (à faire)

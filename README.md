@@ -12,7 +12,7 @@ Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Tél�
 git clone https://github.com/blavad/IAT.git
 cd IAT
 ```
-2. Utiliser un environnement virtuel python
+2. Utiliser un environnement virtuel python (optionnel)
 ```bash
 python3 -m venv .env
 source .env/bin/activate
