@@ -37,11 +37,11 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 
 def main(agent, opt):
-    #env = Maze(7, 7, min_shortest_path=14)
+    #env = Maze(15,15,30)
     # env = Maze(9, 9, min_shortest_path=20) # Create a 9x9 maze
     # env = Maze(15, 15, min_shortest_path=40) # Create a 15x15 maze
     # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
-    env = DeterministicMazeModel(15, 15, 0) # Create a deterministic maze model
+    env = DeterministicMazeModel(10, 10, 30) # Create a deterministic maze model
         
     n_episodes = 200
     max_steps = 60
@@ -59,11 +59,8 @@ def main(agent, opt):
         agent = RandomAgent(env.action_space.n)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "vi"):
-        print("here")
         agent = VIAgent(env, gamma)
-        print("solving")
         agent.solve(0.01)
-        print("end solving")
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
@@ -72,10 +69,6 @@ def main(agent, opt):
     elif(agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
-        return
-    elif (agent=="logAnalysisVI"):
-        agent = logAnalysisVi(opt)
-        res = agent.printCurves()
         return
     else:
         print("Error : Unknown agent name (" + agent + ").")
