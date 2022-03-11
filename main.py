@@ -39,10 +39,10 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 def main(agent, opt):
 
     env = Maze(15,15,30)
-    # env = DeterministicMazeModel(15, 15, 30)
-        
-    n_episodes = 300
-    max_steps = 1000
+    #env = DeterministicMazeModel(5, 5, 10)
+
+    n_episodes = 30
+    max_steps = 100
     alpha = 0.2
     gamma = 1.0
     eps_profile = EpsilonProfile(1., 1., 0., 0.)
@@ -57,8 +57,11 @@ def main(agent, opt):
         agent = RandomAgent(env.action_space.n)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "vi"):
+        print("here")
         agent = VIAgent(env, gamma)
+        print("solving")
         agent.solve(0.01)
+        print("end solving")
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
