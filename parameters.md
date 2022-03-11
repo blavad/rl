@@ -48,6 +48,7 @@ self.layers = nn.Sequential(
 - max_steps = 50
 - gamma = 1.
 - alpha = 0.001
+- 
 - eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
 - final_exploration_episode = 1000
 - batch_size = 32

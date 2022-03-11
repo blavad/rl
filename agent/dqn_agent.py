@@ -16,6 +16,7 @@ class DQNAgent(QAgent):
     Cette classe d'agent représente un agent utilisant la méthode du Q-learning 
     pour mettre à jour sa politique d'action.
     """
+    TEST_FREQUENCY = 100
 
     def __init__(self, qnetwork: nn.Module, eps_profile: EpsilonProfile, gamma: float, alpha: float, replay_memory_size: int = 1000, batch_size: int = 32, target_update_freq: int = 100, tau: float = 1., final_exploration_episode : int = 500):
         """
@@ -101,8 +102,6 @@ class DQNAgent(QAgent):
             state = env.reset()
             # Execute K steps
             for step in range(max_steps):
-                
-                # env.render()
                 # Selectionne une action
                 action = self.select_action(state)
 
@@ -135,23 +134,17 @@ class DQNAgent(QAgent):
                     self.hard_update()
 
             n_ckpt = 10
-            n_test_period = 100
-            if episode % n_test_period == n_test_period - 1:   # for testing
-                test_score, test_extra_steps = self.run_tests(
-                    env, 100, max_steps)
-                # print test score and # of time steps to achieve the score
-                state = env.reset()
+            if episode % DQNAgent.TEST_FREQUENCY == DQNAgent.TEST_FREQUENCY - 1:   
+                test_score, test_extra_steps = self.run_tests(env, 100, max_steps)
                 print('episode: %4d, frames: %6d, train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f, test success ratio: %.2f, epsilon: %.2f, elapsed time: %.1f'
                       % (episode + 1, self.ds, np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
 
         n_test_runs = 100
-        test_score, test_extra_steps = self.run_tests(
-            env, n_test_runs, max_steps)
+        test_score, test_extra_steps = self.run_tests(env, n_test_runs, max_steps)
         for k in range(n_test_runs):
             print(test_extra_steps[k])
         print('Final test score: %.1f' % test_score)
-        print('Final test success ratio: %.2f' %
-              (np.sum(test_extra_steps == 0) / n_test_runs))
+        print('Final test success ratio: %.2f' % (np.sum(test_extra_steps == 0) / n_test_runs))
 
     def updateQ(self, state, action, reward, next_state, terminal):
         """À COMPLÉTER!
@@ -185,13 +178,14 @@ class DQNAgent(QAgent):
             # Récupère les batch de données associés
             x_batch, a_batch, r_batch, y_batch, t_batch = torch.from_numpy(self.Ds[c]), torch.from_numpy(
                 self.Da[c]), torch.from_numpy(self.Dr[c]),  torch.from_numpy(self.Dsn[c]), torch.from_numpy(self.Dt[c])
+
             # Calcul de la valeur courante
             current_value = self.policy_net(x_batch).gather(1, a_batch.max(1).indices.unsqueeze(1)).squeeze(1)
             # Calcul de la valeur cible
             target_value = self.target_net(y_batch).max(1).values * self.gamma * (1. - t_batch) + r_batch
 
-            # La fonction 'detach' stoppe la rétropopagation du gradient à 
-            # travers une partie du graphe (ici target network)
+            # La fonction 'detach' arrête la rétropopagation du gradient à 
+            # travers la partie du graphe concernée (ici target network)
             loss = self.criterion(current_value, target_value.detach())
 
             loss.backward()
@@ -217,7 +211,7 @@ class DQNAgent(QAgent):
         for target_param, local_param in zip(self.target_net.parameters(), self.policy_net.parameters()):
             target_param.data.copy_(tau*local_param.data + (1.0 - tau) * target_param.data)
 
-    def run_tests(self, env, n_runs, max_steps, printenv=False):
+    def run_tests(self, env, n_runs, max_steps):
         test_score = 0.
         extra_steps = np.zeros((n_runs, 2))
         for k in range(n_runs):
