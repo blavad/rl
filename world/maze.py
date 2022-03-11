@@ -69,8 +69,7 @@ class Maze(gym.Env):
 
     def reset(self):       # generate a new maze and reset state
         while True:
-            maze, shortest_length, p1, p2 = MazeGenerator.make_with_goal(
-                self.nx, self.ny)
+            maze, shortest_length, p1, p2 = MazeGenerator.make_with_goal(self.nx, self.ny)
             if shortest_length >= self.min_shortest_length:
                 break
         self.maze = maze
@@ -86,13 +85,13 @@ class Maze(gym.Env):
         if self.mode == 'tabular':    # tabular mode
             return self.loc
         else:    # neural network mode
-            self.s = np.zeros([self.ny, self.nx, self.nf])
-            self.s[:, :, 0] = self.maze
+            self.s = np.zeros([self.nf, self.ny, self.nx])
+            self.s[0, :, :] = self.maze
             # initial location of agent
-            self.s[self.init_state[0], self.init_state[1], 1] = 1
-            self.s[self.terminal_state[0],
-                   self.terminal_state[1], 2] = 1   # goal location
+            self.s[1, self.init_state[0], self.init_state[1]] = 1
+            self.s[2, self.terminal_state[0], self.terminal_state[1]] = 1   # goal location
             return np.copy(self.s)
+
 
     @classmethod
     def from_file(cls, filename: str):
@@ -165,8 +164,8 @@ class Maze(gym.Env):
             self.loc = loc_new
             return loc_new, reward, self.terminal
         else:
-            self.s[self.loc[0], self.loc[1], 1] = 0
-            self.s[loc_new[0], loc_new[1], 1] = 1
+            self.s[1, self.loc[0], self.loc[1]] = 0
+            self.s[1, loc_new[0], loc_new[1]] = 1
             self.loc = loc_new
             return np.copy(self.s), reward, self.terminal
 

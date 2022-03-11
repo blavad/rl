@@ -94,6 +94,7 @@ class QAgent(AgentInterface):
             '''
         print(self.qvalues)
         self.qvalues.to_csv('log.csv')
+        
     def updateQ(self, state, action, reward, next_state):
         """À COMPLÉTER!
         Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 

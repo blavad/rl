@@ -1,16 +1,24 @@
+import imp
 import sys
 import time
-import gym
-import numpy as np
+import argparse
 
-from agent import AgentInterface
 from agent.qagent import QAgent
+from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from epsilon_profile import EpsilonProfile
+from networks import MLP, CNN
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
+
+# parser = argparse.ArgumentParser(description='Maze parameters')
+# parser.add_argument('--algo', type=str, default="random", metavar='a', help='algorithm to use (default: 7)')
+# parser.add_argument('--width', type=int, default=7, metavar='w', help='width of the maze (default: 7)')
+# parser.add_argument('--height', type=int, default=7, metavar='h', help='height of the maze (default: 7)')
+# parser.add_argument('--shortest_path', type=int, default=14, metavar='p', help='shortest distance between starting point and goal point (default: 14)')
+# args = parser.parse_args()
 
 # test once by taking greedy actions based on Q values
 def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., display: bool = False):
@@ -38,17 +46,18 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 def main(agent, opt):
 # 
-    env = Maze(7, 7, min_shortest_path=14)
-    # env = Maze(9, 9, min_shortest_path=20) # Create a 9x9 maze
-    # env = Maze(15, 15, min_shortest_path=40) # Create a 15x15 maze
+    env = Maze(5, 5, min_shortest_length=0) 
+    # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
+    # env = Maze(15, 15, min_shortest_length=40) # Create a 15x15 maze
     # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
-    # env = DeterministicMazeModel(15, 15, min_shortest_path=30) # Create a deterministic maze model
+    # env = DeterministicMazeModel(15, 15, min_shortest_length=30) # Create a deterministic maze model
         
-    n_episodes = 200
-    max_steps = 60
-    alpha = 0.2
-    gamma = 1.0
+    n_episodes = 2000
+    max_steps = 50
+    gamma = 1.
+    alpha = 0.001
     eps_profile = EpsilonProfile(1., 0.1, 1., 0.)
+    # eps_profile = EpsilonProfile(1., 0.1, 1., 0.5)
 
     print(env.maze)
     print('num_actions:', env.action_space.n)
@@ -67,6 +76,13 @@ def main(agent, opt):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
+    elif (agent == "dqn"):
+        env.mode = "nn"
+        # nn = MLP(env.ny, env.nx, env.nf, env.na)
+        nn = CNN(env.ny, env.nx, env.nf, env.na)
+        agent = DQNAgent(nn, eps_profile, gamma, alpha)
+        agent.learn(env, n_episodes, max_steps)
+        test_maze(env, agent, max_steps, speed=0.1, display=False)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
