@@ -37,6 +37,7 @@ class QAgent(AgentInterface):
         self.gamma = gamma
         self.alpha = alpha
         self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
+        self.mazeValues = pd.DataFrame(data={'episode': maze.nx, 'value': [maze.ny]})
 
     def learn(self, env, n_episodes, max_steps):
         """Cette méthode exécute l'algorithme de q-learning. 
@@ -83,6 +84,13 @@ class QAgent(AgentInterface):
                 #print(self.qvalues)
                 self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
+                print("nx : ", self.maze.nx)
+                V = np.zeros((int(self.maze.nx),int(self.maze.ny)))
+                for y in range(self.maze.ny):
+                    for x in range(self.maze.nx):
+                        val = self.Q[int(y),int(x),self.select_action((y,x))]
+                        V[y,x] = val;
+                self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
 
             # test_n_steps[episode], test_sum_rewards[episode] = Q_test_maze(
             #     env, Q, max_steps)
@@ -93,6 +101,7 @@ class QAgent(AgentInterface):
             f.write("\n Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]))
             '''
         print(self.qvalues)
+        self.mazeValues.to_csv('logVI.csv')
         self.qvalues.to_csv('log.csv')
     def updateQ(self, state, action, reward, next_state):
         """À COMPLÉTER!

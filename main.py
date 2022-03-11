@@ -41,7 +41,7 @@ def main(agent, opt):
     # env = Maze(9, 9, min_shortest_path=20) # Create a 9x9 maze
     # env = Maze(15, 15, min_shortest_path=40) # Create a 15x15 maze
     # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
-    env = DeterministicMazeModel(5, 5, 0) # Create a deterministic maze model
+    env = DeterministicMazeModel(15, 15, 0) # Create a deterministic maze model
         
     n_episodes = 200
     max_steps = 60

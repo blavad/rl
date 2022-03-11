@@ -63,5 +63,5 @@ im = plt.imshow(data, cmap='gist_gray_r', vmin=0, vmax=vmax)
 
 
 anim = animation.FuncAnimation(fig, animate, init_func=init, frames=n-1,
-                               interval=500,repeat=False)
+                               interval=50,repeat=False)
 plt.show()
