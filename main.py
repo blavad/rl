@@ -12,6 +12,8 @@ from networks import MLP, CNN
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
+from logAnalysis import logAnalysis
+from logAnalysisVi import logAnalysisVi
 
 # parser = argparse.ArgumentParser(description='Maze parameters')
 # parser.add_argument('--algo', type=str, default="random", metavar='a', help='algorithm to use (default: 7)')
@@ -46,7 +48,7 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 def main(agent, opt):
 # 
-    env = Maze(5, 5, min_shortest_length=0) 
+    env = Maze(7, 7, min_shortest_length=0) 
     # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
     # env = Maze(15, 15, min_shortest_length=40) # Create a 15x15 maze
     # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
@@ -57,7 +59,6 @@ def main(agent, opt):
     gamma = 1.
     alpha = 0.001
     eps_profile = EpsilonProfile(1., 0.1, 1., 0.)
-    # eps_profile = EpsilonProfile(1., 0.1, 1., 0.5)
 
     print(env.maze)
     print('num_actions:', env.action_space.n)
@@ -69,28 +70,34 @@ def main(agent, opt):
         agent = RandomAgent(env.action_space.n)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "vi"):
+        print("here")
         agent = VIAgent(env, gamma)
+        print("solving")
         agent.solve(0.01)
+        print("end solving")
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "dqn"):
+        # A COMPLETER 
         env.mode = "nn"
-        # nn = MLP(env.ny, env.nx, env.nf, env.na)
-        nn = CNN(env.ny, env.nx, env.nf, env.na)
+        nn = MLP(env.ny, env.nx, env.nf, env.na) 
+        nn = CNN(env.ny, env.nx, env.nf, env.na) 
         agent = DQNAgent(nn, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
         test_maze(env, agent, max_steps, speed=0.1, display=False)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
+        return
+    elif (agent=="logAnalysisVI"):
+        agent = logAnalysisVi(opt)
+        res = agent.printCurves()
+        return
     else:
         print("Error : Unknown agent name (" + agent + ").")
-    
-    
-
 
 if __name__ == '__main__':
     """ Usage : python main.py [ARGS]
