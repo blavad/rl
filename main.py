@@ -2,6 +2,7 @@ import imp
 import sys
 import time
 import argparse
+import torch
 
 from agent.qagent import QAgent
 from agent.dqn_agent import DQNAgent
@@ -22,32 +23,33 @@ from logAnalysis import logAnalysis
 # args = parser.parse_args()
 
 # test once by taking greedy actions based on Q values
-def test_maze(env: Maze, agent: QAgent, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
+def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
     n_steps = max_steps
     sum_rewards = 0.
-    state = env.reset_using_existing_maze() if (same) else env.reset()
-    if display:
-        env.render()
-
-    for step in range(max_steps):
-        action = agent.select_greedy_action(state)
-        next_state, reward, terminal = env.step(action)
-
+    for _ in range(nepisodes):
+        state = env.reset_using_existing_maze() if (same) else env.reset()
         if display:
-            time.sleep(speed)
             env.render()
 
-        sum_rewards += reward
-        if terminal:
-            n_steps = step+1  # number of steps taken
-            break
-        state = next_state
+        for step in range(max_steps):
+            action = agent.select_greedy_action(state)
+            next_state, reward, terminal = env.step(action)
+
+            if display:
+                time.sleep(speed)
+                env.render()
+
+            sum_rewards += reward
+            if terminal:
+                n_steps = step+1  # number of steps taken
+                break
+            state = next_state
     return n_steps, sum_rewards
 
 
 def main(agent, opt):
 # 
-    env = Maze(6, 6, min_shortest_length=0) 
+    env = Maze(7, 7, min_shortest_length=0) 
     # env = Maze(7, 7, min_shortest_length=15) 
     # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
     # env = Maze(14, 14, min_shortest_length=40) # Create a 15x15 maze
@@ -55,18 +57,18 @@ def main(agent, opt):
     # env = DeterministicMazeModel(15, 15, min_shortest_length=30) # Create a deterministic maze model
         
     # WARNING : Pour Aurélien et Jilles : ces paramètres sont pour DQN (à changer pour VI et Q-learning tabulaire)  
-    n_episodes = 5000
-    max_steps = 50
+    n_episodes = 15000
+    max_steps = 80
     gamma = 1.
-    alpha = 0.0005
-    eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
+    alpha = 0.00025
+    eps_profile = EpsilonProfile(1.0, 0.2, 1., 0.)
 
 
     # Hyperparamètres de DQN
-    final_exploration_episode = 2000
-    batch_size = 32
-    replay_memory_size = 1000
-    target_update_frequency = 100
+    final_exploration_episode = 5000
+    batch_size = 64
+    replay_memory_size = 10000
+    target_update_frequency = 1000
     tau = 1.0
 
     print(env.maze)
@@ -93,7 +95,7 @@ def main(agent, opt):
         nn = CNN(env.ny, env.nx, env.nf, env.na) 
         agent = DQNAgent(nn, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
         agent.learn(env, n_episodes, max_steps)
-        test_maze(env, agent, max_steps, speed=0.1, display=True, same=False)
+        test_maze(env, agent, max_steps, 10, speed=0.1, display=True, same=False)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()

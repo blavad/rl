@@ -47,9 +47,11 @@ class Maze(gym.Env):
         self.min_shortest_length = min_shortest_length
         # number of planes (walls, agent's location, goal location)
         self.nf = 3
-        self.na = 4        # number of actions
+        # number of actions
+        self.na = 4       
+        # Can be 'tabular' or 'nn' 
         self.mode = mode
-
+        
         _ = self.reset()
 
         self.action_space = spaces.Discrete(4)

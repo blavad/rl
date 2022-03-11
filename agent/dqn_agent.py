@@ -101,7 +101,8 @@ class DQNAgent(QAgent):
             state = env.reset()
             # Execute K steps
             for step in range(max_steps):
-
+                
+                # env.render()
                 # Selectionne une action
                 action = self.select_action(state)
 
@@ -139,8 +140,9 @@ class DQNAgent(QAgent):
                 test_score, test_extra_steps = self.run_tests(
                     env, 100, max_steps)
                 # print test score and # of time steps to achieve the score
-                print('episode: %4d, frames: %6d, train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f, test success ratio: %.2f, elapsed time: %.1f'
-                      % (episode + 1, self.ds, np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), np.sum(test_extra_steps == 0) / 100, time.time() - start_time))
+                state = env.reset()
+                print('episode: %4d, frames: %6d, train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f, test success ratio: %.2f, epsilon: %.2f, elapsed time: %.1f'
+                      % (episode + 1, self.ds, np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
 
         n_test_runs = 100
         test_score, test_extra_steps = self.run_tests(
@@ -213,8 +215,7 @@ class DQNAgent(QAgent):
         """ Cette fonction fait mise à jour glissante du réseau de neurones cible 
         """
         for target_param, local_param in zip(self.target_net.parameters(), self.policy_net.parameters()):
-            target_param.data.copy_(
-                tau*local_param.data + (1.0-tau)*target_param.data)
+            target_param.data.copy_(tau*local_param.data + (1.0 - tau) * target_param.data)
 
     def run_tests(self, env, n_runs, max_steps, printenv=False):
         test_score = 0.
