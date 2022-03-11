@@ -39,6 +39,7 @@ class Maze(gym.Env):
         2	    Left
         3	    Right
     """
+    actions = ['up', 'down', 'left', 'right']
     URL_ROBOT = os.path.join(os.path.dirname(assets.__file__), "robot.png")
 
     def __init__(self, nx, ny, min_shortest_length=0, mode='tabular'):
@@ -121,7 +122,7 @@ class Maze(gym.Env):
         for y, line in enumerate(grid):
             for x, val in enumerate(line):
                 if (val not in {'\n', '\t', ' ', '\r'}):
-                    print(x," - ",y, " = ", val)
+                    #print(x," - ",y, " = ", val)
                     if val in {"W"}:
                         maze_.maze[y,x] = 1
                     elif val in {"P", "S", "G"}:
@@ -223,3 +224,38 @@ class Maze(gym.Env):
                              (self.pixel_per_case, self.pixel_per_case))[:, :, :3]
         img[self.loc[0]*self.pixel_per_case: (self.loc[0]+1)*self.pixel_per_case, self.loc[1] * self.pixel_per_case:(
             self.loc[1]+1)*self.pixel_per_case, :3] = cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
+
+    def T(self, state, action, next_state):
+        action_name = self.actions[action]
+        proba = 0.
+        if (state == self.terminal_state):
+            return (next_state == self.terminal_state)
+               
+        if action_name == 'up':    # up
+            if (self.maze[state[0]-1, state[1]] == 0) and (next_state == (state[0]-1, state[1])):  # can go up
+                proba = 1
+            elif (self.maze[state[0]-1, state[1]] == 1) and (next_state == state):  # cant go up
+                proba = 1
+        elif action_name == 'down':  # down
+            if (self.maze[state[0]+1, state[1]] == 0) and (next_state == (state[0]+1, state[1])):  # can go down
+                proba = 1
+            elif (self.maze[state[0]+1, state[1]] == 1) and (next_state == state):  # cant go down
+                proba = 1
+        elif action_name == 'left':  # left
+            if (self.maze[state[0], state[1]-1] == 0) and (next_state == (state[0], state[1]-1)):  # can go left
+                proba = 1
+            elif (self.maze[state[0], state[1]-1] == 1) and (next_state == state):  # cant go left
+                proba = 1
+        else:              # right
+            if (self.maze[state[0], state[1]+1] == 0) and (next_state == (state[0], state[1]+1)):  # can go right
+                proba = 1
+            elif (self.maze[state[0], state[1]+1] == 1) and (next_state == state):  # cant go right
+                proba = 1
+
+        return proba
+
+    def R(self, state, action):
+        if (state == self.terminal_state):
+            return 0
+        else:
+            return -1
