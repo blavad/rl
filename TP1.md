@@ -23,10 +23,14 @@ pour déterminer la politique optimale.
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
 - Lancer la programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
-  - `python main.py vi ./assets/maze_exo1.txt`
-  - `python main.py vi ./assets/maze_exo1.txt --stochastic`
+  - `python3 main.py vi ./assets/maze_exo1.txt`
+  - `python3 main.py vi ./assets/maze_exo1.txt --stochastic`
 - Comparer les résultats obtenus au résultats théoriques
 - **Bonus** : Implémenter l'algorithme d'évaluation de la valeur ou TD-learning ou Monte-Carlo
+
+## Partie 2.5 : Visualisation
+
+- A tout moment, python3 main.py logAnalysis peut être lancé pour afficher dans un navigateur un graphe montrant l'évolution de la Q-valeur du dernier algorithme lancé.
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
