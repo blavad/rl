@@ -19,6 +19,7 @@ class TestVIAgent(unittest.TestCase):
         _viagent = VIAgent(_maze, gamma)
         self.assertTrue(_viagent.maze_model==_maze);
         self.assertTrue(_viagent.gamma==gamma);
+        self.assertTrue(len(_viagent.V)>0);
         for x in range(len(_viagent.V)):
             for y in range(len(_viagent.V[0])):
                 self.assertTrue(_viagent.V[x,y]==0)
@@ -55,7 +56,7 @@ class TestVIAgent(unittest.TestCase):
         env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
 
         _viagent = VIAgent(env, 1.0)
-
+        _viagent.solve(0.01)
         s = (3,2)
         self.assertTrue(_viagent.bellman_operator(s)==-1)
 
@@ -63,9 +64,10 @@ class TestVIAgent(unittest.TestCase):
         env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
 
         _viagent = VIAgent(env, 1.0)
+        _viagent.solve(0.01)
 
-        s = (3,2)
-        self.assertTrue(_viagent.select_action(s)==0)
+        s = (3,1)
+        self.assertTrue(_viagent.select_action(s)==3)
 
 if __name__ == "__main__":
     unittest.main()
