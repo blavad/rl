@@ -1,22 +1,31 @@
+import imp
 import sys
 import time
-import gym
-import numpy as np
+import argparse
 
-from agent import AgentInterface
 from agent.qagent import QAgent
+from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from epsilon_profile import EpsilonProfile
+from networks import MLP, CNN
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
+from logAnalysis import logAnalysis
+
+# parser = argparse.ArgumentParser(description='Maze parameters')
+# parser.add_argument('--algo', type=str, default="random", metavar='a', help='algorithm to use (default: 7)')
+# parser.add_argument('--width', type=int, default=7, metavar='w', help='width of the maze (default: 7)')
+# parser.add_argument('--height', type=int, default=7, metavar='h', help='height of the maze (default: 7)')
+# parser.add_argument('--shortest_path', type=int, default=14, metavar='p', help='shortest distance between starting point and goal point (default: 14)')
+# args = parser.parse_args()
 
 # test once by taking greedy actions based on Q values
-def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., display: bool = False):
+def test_maze(env: Maze, agent: QAgent, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
     n_steps = max_steps
     sum_rewards = 0.
-    state = env.reset_using_existing_maze()
+    state = env.reset_using_existing_maze() if (same) else env.reset()
     if display:
         env.render()
 
@@ -37,17 +46,31 @@ def test_maze(env: Maze, agent: QAgent, max_steps: int, speed: float = 0., displ
 
 
 def main(agent, opt):
+
     #env = Maze(15,15,30)
     # env = Maze(9, 9, min_shortest_path=20) # Create a 9x9 maze
     # env = Maze(15, 15, min_shortest_path=40) # Create a 15x15 maze
     # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
-    env = DeterministicMazeModel(10, 10, 30) # Create a deterministic maze model
-        
-    n_episodes = 200
-    max_steps = 60
-    alpha = 0.2
-    gamma = 1.0
-    eps_profile = EpsilonProfile(1., 0.1, 1., 0.)
+    #env = DeterministicMazeModel(10, 10) # Create a deterministic maze model
+    
+    env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
+    
+    #env = DeterministicMazeModel("tests/maze_ex1.txt") # Create a maze from a file
+
+    # WARNING : Pour Aurélien et Jilles : ces paramètres sont pour DQN (à changer pour VI et Q-learning tabulaire)  
+    n_episodes = 5000
+    max_steps = 50
+    gamma = 1.
+    alpha = 0.0005
+    eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
+
+
+    # Hyperparamètres de DQN
+    final_exploration_episode = 2000
+    batch_size = 32
+    replay_memory_size = 1000
+    target_update_frequency = 100
+    tau = 1.0
 
     print(env.maze)
     print('num_actions:', env.action_space.n)
@@ -66,15 +89,20 @@ def main(agent, opt):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
-    elif(agent=="logAnalysis"):
+    elif (agent == "dqn"):
+        env.mode = "nn" # active le mode DeepRL (l'observation est la grille directement)
+        # A COMPLETER 
+        # nn = MLP(env.ny, env.nx, env.nf, env.na) 
+        nn = CNN(env.ny, env.nx, env.nf, env.na) 
+        agent = DQNAgent(nn, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
+        agent.learn(env, n_episodes, max_steps)
+        test_maze(env, agent, max_steps, speed=0.1, display=True, same=False)
+    elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
         return
     else:
         print("Error : Unknown agent name (" + agent + ").")
-    
-    
-
 
 if __name__ == '__main__':
     """ Usage : python main.py [ARGS]
