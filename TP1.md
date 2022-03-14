@@ -59,7 +59,7 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 - Implémenter le stockage de l'évolution de la Q-valeur à l'état initial au cours de la résolution dans un fichier logAnalysis.csv.
 - Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
 - Visualiser la courbe d'évolution de la Q-valeur
-- 
+
 **Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
 ## Partie 3 : Reinforce (Complémentaire)
