@@ -64,7 +64,7 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 
 ## Partie 4 : Reinforce (Bonus)
 - Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
-- Compléter reinforce.py (voir https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf)
+- Compléter reinforce.py (voir https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf, https://web.stanford.edu/class/cs234/CS234Win2019/slides/lnotes8.pdf)
 - Résoudre le problème en utilisant l'algorithme hsvi
 - Que constatez-vous des performances de Reinforce par rapport à VI & Q-learning?
 
