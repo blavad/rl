@@ -34,6 +34,8 @@ pour déterminer la politique optimale.
 - Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la fonction de valeur
 - Visualiser l'évolution de la fonction de valeur
 
+- Tips : vous pouvez utiliser le module "animation" de matplotlib
+
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
 **Intro** : Parfois, les modèles de la dynamique (T et R) sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer 
@@ -50,16 +52,14 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 
 ## Partie 3.5 : Visualisation
 
-
-## Partie 2.5 : Visualisation
-
 - Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
 - Visualiser l'évolution de la fonction de valeur
+- Que constatez-vous?
 
 - Implémenter le stockage de l'évolution de la Q-valeur à l'état initial au cours de la résolution dans un fichier logAnalysis.csv.
 - Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
 - Visualiser la courbe d'évolution de la Q-valeur
-
+- 
 **Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
 ## Partie 3 : Reinforce (Complémentaire)
