@@ -6,7 +6,7 @@ from world.deterministic_maze import DeterministicMazeModel
 
 import pandas as pd
 
-class VIAgent(AgentInterface):
+class hsvi(AgentInterface):
     """ 
     Un agent capable de résoudre un labyrinthe donné grâce à l'algorithme d'itération 
     sur les valeurs (VI = Value Iteration).
