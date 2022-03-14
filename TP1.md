@@ -62,11 +62,14 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 
 **Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
-## Partie 4 : Reinforce (Complémentaire)
-(à faire)
+## Partie 4 : Reinforce (Bonus)
+- Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
+- Compléter reinforce.py (voir https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf, https://web.stanford.edu/class/cs234/CS234Win2019/slides/lnotes8.pdf)
+- Résoudre le problème en utilisant l'algorithme hsvi
+- Que constatez-vous des performances de Reinforce par rapport à VI & Q-learning?
 
 ## Partie 5 : HSVI (Bonus)
 - Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
-- Compléter hsvi.py
+- Compléter hsvi.py (voir https://arxiv.org/pdf/1207.4166.pdf)
 - Résoudre le problème en utilisant l'algorithme hsvi
 - Que constatez-vous des performances d'hsvi par rapport à VI & Q-learning?
