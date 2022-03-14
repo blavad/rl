@@ -30,7 +30,9 @@ pour déterminer la politique optimale.
 
 ## Partie 2.5 : Visualisation
 
-- A tout moment, python3 main.py logAnalysis peut être lancé pour afficher dans un navigateur un graphe montrant l'évolution de la Q-valeur du dernier algorithme lancé.
+- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
+- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la fonction de valeur
+- Visualiser l'évolution de la fonction de valeur
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
@@ -45,7 +47,19 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 4. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
   - Analyser les résultats
   - Quel est l'intérêt de faire décroître ce paramètre ?
-  
+
+## Partie 3.5 : Visualisation
+
+
+## Partie 2.5 : Visualisation
+
+- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
+- Visualiser l'évolution de la fonction de valeur
+
+- Implémenter le stockage de l'évolution de la Q-valeur à l'état initial au cours de la résolution dans un fichier logAnalysis.csv.
+- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
+- Visualiser la courbe d'évolution de la Q-valeur
+
 **Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
 ## Partie 3 : Reinforce (Complémentaire)
