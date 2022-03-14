@@ -62,7 +62,7 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 
 **Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
-## Partie 4 : Reinforce (Complémentaire)
+## Partie 4 : Reinforce (Bonus)
 (à faire)
 
 ## Partie 5 : HSVI (Bonus)
