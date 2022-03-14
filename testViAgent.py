@@ -53,35 +53,28 @@ class TestVIAgent(unittest.TestCase):
         self.assertFalse(_viagent.done(_viagent.V,(_viagent.V-error*2),error))
 
     def test_03_belllman_operator(self):
-        env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
-
+        env = Maze.from_file("tests/maze_ex2.txt") # Create a maze from a file
         _viagent = VIAgent(env, 1.0)
+        self.assertTrue(_viagent.bellman_operator((2,3))==-1)
         _viagent.solve(0.01)
-        s = (3,2)
-        self.assertTrue(_viagent.bellman_operator(s)==-1)
+        _viagent.V = np.asarray([[ 0., -4.,  0.,  0.,  0.],[ 0., -4., -3., -2.,  0.],[ 0., -4.,  0., -1.,  0.],
+            [ 0., -4.,  0.,  0.,  0.],[ 0.,  0.,  0.,  0.,  0.]])
+        with self.assertRaises(Exception) as context:
+            _viagent.bellman_operator((0,0))
+        self.assertTrue(len(str(context.exception))>0)
+        self.assertTrue(_viagent.bellman_operator((2,1))==-5)
 
     def test_04_select_action(self):
         env = Maze.from_file("tests/maze_ex2.txt") # Create a maze from a file
         _viagent = VIAgent(env, 1.0)
-        _viagent.solve(0.01)
         _viagent.V = np.asarray([[ 0., -5.,  0.,  0.,  0.,],[ 0., -4., -3., -2.,  0.],[ 0., -5.,  0., -1.,  0.],
             [ 0., -6.,  0.,  0.,  0.],[ 0.,  0.,  0.,  0.,  0.]])
         s = (2,3)
-        #print("3,1 :  ", (_viagent.V[2,3]))
         self.assertTrue(_viagent.select_action((2,3))==1)
         with self.assertRaises(Exception) as context:
             _viagent.select_action((0,0))
-        #print("\n exception : ", str(context.exception))
         self.assertTrue(len(str(context.exception))>0)
-        #self.assertTrue(_viagent.select_action((0,0))==0)
         self.assertTrue(_viagent.select_action((3,1))==0)
-
-        '''s = (3,2)
-        print("3,1 :  ", (_viagent.select_action(s)))
-        #self.assertTrue(_viagent.select_action(s)==0)
-        s = (4,1)
-        print("4,1 :  ", (_viagent.select_action(s)))
-        #self.assertTrue(_viagent.select_action(s)==0)'''
 
 if __name__ == "__main__":
     unittest.main()
