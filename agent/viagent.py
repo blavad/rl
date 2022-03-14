@@ -28,6 +28,7 @@ class VIAgent(AgentInterface):
         #visualisation des données
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
+        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
         """
         self.gamma = gamma
         self.maze_model = maze_model
@@ -49,11 +50,8 @@ class VIAgent(AgentInterface):
                 for x in range(self.maze_model.nx):
                     if (not self.maze_model.maze[y, x]):
                         V_copy[y, x] = self.bellman_operator((y, x))
-            #print("V : ", self.V)
             if (True):
                 self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(self.V,(1,self.maze_model.ny*self.maze_model.nx))[0]},ignore_index=True)
-        #print("V : ", self.V)
-        #print("self.mazeValues :  ", self.mazeValues);
         self.mazeValues.to_csv('logVI.csv')
 
     def done(self, V, V_copy, error) -> bool:
@@ -69,6 +67,8 @@ class VIAgent(AgentInterface):
 
         :param s: Un état quelconque
         :return: La valeur de mise à jour de la fonction de valeur
+
+        doit retourner une exception si l'état n'est pas valide
         """
         if (self.maze_model.maze[s[0], s[1]]):
             raise Exception('this state is a wall, should not be considered')
@@ -89,6 +89,8 @@ class VIAgent(AgentInterface):
 
         :param state: L'état courant
         :return: L'action optimale
+
+        doit retourner une exception si l'état n'est pas valide
         """
         if (self.maze_model.maze[s[0], s[1]]):
             raise Exception('this state is a wall, should not be considered')

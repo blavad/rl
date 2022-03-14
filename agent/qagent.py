@@ -25,6 +25,14 @@ class QAgent(AgentInterface):
         :type gamma: float
         :param alpha: Le learning rate 
         :type alpha: float
+
+        #visualisation des données
+        :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
+        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
+
+        :attribut qvalues: la Q-valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
         """
         self.Q = np.zeros([maze.ny, maze.nx, maze.na])
 
@@ -50,6 +58,10 @@ class QAgent(AgentInterface):
         :type num_episodes: int
         :param max_num_steps: Le nombre maximum d'étape par épisode
         :type max_num_steps: int
+
+        #Visualisation des données
+        Elle doit proposer l'option de stockage de (i) la fonction de valeur & (ii) la Q-valeur 
+        dans un fichier de log
         """
         n_steps = np.zeros(n_episodes) + max_steps
         sum_rewards = np.zeros(n_episodes)  # total reward for each episode
