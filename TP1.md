@@ -66,3 +66,7 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 (à faire)
 
 ## Partie 5 : HSVI (Bonus)
+- Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
+- Compléter hsvi.py
+- Résoudre le problème en utilisant l'algorithme hsvi
+- Que constatez-vous des performances d'hsvi par rapport à VI & Q-learning?
