@@ -1,6 +1,6 @@
 # Intelligence Artificielle pour les Télécoms (IAT), 2022
 
-Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Télécom aux méthodes récentes d'intelligence artificielle.
+Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Télécoms aux méthodes récentes d'intelligence artificielle. Dans ce sous-module, nous nous interesserons tout particulièrement à l'apprentissage par renforcement et ses variantes profondes. 
 
 
 ## 0. Pour commencer
