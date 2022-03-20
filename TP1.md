@@ -4,7 +4,13 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 ## Partie 1 : Théorie (30min)
 
-1. Rappeler les équations d'optimalité de Bellman pour V^*
+1. Equations de Bellman pour la résolution d'un processus décisionnel de Markov
+
+  1.a Soit un processus decisionnel de Markov donné par le tuple (S, A, p, r). Considerons une politique quelconque notée \pi. Ecrire l'expression d'evaluation de cette politique, dans le cadre du critère des recompenses décomptées de paramètres de décompte \gamma.
+  
+  1.b En déduire les **équations  de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la fonction de valeur en tout état de la politique fixée. 
+  
+  1.c Demontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
 
 2. Calculer fonction de valeur V^* associer au labyrinthe suivant (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
   - parameters : gamma = 1.0
@@ -20,6 +26,8 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 **Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
 pour déterminer la politique optimale.
+
+**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inferieur à un seuil à fixer. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
 - Lancer la programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
