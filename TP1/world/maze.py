@@ -5,7 +5,7 @@
 # 11/02/2018: written for EE807B
 
 import os
-import cv2
+# import cv2
 import numpy as np
 import gym
 from gym import spaces
@@ -177,9 +177,9 @@ class Maze(gym.Env):
         return MazeGenerator.make(width, height, complexity, density)
 
     def render(self, mode='human', filename=''):
-        if filename != '':
-            cv2.imwrite(filename, cv2.cvtColor(
-                self.render_game(self.bg_color), cv2.COLOR_RGB2BGR))
+        # if filename != '':
+        #     cv2.imwrite(filename, cv2.cvtColor(
+        #         self.render_game(self.bg_color), cv2.COLOR_RGB2BGR))
         if mode == 'human':
             return self.render_human(mode)
         return self.render_array()
@@ -222,10 +222,10 @@ class Maze(gym.Env):
                         col+1)*self.pixel_per_case, :3] = self.wall_color
 
     def render_robot(self, img):
-        img_cv2 = cv2.resize(cv2.imread(Maze.URL_ROBOT, cv2.IMREAD_UNCHANGED),
-                             (self.pixel_per_case, self.pixel_per_case))[:, :, :3]
+        # img_cv2 = cv2.resize(cv2.imread(Maze.URL_ROBOT, cv2.IMREAD_UNCHANGED),
+        #                      (self.pixel_per_case, self.pixel_per_case))[:, :, :3]
         img[self.loc[0]*self.pixel_per_case: (self.loc[0]+1)*self.pixel_per_case, self.loc[1] * self.pixel_per_case:(
-            self.loc[1]+1)*self.pixel_per_case, :3] = cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
+            self.loc[1]+1)*self.pixel_per_case, :3] = self.robot_color #cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
 
     def T(self, state, action, next_state):
         action_name = self.actions[action]

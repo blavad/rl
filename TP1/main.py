@@ -2,13 +2,12 @@ import imp
 import sys
 import time
 import argparse
-import torch
+from TP1.agent import AgentInterface
 
 from agent.qagent import QAgent
-from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
-from TP1.epsilon_profile import EpsilonProfile
+from epsilon_profile import EpsilonProfile
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
@@ -22,7 +21,7 @@ from logAnalysis import logAnalysis
 # args = parser.parse_args()
 
 # test once by taking greedy actions based on Q values
-def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
+def test_maze(env: Maze, agent: AgentInterface, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
     n_steps = max_steps
     sum_rewards = 0.
     for _ in range(nepisodes):
@@ -60,7 +59,7 @@ def main(agent, opt):
     gamma = 1.
     alpha = 0.2
     eps_profile = EpsilonProfile(1.0, 0.1)
-    
+
     if (agent == "random"):
         agent = RandomAgent(env.action_space.n)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
