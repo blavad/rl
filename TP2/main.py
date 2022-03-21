@@ -55,12 +55,20 @@ def main(agent, opt):
     # env = DeterministicMazeModel.from_file("tests/maze_ex2.txt") # Create a deterministic maze model
     # env = DeterministicMazeModel(15, 15, min_shortest_length=30) # Create a deterministic maze model
         
+    # WARNING : Pour Aurélien et Jilles : ces paramètres sont pour DQN (à changer pour VI et Q-learning tabulaire)  
     n_episodes = 200
     max_steps = 50
     gamma = 1.
     alpha = 0.2
     eps_profile = EpsilonProfile(1.0, 0.1)
-    
+
+    # Hyperparamètres de DQN
+    final_exploration_episode = 500
+    batch_size = 32
+    replay_memory_size = 1000
+    target_update_frequency = 100
+    tau = 1.0
+
     if (agent == "random"):
         agent = RandomAgent(env.action_space.n)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
