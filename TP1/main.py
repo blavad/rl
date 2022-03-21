@@ -8,7 +8,7 @@ from agent.qagent import QAgent
 from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
-from epsilon_profile import EpsilonProfile
+from TP1.epsilon_profile import EpsilonProfile
 from networks import MLP, CNN
 from logAnalysis import *
 from world.maze import Maze

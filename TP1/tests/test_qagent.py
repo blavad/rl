@@ -4,7 +4,7 @@ import unittest
 import random
 
 from agent.qagent import QAgent
-from epsilon_profile import EpsilonProfile
+from TP1.epsilon_profile import EpsilonProfile
 
 from world.maze import Maze 
 

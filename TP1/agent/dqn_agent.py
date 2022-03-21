@@ -8,7 +8,7 @@ import time
 
 from agent.qagent import QAgent
 from world.maze import Maze
-from epsilon_profile import EpsilonProfile
+from TP1.epsilon_profile import EpsilonProfile
 
 
 class DQNAgent(QAgent):

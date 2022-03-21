@@ -5,7 +5,7 @@ import time
 from agent import AgentInterface
 from agent.random_agent import RandomAgent
 from agent.qagent import QAgent
-from epsilon_profile import EpsilonProfile
+from TP1.epsilon_profile import EpsilonProfile
 from world.maze import Maze
 
 SIZE_MAZE = 8
