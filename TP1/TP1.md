@@ -49,11 +49,7 @@ pour déterminer la politique optimale.
 
 ## Partie 2.5 : Visualisation
 
-- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
-- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la fonction de valeur
-- Visualiser l'évolution de la fonction de valeur
-
-- Tips : vous pouvez utiliser le module "animation" de matplotlib
+- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisVi.py
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
@@ -70,13 +66,5 @@ pour déterminer la politique optimale.
 
 ## Partie 3.5 : Visualisation
 
-- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
-- Visualiser l'évolution de la fonction de valeur
-- Que constatez-vous?
+- Visualiser la courbe d'évolution de la Q-valeur avec la commande python3 main.py logAnalysis
 
-- Implémenter le stockage de l'évolution de la Q-valeur à l'état initial au cours de la résolution dans un fichier logAnalysis.csv.
-- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
-- Visualiser la courbe d'évolution de la Q-valeur
-
-## Partie 4 : Reinforce (Bonus)
-- En vous appuyant sur vos notes de cours, liser et compléter l'algorithme **Reinforce** décrit dans le fihier reinforce.py 
