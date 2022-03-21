@@ -8,7 +8,6 @@ from agent.random_agent import RandomAgent
 from epsilon_profile import EpsilonProfile
 from logAnalysis import *
 from world.maze import Maze
-from world.deterministic_maze import DeterministicMazeModel
 from logAnalysis import logAnalysis
 
 # parser = argparse.ArgumentParser(description='Maze parameters')
@@ -49,8 +48,7 @@ def main(agent, opt):
     env = Maze(7, 7, min_shortest_length=15) 
     # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
     # env = Maze(14, 14, min_shortest_length=40) # Create a 15x15 maze
-    # env = DeterministicMazeModel.from_file("tests/maze_ex2.txt") # Create a deterministic maze model
-    # env = DeterministicMazeModel(15, 15, min_shortest_length=30) # Create a deterministic maze model
+    # env = Maze.from_file("tests/maze_ex2.txt") # Create a maze from a file
         
     n_episodes = 200
     max_steps = 50

@@ -70,6 +70,41 @@ class Maze(gym.Env):
         self.init_color = [0, 0, 200]
         self.terminal_color = [200, 0, 0]
 
+    def getDynamics(self, state, action, next_state):
+        action_name = self.actions[action]
+        proba = 0.
+        if (state == self.terminal_state):
+            return (next_state == self.terminal_state)
+               
+        if action_name == 'up':    # up
+            if (self.maze[state[0]-1, state[1]] == 0) and (next_state == (state[0]-1, state[1])):  # can go up
+                proba = 1
+            elif (self.maze[state[0]-1, state[1]] == 1) and (next_state == state):  # cant go up
+                proba = 1
+        elif action_name == 'down':  # down
+            if (self.maze[state[0]+1, state[1]] == 0) and (next_state == (state[0]+1, state[1])):  # can go down
+                proba = 1
+            elif (self.maze[state[0]+1, state[1]] == 1) and (next_state == state):  # cant go down
+                proba = 1
+        elif action_name == 'left':  # left
+            if (self.maze[state[0], state[1]-1] == 0) and (next_state == (state[0], state[1]-1)):  # can go left
+                proba = 1
+            elif (self.maze[state[0], state[1]-1] == 1) and (next_state == state):  # cant go left
+                proba = 1
+        else:              # right
+            if (self.maze[state[0], state[1]+1] == 0) and (next_state == (state[0], state[1]+1)):  # can go right
+                proba = 1
+            elif (self.maze[state[0], state[1]+1] == 1) and (next_state == state):  # cant go right
+                proba = 1
+
+        return proba
+
+    def getReward(self, state, action):
+        if (state == self.terminal_state):
+            return 0
+        else:
+            return -1
+
     def reset(self):       # generate a new maze and reset state
         while True:
             maze, shortest_length, p1, p2 = MazeGenerator.make_with_goal(self.nx, self.ny)
@@ -226,38 +261,3 @@ class Maze(gym.Env):
         #                      (self.pixel_per_case, self.pixel_per_case))[:, :, :3]
         img[self.loc[0]*self.pixel_per_case: (self.loc[0]+1)*self.pixel_per_case, self.loc[1] * self.pixel_per_case:(
             self.loc[1]+1)*self.pixel_per_case, :3] = self.robot_color #cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
-
-    def getDynamics(self, state, action, next_state):
-        action_name = self.actions[action]
-        proba = 0.
-        if (state == self.terminal_state):
-            return (next_state == self.terminal_state)
-               
-        if action_name == 'up':    # up
-            if (self.maze[state[0]-1, state[1]] == 0) and (next_state == (state[0]-1, state[1])):  # can go up
-                proba = 1
-            elif (self.maze[state[0]-1, state[1]] == 1) and (next_state == state):  # cant go up
-                proba = 1
-        elif action_name == 'down':  # down
-            if (self.maze[state[0]+1, state[1]] == 0) and (next_state == (state[0]+1, state[1])):  # can go down
-                proba = 1
-            elif (self.maze[state[0]+1, state[1]] == 1) and (next_state == state):  # cant go down
-                proba = 1
-        elif action_name == 'left':  # left
-            if (self.maze[state[0], state[1]-1] == 0) and (next_state == (state[0], state[1]-1)):  # can go left
-                proba = 1
-            elif (self.maze[state[0], state[1]-1] == 1) and (next_state == state):  # cant go left
-                proba = 1
-        else:              # right
-            if (self.maze[state[0], state[1]+1] == 0) and (next_state == (state[0], state[1]+1)):  # can go right
-                proba = 1
-            elif (self.maze[state[0], state[1]+1] == 1) and (next_state == state):  # cant go right
-                proba = 1
-
-        return proba
-
-    def getReward(self, state, action):
-        if (state == self.terminal_state):
-            return 0
-        else:
-            return -1

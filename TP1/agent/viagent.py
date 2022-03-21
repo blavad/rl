@@ -83,7 +83,8 @@ class VIAgent(AgentInterface):
             q_s_a = 0.
             for next_y in range(self.maze.ny):
                 for next_x in range(self.maze.nx):
-                    # Compléter ici votre équation de Bellman
+                    # Compléter ici votre équation de Bellman 
+                    # On utilisera la fonction de récompense (getReward) et la fonction de transition (getDynamics) du labyrinthe.
                     raise NotImplementedError("Value Iteration NotImplementedError at Function bellman_operator.")
             if (q_s_a > max_value):
                 max_value = q_s_a
@@ -107,6 +108,7 @@ class VIAgent(AgentInterface):
             for next_y in range(self.maze.ny):
                 for next_x in range(self.maze.nx):
                     # Compléter ici votre équation de Bellman
+                    # On utilisera la fonction de récompense (getReward) et la fonction de transition (getDynamics) du labyrinthe.
                     raise NotImplementedError("Value Iteration NotImplementedError at Function select_action")
             if (q_s_a > max_value):
                 max_value = q_s_a
