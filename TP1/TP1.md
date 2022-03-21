@@ -19,7 +19,9 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
   - Démontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
 
 
-2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe suivant `tests/maze_ex1.txt` 
+2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe ci-dessous : 
+
+![Image](https://raw.githubusercontent.com/blavad/IAT/master/TP1/tests/MazeEx2NR.png)
 
   - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
@@ -35,20 +37,19 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 ## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
-**Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
+**Intro** : Quand on connait les modèles de la dynamique, p(s' | s,a) et r(s,a), on peut utiliser un algorithme de planification 
 pour déterminer la politique optimale.
 
-**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
+**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique et des récompenses. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
 - Lancer le programme principal avec comme paramètre `vi` 
-  - Dans le fichier `main.py` décommenter la ligne 52. 
   - Lancer `python3 main.py vi`
 - Comparer les résultats obtenus aux résultats théoriques
 
 ## Partie 2.5 : Visualisation
 
-- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisV.py
+- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisV.py dans le dossier partie_2/visualisation/
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
@@ -66,5 +67,5 @@ pour déterminer la politique optimale.
 ## Partie 3.5 : Visualisation
 
 - Visualiser la courbe d'évolution de la Q-valeur avec la commande python3 main.py logAnalysisQ
-- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisV.py
+- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisV.py dans le dossier partie_3/visualisation/
 
