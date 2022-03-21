@@ -92,7 +92,7 @@ class QAgent(AgentInterface):
                     break
 
                 state = next_state
-                epsilon = max(self.epsilon - self.eps_profile.dec_step, self.eps_profile.final)
+                epsilon = max(self.epsilon - self.eps_profile.dec_step, self.eps_profile.final) # mets à jour le critère de compromis exploration/exploitation
 
             if n_episodes >= 0:
                 self.epsilon = max(epsilon - self.eps_profile.dec_episode / (n_episodes - 1.), self.eps_profile.final)
@@ -100,8 +100,8 @@ class QAgent(AgentInterface):
                 self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
                 V = np.zeros((int(self.maze.ny),int(self.maze.nx)))
-                for y in range(self.maze.ny):
-                    for x in range(self.maze.nx):
+                for y in range(self.maze.ny): # itère sur toutes les prochaines ordonnées possible sur le labyrinthe
+                    for x in range(self.maze.nx): # itère sur toutes les prochains abcisses possible sur le labyrinthe
                         val = self.Q[int(y),int(x),self.select_action((y,x))]
                         V[y,x] = val
                 self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
