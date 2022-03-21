@@ -17,32 +17,32 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
   - Soit un processus decisionnel de Markov donné par le tuple (S, A, p, r). Considérons une politique quelconque notée **pi**. Écrire l'expression d'évaluation de cette politique, dans le cadre du critère des recompenses décomptées de paramètre de décompte **gamma**.
   - En déduire les **équations de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la fonction de valeur en tout état de la politique fixée. 
-  - Demontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
+  - Démontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
 
 
-2. Calculer sur papier la fonction de valeur optimale associée aux labyrinthes suivants (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
+2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe suivant `tests/maze_ex1.txt` 
+
   - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition déterministes** 
 
-**TODO**: Il faut expliquer qu'est-ce que c'est ce labyrinthe. Comment est-il construit? Que signifie dessiner? Comment le faire? Quel modèle, language suivre? Il faut également en donner un exemple à la fois de son écriture et idéalement de sa visualisation. Autrement, on ne sait pas exactement de quoi il est question, c'est bien trop vague. 
 
-3. Calculer fonction de valeur V(s) associer au même labyrinthe (cette fois le modèle de transition est stochastique)
+3. Calculer sur papier la fonction de valeur optimale associée au même labyrinthe
   - parameters : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
-  - **Transition stochastiques** (modèle à définir) 
+  - **Transition stochastiques** 
+  On distinguera deux cas de figure. Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un obstacle ou mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante. Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante. 
 
-**TODO**: Que signifie définir le modèle? A-t-on un exemple de comment le faire?  
 
 ## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
 **Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
 pour déterminer la politique optimale.
 
-**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inferieur à un seuil à fixer. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
+**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
-- Lancer la programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
+- Lancer le programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
   - `python3 main.py vi ./assets/maze_exo1.txt`
   - `python3 main.py vi ./assets/maze_exo1.txt --stochastic`
 - Comparer les résultats obtenus au résultats théoriques
