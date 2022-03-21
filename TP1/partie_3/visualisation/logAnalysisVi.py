@@ -17,7 +17,7 @@ def printCurves():
 	df = pd.read_csv("logVI.csv")
 	nx = int(df.iloc[0]["episode"])
 	ny = int(df.iloc[0]["value"])
-	n = len(df.index)
+	n = len(df.index)https://github.com/blavad/IAT
 	im = plt.imshow([[]])
 	for i in range(n-1):
 		V=df.iloc[i+1]["value"].replace("[","").replace("]","").split(" ")
@@ -48,8 +48,8 @@ def animate(i):
 	return im
 
 df = pd.read_csv("logVI.csv")
-nx = int(df.iloc[0]["episode"])
-ny = int(df.iloc[0]["value"])
+nx = int(df.iloc[0]["nx"])
+ny = int(df.iloc[0]["ny"])
 n = len(df.index)
 
 
