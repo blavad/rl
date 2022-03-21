@@ -19,7 +19,9 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
   - Démontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
 
 
-2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe suivant `tests/maze_ex1.txt` 
+2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe ci-dessous : 
+
+![Image](https://raw.githubusercontent.com/blavad/IAT/master/TP1/tests/MazeEx2NR.png)
 
   - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
