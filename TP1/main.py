@@ -45,7 +45,7 @@ def main(agent, opt):
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
-        "test_maze(env, agent, max_steps, speed=0.1, display=True)
+        #test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
