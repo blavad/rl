@@ -48,8 +48,8 @@ def animate(i):
 	return im
 
 df = pd.read_csv("logVI.csv")
-nx = int(df.iloc[0]["episode"])
-ny = int(df.iloc[0]["value"])
+nx = int(df.iloc[0]["nx"])
+ny = int(df.iloc[0]["ny"])
 n = len(df.index)
 
 
