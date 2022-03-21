@@ -259,5 +259,6 @@ class Maze(gym.Env):
     def render_robot(self, img):
         # img_cv2 = cv2.resize(cv2.imread(Maze.URL_ROBOT, cv2.IMREAD_UNCHANGED),
         #                      (self.pixel_per_case, self.pixel_per_case))[:, :, :3]
-        img[self.loc[0]*self.pixel_per_case: (self.loc[0]+1)*self.pixel_per_case, self.loc[1] * self.pixel_per_case:(
-            self.loc[1]+1)*self.pixel_per_case, :3] = self.robot_color #cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
+        padding = int(self.pixel_per_case * 0.3)
+        img[self.loc[0]*self.pixel_per_case + padding : (self.loc[0]+1)*self.pixel_per_case - padding, self.loc[1] * self.pixel_per_case + padding:(
+            self.loc[1]+1)*self.pixel_per_case - padding, :3] = self.robot_color #cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
