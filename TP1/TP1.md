@@ -21,15 +21,15 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe ci-dessous : 
 
-![Image](https://raw.githubusercontent.com/blavad/IAT/master/TP1/tests/MazeEx2NR.png)
-
   - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition déterministes** 
+  - *Note :* l'objectif est atteint quand l'agent atteint le point rouge et dans ce cas, l'agent perçoit une récompense nulle. 
 
+<img src="https://raw.githubusercontent.com/blavad/IAT/master/TP1/tests/MazeEx2NR.png" width="200" title="hover text">
 
 3. Calculer sur papier la fonction de valeur optimale associée au même labyrinthe
-  - parameters : gamma = 1.0
+  - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition stochastiques** 
   On distinguera deux cas de figure. Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un obstacle ou mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante. Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante. 
