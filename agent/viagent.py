@@ -13,9 +13,9 @@ class VIAgent(AgentInterface):
     """
 
     def __init__(self, maze_model: DeterministicMazeModel, gamma: float):
-        """"À COMPLÉTER!
+        """"
         Ce constructeur initialise une nouvelle instance de la classe ValueIteration.
-        Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser à 0 la 
+        Il stocke les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser à 0 la 
         fonction de valeur d'état, notée V.
 
         :param maze_model: Le modèle du problème
@@ -34,10 +34,9 @@ class VIAgent(AgentInterface):
         self.maze_model = maze_model
         self.V = np.zeros([maze_model.ny, maze_model.nx])
         self.mazeValues = pd.DataFrame(data={'nx': maze_model.nx, 'ny': [maze_model.ny]})
-        #self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
 
     def solve(self, error: float):
-        """À COMPLÉTER!
+        """
         Cette méthode résoud le problème avec une tolérance donnée.
         Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logVI.csv)
         """
@@ -59,9 +58,9 @@ class VIAgent(AgentInterface):
         Cette méthode retourne vraie si la condition d'arrêt de 
         l'algorithme est vérifiée. Sinon elle retourne faux.
         """
-        return (abs(V - V_copy).max() < error)
+        raise NotImplementedError("VI NotImplementedError at function done.")
 
-    def bellman_operator(self, s) -> float:
+    def bellman_operator(self, s : 'Pair[int, int]') -> float:
         """À COMPLÉTER!
         Cette méthode calcul l'opérateur de mise à jour de bellman pour un état s.
 
@@ -77,8 +76,7 @@ class VIAgent(AgentInterface):
             q_s_a = 0.
             for next_y in range(self.maze_model.ny):
                 for next_x in range(self.maze_model.nx):
-                    q_s_a += self.maze_model.T((s[0], s[1]), a, (next_y, next_x)) * (self.maze_model.R(
-                        s, a) + self.gamma * self.V[next_y, next_x])
+                    # Compléter ici votre équation de Bellman
             if (q_s_a > max_value):
                 max_value = q_s_a
         return max_value
@@ -100,7 +98,7 @@ class VIAgent(AgentInterface):
             q_s_a = 0.
             for next_y in range(self.maze_model.ny):
                 for next_x in range(self.maze_model.nx):
-                    q_s_a += self.maze_model.T((s[0], s[1]), a, (next_y, next_x)) * (self.maze_model.R(s, a) + self.gamma * self.V[next_y, next_x])
+                    # Compléter ici votre équation de Bellman
             if (q_s_a > max_value):
                 max_value = q_s_a
                 amax = a
