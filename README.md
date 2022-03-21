@@ -20,6 +20,7 @@ pip3 install -r requirements.txt
 
 ### Vérifier l'installation
 ```bash
+cd TD1
 python3 main.py random
 ```
 
