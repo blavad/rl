@@ -106,8 +106,8 @@ class QAgent(AgentInterface):
                         V[y,x] = val
                 self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
 
-        self.mazeValues.to_csv('logV.csv')
-        self.qvalues.to_csv('logQ.csv')
+        self.mazeValues.to_csv('TP1/partie_3/visualisation/logV.csv')
+        self.qvalues.to_csv('TP1/partie_3/visualisation/log.csv')
         
     def updateQ(self, state, action, reward, next_state):
         """À COMPLÉTER!

@@ -12,20 +12,16 @@ Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Tél�
 git clone https://github.com/blavad/IAT.git
 cd IAT
 ```
-2. Utiliser un environnement virtuel python (optionnel)
-```bash
-python3 -m venv .env
-source .env/bin/activate
-```
 
-3. Installer des dépendances
+2. Installer des dépendances
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Vérifier l'installation
 ```bash
-python main.py random
+cd TP1
+python3 main.py random
 ```
 
 ## TP 1. Résoudre un labyrinthe fixé
