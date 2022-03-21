@@ -35,10 +35,10 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 ## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
-**Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
+**Intro** : Quand on connait les modèles de la dynamique, p(s' | s,a) et r(s,a), on peut utiliser un algorithme de planification 
 pour déterminer la politique optimale.
 
-**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
+**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique et des récompenses. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
 - Lancer le programme principal avec comme paramètre `vi` 
