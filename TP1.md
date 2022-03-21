@@ -43,9 +43,9 @@ pour déterminer la politique optimale.
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
 - Lancer le programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
-  - `python3 main.py vi ./assets/maze_exo1.txt`
-  - `python3 main.py vi ./assets/maze_exo1.txt --stochastic`
-- Comparer les résultats obtenus au résultats théoriques
+  - Dans le fichier `main.py` décommenter la ligne 56. 
+  - Lancer `python3 main.py vi`
+- Comparer les résultats obtenus aux résultats théoriques
 - **Bonus** : Implémenter l'algorithme d'évaluation de la valeur ou TD-learning ou Monte-Carlo
 
 ## Partie 2.5 : Visualisation
