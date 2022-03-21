@@ -4,6 +4,7 @@ from copy import deepcopy
 from agent import AgentInterface
 from world.deterministic_maze import DeterministicMazeModel
 
+import pandas as pd
 
 class VIAgent(AgentInterface):
     """ 
@@ -11,28 +12,37 @@ class VIAgent(AgentInterface):
     sur les valeurs (VI = Value Iteration).
     """
 
-    def __init__(self, maze_model: DeterministicMazeModel, gamma: float = 1.0):
+    def __init__(self, maze_model: DeterministicMazeModel, gamma: float):
         """"À COMPLÉTER!
         Ce constructeur initialise une nouvelle instance de la classe ValueIteration.
-        Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser la 
+        Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser à 0 la 
         fonction de valeur d'état, notée V.
 
         :param maze_model: Le modèle du problème
         :type maze_model: DeterministicMazeModel
-        :param gamma: le discount factor, defaults to 1.0
-        :type gamma: float, optional
+
+        :param gamma: le facteur d'atténuation
+        :type gamma: float
+        :requirement: 0<gamma<1
+
+        #visualisation des données
+        :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
+        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
         """
         self.gamma = gamma
         self.maze_model = maze_model
         self.V = np.zeros([maze_model.ny, maze_model.nx])
+        self.mazeValues = pd.DataFrame(data={'nx': maze_model.nx, 'ny': [maze_model.ny]})
+        #self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
 
     def solve(self, error: float):
         """À COMPLÉTER!
         Cette méthode résoud le problème avec une tolérance donnée.
+        Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logVI.csv)
         """
         n_iteration = 0
         V_copy = np.zeros([self.maze_model.ny, self.maze_model.nx])
-
         while ((n_iteration == 0) or not self.done(self.V, V_copy, error)):
             n_iteration += 1
             self.V = deepcopy(V_copy)
@@ -40,6 +50,9 @@ class VIAgent(AgentInterface):
                 for x in range(self.maze_model.nx):
                     if (not self.maze_model.maze[y, x]):
                         V_copy[y, x] = self.bellman_operator((y, x))
+            if (True):
+                self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(self.V,(1,self.maze_model.ny*self.maze_model.nx))[0]},ignore_index=True)
+        self.mazeValues.to_csv('logVI.csv')
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!
@@ -54,7 +67,11 @@ class VIAgent(AgentInterface):
 
         :param s: Un état quelconque
         :return: La valeur de mise à jour de la fonction de valeur
+
+        doit retourner une exception si l'état n'est pas valide
         """
+        if (self.maze_model.maze[s[0], s[1]]):
+            raise Exception('this state is a wall, should not be considered')
         max_value = -np.infty
         for a in range(self.maze_model.na):
             q_s_a = 0.
@@ -72,7 +89,11 @@ class VIAgent(AgentInterface):
 
         :param state: L'état courant
         :return: L'action optimale
+
+        doit retourner une exception si l'état n'est pas valide
         """
+        if (self.maze_model.maze[s[0], s[1]]):
+            raise Exception('this state is a wall, should not be considered')
         max_value = -np.infty
         amax = 0
         for a in range(self.maze_model.na):

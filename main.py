@@ -48,6 +48,7 @@ def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, s
 
 
 def main(agent, opt):
+<<<<<<< HEAD
 # 
     # env = Maze(5, 5, min_shortest_length=0) 
     # env = Maze(7, 7, min_shortest_length=15) 
@@ -62,6 +63,33 @@ def main(agent, opt):
     gamma = 1.
     alpha = 0.2
     eps_profile = EpsilonProfile(1.0, 0.1)
+=======
+    #env = Maze(5, 5, min_shortest_length=0) 
+    env = Maze(7, 7, min_shortest_length=14) 
+    #env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
+    # env = Maze(14, 14, min_shortest_length=40) # Create a 15x15 maze
+    #env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
+    #env = DeterministicMazeModel(10, 10) # Create a deterministic maze model
+    
+    #env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
+    
+    #env = DeterministicMazeModel("tests/maze_ex1.txt") # Create a maze from a file
+    '''
+     env = Maze(7, 7, 14)
+    # env = DeterministicMazeModel(15, 15, 30)
+        
+    n_episodes = 30
+    max_steps = 500
+    alpha = 0.2
+    gamma = 1.0
+    eps_profile = EpsilonProfile(1., 1., 0., 0.)
+    '''
+    n_episodes = 30
+    max_steps = 500
+    gamma = 1.
+    alpha = 0.2
+    eps_profile = EpsilonProfile(1., 1., 0., 0.)
+>>>>>>> cbdd3442ce4edfe9343cf879a08f5b3e83799a7d
 
     # Hyperparamètres de DQN
     final_exploration_episode = 500

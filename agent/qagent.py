@@ -25,6 +25,14 @@ class QAgent(AgentInterface):
         :type gamma: float
         :param alpha: Le learning rate 
         :type alpha: float
+
+        #visualisation des données
+        :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
+        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
+
+        :attribut qvalues: la Q-valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
         """
         self.Q = np.zeros([maze.ny, maze.nx, maze.na])
 
@@ -38,7 +46,7 @@ class QAgent(AgentInterface):
         self.gamma = gamma
         self.alpha = alpha
         self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
-        self.mazeValues = pd.DataFrame(data={'episode': maze.nx, 'value': [maze.ny]})
+        self.mazeValues = pd.DataFrame(data={'nx': [maze.nx], 'ny': [maze.ny]})
 
     def learn(self, env, n_episodes, max_steps):
         """Cette méthode exécute l'algorithme de q-learning. 
@@ -50,6 +58,10 @@ class QAgent(AgentInterface):
         :type num_episodes: int
         :param max_num_steps: Le nombre maximum d'étape par épisode
         :type max_num_steps: int
+
+        #Visualisation des données
+        Elle doit proposer l'option de stockage de (i) la fonction de valeur & (ii) la Q-valeur 
+        dans un fichier de log
         """
         n_steps = np.zeros(n_episodes) + max_steps
         sum_rewards = np.zeros(n_episodes)  # total reward for each episode
@@ -81,7 +93,7 @@ class QAgent(AgentInterface):
                 state = env.reset_using_existing_maze()
                 self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
-                V = np.zeros((int(self.maze.nx),int(self.maze.ny)))
+                V = np.zeros((int(self.maze.ny),int(self.maze.nx)))
                 for y in range(self.maze.ny):
                     for x in range(self.maze.nx):
                         val = self.Q[int(y),int(x),self.select_action((y,x))]

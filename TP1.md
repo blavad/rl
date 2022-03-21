@@ -1,28 +1,48 @@
 # TP 1 : Résolution d'un labyrinthe fixé
 
-Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque.
+
+Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cet activité sont les suivantes.
+
+- Retrouver, differentier formellement les equations d'optimalité de Bellman et les équations de Bellman.
+- Écrire en Python l'algorithme **Value Iteration** de résolution  d'un processus décisionnel de Markov, avec modèles connus. 
+- Écrire en Python l'algorithme **Q-Learning** de résolution  d'un processus décisionnel de Markov, avec modèles inconnus. 
+- Savoir conduire des simulations d'un algorithme d'apprentissage par renforcement via les hyper-paramètres d'apprentissage.
+- Savoir interpréter les courbes d'apprentissage en phase d'apprentissage de l'algorithme.   
+
+
 
 ## Partie 1 : Théorie (30min)
 
-1. Rappeler les équations d'optimalité de Bellman pour V^*
+1. Equations de Bellman pour la résolution d'un processus décisionnel de Markov avec connaissance parfaite des modèles.
 
-2. Calculer fonction de valeur V^* associer au labyrinthe suivant (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
-  - parameters : gamma = 1.0
+  - Soit un processus decisionnel de Markov donné par le tuple (S, A, p, r). Considérons une politique quelconque notée **pi**. Écrire l'expression d'évaluation de cette politique, dans le cadre du critère des recompenses décomptées de paramètre de décompte **gamma**.
+  - En déduire les **équations de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la fonction de valeur en tout état de la politique fixée. 
+  - Démontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
+
+
+2. Calculer sur papier la fonction de valeur optimale associée au labyrinthe suivant `tests/maze_ex1.txt` 
+
+  - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition déterministes** 
 
-3. Calculer fonction de valeur V(s) associer au même labyrinthe (cette fois le modèle de transition est stochastique)
+
+3. Calculer sur papier la fonction de valeur optimale associée au même labyrinthe
   - parameters : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
-  - **Transition stochastiques** (modèle à définir) 
+  - **Transition stochastiques** 
+  On distinguera deux cas de figure. Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un obstacle ou mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante. Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante. 
+
 
 ## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
 **Intro** : Quand on connait les modèles de la dynamique (T et R), on peut utiliser un algorithme de planification 
 pour déterminer la politique optimale.
 
+**Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
+
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
-- Lancer la programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
+- Lancer le programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
   - `python3 main.py vi ./assets/maze_exo1.txt`
   - `python3 main.py vi ./assets/maze_exo1.txt --stochastic`
 - Comparer les résultats obtenus au résultats théoriques
@@ -30,7 +50,11 @@ pour déterminer la politique optimale.
 
 ## Partie 2.5 : Visualisation
 
-- A tout moment, python3 main.py logAnalysis peut être lancé pour afficher dans un navigateur un graphe montrant l'évolution de la Q-valeur du dernier algorithme lancé.
+- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
+- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la fonction de valeur
+- Visualiser l'évolution de la fonction de valeur
+
+- Tips : vous pouvez utiliser le module "animation" de matplotlib
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
@@ -45,8 +69,16 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 4. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
   - Analyser les résultats
   - Quel est l'intérêt de faire décroître ce paramètre ?
-  
-**Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
 
-## Partie 3 : Reinforce (Complémentaire)
-(à faire)
+## Partie 3.5 : Visualisation
+
+- Implémenter le stockage de l'évolution de fonction de valeur au cours de la résolution dans un fichier logAnalysisVi.csv.
+- Visualiser l'évolution de la fonction de valeur
+- Que constatez-vous?
+
+- Implémenter le stockage de l'évolution de la Q-valeur à l'état initial au cours de la résolution dans un fichier logAnalysis.csv.
+- Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
+- Visualiser la courbe d'évolution de la Q-valeur
+
+## Partie 4 : Reinforce (Bonus)
+- En vous appuyant sur vos notes de cours, liser et compléter l'algorithme **Reinforce** décrit dans le fihier reinforce.py 
