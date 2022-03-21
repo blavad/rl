@@ -2,7 +2,7 @@ import numpy as np
 import gym
 from agent import AgentInterface
 from world.maze import Maze
-from TP1.epsilon_profile import EpsilonProfile
+from epsilon_profile import EpsilonProfile
 import pandas as pd
 
 class QAgent(AgentInterface):
