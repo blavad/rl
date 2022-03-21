@@ -2,10 +2,8 @@ import imp
 import sys
 import time
 import argparse
-import torch
 
 from agent.qagent import QAgent
-from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from TP1.epsilon_profile import EpsilonProfile
@@ -20,30 +18,6 @@ from logAnalysis import logAnalysis
 # parser.add_argument('--height', type=int, default=7, metavar='h', help='height of the maze (default: 7)')
 # parser.add_argument('--shortest_path', type=int, default=14, metavar='p', help='shortest distance between starting point and goal point (default: 14)')
 # args = parser.parse_args()
-
-# test once by taking greedy actions based on Q values
-def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, speed: float = 0., same = True, display: bool = False):
-    n_steps = max_steps
-    sum_rewards = 0.
-    for _ in range(nepisodes):
-        state = env.reset_using_existing_maze() if (same) else env.reset()
-        if display:
-            env.render()
-
-        for step in range(max_steps):
-            action = agent.select_greedy_action(state)
-            next_state, reward, terminal = env.step(action)
-
-            if display:
-                time.sleep(speed)
-                env.render()
-
-            sum_rewards += reward
-            if terminal:
-                n_steps = step+1  # number of steps taken
-                break
-            state = next_state
-    return n_steps, sum_rewards
 
 
 def main(agent, opt):
@@ -63,15 +37,15 @@ def main(agent, opt):
     
     if (agent == "random"):
         agent = RandomAgent(env.action_space.n)
-        test_maze(env, agent, max_steps, speed=0.1, display=True)
+        #test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "vi"):
         agent = VIAgent(env, gamma)
         agent.solve(0.01)
-        test_maze(env, agent, max_steps, speed=0.1, display=True)
+        #test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent == "qlearning"):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
-        test_maze(env, agent, max_steps, speed=0.1, display=True)
+        "test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()
