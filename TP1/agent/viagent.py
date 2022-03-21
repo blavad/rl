@@ -54,7 +54,7 @@ class VIAgent(AgentInterface):
             if (True):
                 self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(
                     self.V, (1, self.maze_model.ny*self.maze_model.nx))[0]}, ignore_index=True)
-        self.mazeValues.to_csv('logVI.csv')
+        self.mazeValues.to_csv('logV.csv')
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!
