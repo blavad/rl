@@ -1,6 +1,5 @@
 # TP 1 : Résolution d'un labyrinthe fixé
 
-
 Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cet activité sont les suivantes.
 
 - Retrouver, differentier formellement les equations d'optimalité de Bellman et les équations de Bellman.
@@ -41,9 +40,9 @@ pour déterminer la politique optimale.
 
 **Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
-- Lire et compléter le fichier Value Iteration (agent/viagent.py)
+- Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
 - Lancer le programme principal avec comme paramètre `vi` 
-  - Dans le fichier `main.py` décommenter la ligne 56. 
+  - Dans le fichier `main.py` décommenter la ligne 52. 
   - Lancer `python3 main.py vi`
 - Comparer les résultats obtenus aux résultats théoriques
 
