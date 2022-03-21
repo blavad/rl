@@ -126,7 +126,7 @@ class QAgent(AgentInterface):
 
 
     def select_greedy_action(self, state):
-        """À COMPLÉTER!
+        """
         Cette méthode retourne l'action gourmande.
 
         :param state: L'état courant
