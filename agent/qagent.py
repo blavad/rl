@@ -12,7 +12,7 @@ class QAgent(AgentInterface):
     """
 
     def __init__(self, maze: Maze, eps_profile: EpsilonProfile, gamma: float, alpha: float):
-        """À COMPLÉTER!
+        """
         Ce constructeur initialise une nouvelle instance de la classe QAgent.
         Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser la 
         fonction de valeur d'action, notée Q.
@@ -26,7 +26,7 @@ class QAgent(AgentInterface):
         :param alpha: Le learning rate 
         :type alpha: float
 
-        #visualisation des données
+        # visualisation des données
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
@@ -59,7 +59,7 @@ class QAgent(AgentInterface):
         :param max_num_steps: Le nombre maximum d'étape par épisode
         :type max_num_steps: int
 
-        #Visualisation des données
+        # Visualisation des données
         Elle doit proposer l'option de stockage de (i) la fonction de valeur & (ii) la Q-valeur 
         dans un fichier de log
         """
@@ -114,7 +114,7 @@ class QAgent(AgentInterface):
         :param reward: La récompense perçue
         :param next_state: L'état suivant
         """
-        self.Q[state[0], state[1], action] = (1. - self.alpha) * self.Q[state[0], state[1], action] + self.alpha * (reward + self.gamma * np.max(self.Q[next_state]))
+        raise NotImplementedError("Q-learning NotImplementedError at Function updateQ.")
 
     def select_action(self, state):
         """À COMPLÉTER!
