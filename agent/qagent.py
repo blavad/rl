@@ -122,11 +122,8 @@ class QAgent(AgentInterface):
         :param state: L'état courant
         :return: L'action 
         """
-        if np.random.rand() < self.epsilon:
-            a = np.random.randint(self.na)      # random action
-        else:
-            a = self.select_greedy_action(state)
-        return a
+        raise NotImplementedError("Q-learning NotImplementedError at Function select_action.")
+
 
     def select_greedy_action(self, state):
         """À COMPLÉTER!
