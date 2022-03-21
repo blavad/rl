@@ -21,7 +21,9 @@ class Maze(gym.Env):
         Ce code n'a pas besoin d'être compris. On prendra simplement
         le soin savoir manipuler l'environnement "Maze" via ses méthodes:
             - __init__ (constructeur de Maze)
-            - reset
+            - getDynamics (accède à la dynamique)
+            - getReward (accède aux récompenses)
+            - reset 
             - reset_using_existing_maze
             - step
             - render
@@ -71,6 +73,8 @@ class Maze(gym.Env):
         self.terminal_color = [200, 0, 0]
 
     def getDynamics(self, state, action, next_state):
+        """ Retourne la probabilité de transition associé au problème déterministe
+        """
         action_name = self.actions[action]
         proba = 0.
         if (state == self.terminal_state):
@@ -100,12 +104,16 @@ class Maze(gym.Env):
         return proba
 
     def getReward(self, state, action):
+        """ Retourne la récompense.
+        """
         if (state == self.terminal_state):
             return 0
         else:
             return -1
 
-    def reset(self):       # generate a new maze and reset state
+    def reset(self):     
+        """ Génère un nouveau labyrinthe.
+        """
         while True:
             maze, shortest_length, p1, p2 = MazeGenerator.make_with_goal(self.nx, self.ny)
             if shortest_length >= self.min_shortest_length:
@@ -118,6 +126,8 @@ class Maze(gym.Env):
 
     # reset state without generating a new maze
     def reset_using_existing_maze(self):
+        """ Initialise le problème dans un état initial.
+        """
         self.terminal = 0             # 1 means game ended, 0 means game in progress
         self.loc = self.init_state  # current location (y,x) of agent as state
         if self.mode == 'tabular':    # tabular mode
@@ -133,7 +143,7 @@ class Maze(gym.Env):
 
     @classmethod
     def from_file(cls, filename: str):
-        """ Load a maze describes in a file. 
+        """ Charge un labyrinthe contenu dans un fichier texte. 
         
         Description:
             - P : Path 
@@ -172,7 +182,10 @@ class Maze(gym.Env):
                         maze_.init_state = (y, x)
         return maze_
                 
-    def step(self, action):      # take action and returns next state, reward, terminal
+    def step(self, action):     
+        """ Execute une action dans l'environnement et retourne l'état suivant, la récompense et un booléen 
+        indiquant si le système se trouve dans un état terminal.
+        """
         if self.terminal:
             print(
                 'Warning: maze_environment.run() has been called after reaching terminal = 1')
