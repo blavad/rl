@@ -13,48 +13,52 @@ class VIAgent(AgentInterface):
     sur les valeurs (VI = Value Iteration).
     """
 
-    def __init__(self, maze_model: DeterministicMazeModel, gamma: float):
-        """"
+    def __init__(self, maze: DeterministicMazeModel, gamma: float):
+        """"À LIRE
         Ce constructeur initialise une nouvelle instance de la classe ValueIteration.
-        Il stocke les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser à 0 la 
+        Il stocke les différents paramètres nécessaires au fonctionnement de l'algorithme et initialise à 0 la 
         fonction de valeur d'état, notée V.
 
-        :param maze_model: Le modèle du problème
-        :type maze_model: DeterministicMazeModel
+        :attribut V: La fonction de valeur d'états
+        :type V: un tableau de dimension : ny x nx 
 
-        :param gamma: le facteur d'atténuation
+        :attribut maze: Le modèle du labyrinthe. Il permet de récupérer la fonction de transition (maze.dynamics) et la récompense (maze.reward)
+        :type maze: DeterministicMazeModel
+
+        :attribut gamma: le facteur d'atténuation
         :type gamma: float
-        :requirement: 0<gamma<1
+        :requirement: 0 <= gamma <= 1
 
-        #visualisation des données
+        - Visualisation des données
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
         """
-        self.gamma = gamma
-        self.maze_model = maze_model
-        self.V = np.zeros([maze_model.ny, maze_model.nx])
+        self.gamma = gamma 
+        self.maze = maze 
+        self.V = np.zeros([maze.ny, maze.nx]) 
+
         self.mazeValues = pd.DataFrame(
-            data={'nx': maze_model.nx, 'ny': [maze_model.ny]})
+            data={'nx': maze.nx, 'ny': [maze.ny]})
 
     def solve(self, error: float):
         """
         Cette méthode résoud le problème avec une tolérance donnée.
-        Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logVI.csv)
+        Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logV.csv)
         """
         n_iteration = 0
-        V_copy = np.zeros([self.maze_model.ny, self.maze_model.nx])
+        V_copy = np.zeros([self.maze.ny, self.maze.nx])
         while ((n_iteration == 0) or not self.done(self.V, V_copy, error)):
             n_iteration += 1
             self.V = deepcopy(V_copy)
-            for y in range(self.maze_model.ny):
-                for x in range(self.maze_model.nx):
-                    if (not self.maze_model.maze[y, x]):
+            for y in range(self.maze.ny):
+                for x in range(self.maze.nx):
+                    if (not self.maze.maze[y, x]):
                         V_copy[y, x] = self.bellman_operator((y, x))
-            if (True):
-                self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(
-                    self.V, (1, self.maze_model.ny*self.maze_model.nx))[0]}, ignore_index=True)
-        self.mazeValues.to_csv('logVI.csv')
+            
+            # Sauvegarde les valeurs intermédiaires
+            self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(self.V, (1, self.maze.ny*self.maze.nx))[0]}, ignore_index=True)
+        self.mazeValues.to_csv('logV.csv')
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!
@@ -65,20 +69,20 @@ class VIAgent(AgentInterface):
 
     def bellman_operator(self, s: 'Pair[int, int]') -> float:
         """À COMPLÉTER!
-        Cette méthode calcul l'opérateur de mise à jour de bellman pour un état s.
+        Cette méthode calcul l'opérateur de mise à jour de bellman pour un état s. 
 
         :param s: Un état quelconque
         :return: La valeur de mise à jour de la fonction de valeur
 
         doit retourner une exception si l'état n'est pas valide
         """
-        if (self.maze_model.maze[s[0], s[1]]):
+        if (self.maze.maze[s[0], s[1]]):
             raise Exception('this state is a wall, should not be considered')
         max_value = -np.infty
-        for a in range(self.maze_model.na):
+        for a in range(self.maze.na):
             q_s_a = 0.
-            for next_y in range(self.maze_model.ny):
-                for next_x in range(self.maze_model.nx):
+            for next_y in range(self.maze.ny):
+                for next_x in range(self.maze.nx):
                     # Compléter ici votre équation de Bellman
                     raise NotImplementedError("Value Iteration NotImplementedError at Function bellman_operator.")
             if (q_s_a > max_value):
@@ -94,14 +98,14 @@ class VIAgent(AgentInterface):
 
         doit retourner une exception si l'état n'est pas valide
         """
-        if (self.maze_model.maze[s[0], s[1]]):
+        if (self.maze.maze[s[0], s[1]]):
             raise Exception('this state is a wall, should not be considered')
         max_value = -np.infty
         amax = 0
-        for a in range(self.maze_model.na):
+        for a in range(self.maze.na):
             q_s_a = 0.
-            for next_y in range(self.maze_model.ny):
-                for next_x in range(self.maze_model.nx):
+            for next_y in range(self.maze.ny):
+                for next_x in range(self.maze.nx):
                     # Compléter ici votre équation de Bellman
                     raise NotImplementedError("Value Iteration NotImplementedError at Function select_action")
             if (q_s_a > max_value):

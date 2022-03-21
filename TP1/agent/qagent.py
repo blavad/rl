@@ -12,21 +12,24 @@ class QAgent(AgentInterface):
     """
 
     def __init__(self, maze: Maze, eps_profile: EpsilonProfile, gamma: float, alpha: float):
-        """
+        """A LIRE
         Ce constructeur initialise une nouvelle instance de la classe QAgent.
         Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser la 
         fonction de valeur d'action, notée Q.
 
         :param maze: Le labyrinthe à résoudre 
         :type maze: Maze
+
         :param eps_profile: Le profil du paramètre d'exploration epsilon 
         :type eps_profile: EpsilonProfile
+        
         :param gamma: Le discount factor 
         :type gamma: float
+        
         :param alpha: Le learning rate 
         :type alpha: float
 
-        # visualisation des données
+        - Visualisation des données
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
@@ -34,6 +37,7 @@ class QAgent(AgentInterface):
         :attribut qvalues: la Q-valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         """
+        # Initialise la fonction de valeur Q
         self.Q = np.zeros([maze.ny, maze.nx, maze.na])
 
         self.maze = maze
@@ -45,6 +49,8 @@ class QAgent(AgentInterface):
 
         self.gamma = gamma
         self.alpha = alpha
+
+        # Visualisation des données (vous n'avez pas besoin de comprendre cette partie)
         self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
         self.mazeValues = pd.DataFrame(data={'nx': [maze.nx], 'ny': [maze.ny]})
 
@@ -100,8 +106,8 @@ class QAgent(AgentInterface):
                         V[y,x] = val
                 self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
 
-        self.mazeValues.to_csv('TP1/partie_3/visualisation/logVI.csv')
-        self.qvalues.to_csv('TP1/partie_3/visualisation/log.csv')
+        self.mazeValues.to_csv('logV.csv')
+        self.qvalues.to_csv('logQ.csv')
         
     def updateQ(self, state, action, reward, next_state):
         """À COMPLÉTER!
