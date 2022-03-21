@@ -6,7 +6,7 @@ import argparse
 from agent.qagent import QAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
-from TP1.epsilon_profile import EpsilonProfile
+from epsilon_profile import EpsilonProfile
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
