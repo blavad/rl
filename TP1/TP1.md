@@ -46,7 +46,7 @@ pour déterminer la politique optimale.
       
   :warning: L'état `s` correspond au couple de coordonnées `(y,x)`
 - Lancer le programme principal avec comme paramètre `vi` 
-  - Lancer `python3 main.py vi
+  - Lancer `python3 main.py vi`
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
   -  Utiliser l'environnement `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
 - Comparer les résultats obtenus aux résultats théoriques en affichant la fonction de valeur obtenue après résolution
