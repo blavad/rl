@@ -2,7 +2,6 @@ from fileinput import filename
 import os
 from tkinter import E
 
-from torch import from_file
 from world.maze import Maze
 import world.maze_generator
 from world.maze_generator import MazeGenerator
