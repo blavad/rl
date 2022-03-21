@@ -47,7 +47,7 @@ def animate(i):
 	im.set_data(V)
 	return im
 
-df = pd.read_csv("logVI.csv")
+df = pd.read_csv("logV.csv")
 nx = int(df.iloc[0]["nx"])
 ny = int(df.iloc[0]["ny"])
 n = len(df.index)
