@@ -42,11 +42,10 @@ pour déterminer la politique optimale.
 **Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique T et des récompenses R. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (agent/viagent.py)
-- Lancer le programme principal avec comme paramètre VI et le chemin vers le laryrinthe en .txt
+- Lancer le programme principal avec comme paramètre `vi` 
   - Dans le fichier `main.py` décommenter la ligne 56. 
   - Lancer `python3 main.py vi`
 - Comparer les résultats obtenus aux résultats théoriques
-- **Bonus** : Implémenter l'algorithme d'évaluation de la valeur ou TD-learning ou Monte-Carlo
 
 ## Partie 2.5 : Visualisation
 
@@ -58,8 +57,7 @@ pour déterminer la politique optimale.
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
-**Intro** : Parfois, les modèles de la dynamique (T et R) sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer 
-des informations au fil de l'eau, il est alors possible d'implementer des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
+**Intro** : Parfois, les modèles de la dynamique (T et R) sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer des informations au fil de l'eau, il est alors possible d'implémenter des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
 
 1. Lire et compléter le fichier Q-learning (agent/qagent.py)
 2. Lancer le fichier main.py pour vérifier les résultats `python main.py qlearning`
