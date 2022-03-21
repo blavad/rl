@@ -91,12 +91,13 @@ class QAgent(AgentInterface):
                     n_steps[episode] = step + 1  
                     break
 
-                state = next_state
+                state = next_state # fait évoluer le système dans le prochain état
                 epsilon = max(self.epsilon - self.eps_profile.dec_step, self.eps_profile.final) # mets à jour le critère de compromis exploration/exploitation
 
             if n_episodes >= 0:
                 self.epsilon = max(epsilon - self.eps_profile.dec_episode / (n_episodes - 1.), self.eps_profile.final)
                 state = env.reset_using_existing_maze()
+                #stock la Q-valeur dans l'attribut self.qvalues
                 self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
                 V = np.zeros((int(self.maze.ny),int(self.maze.nx)))
@@ -104,6 +105,7 @@ class QAgent(AgentInterface):
                     for x in range(self.maze.nx): # itère sur toutes les prochains abcisses possible sur le labyrinthe
                         val = self.Q[int(y),int(x),self.select_action((y,x))]
                         V[y,x] = val
+                #stock la fonction de valeur dans l'attribut self.mazeValues
                 self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
 
         self.mazeValues.to_csv('partie_3/visualisation/logV.csv')
