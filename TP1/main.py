@@ -3,7 +3,7 @@ import sys
 import time
 import argparse
 
-from agent.qagent import QAgent
+#from agent.qagent import QAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from epsilon_profile import EpsilonProfile
