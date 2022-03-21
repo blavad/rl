@@ -17,7 +17,7 @@ def printCurves():
 	df = pd.read_csv("logV.csv")
 	nx = int(df.iloc[0]["episode"])
 	ny = int(df.iloc[0]["value"])
-	n = len(df.index)https://github.com/blavad/IAT
+	n = len(df.index)
 	im = plt.imshow([[]])
 	for i in range(n-1):
 		V=df.iloc[i+1]["value"].replace("[","").replace("]","").split(" ")
@@ -34,7 +34,6 @@ def printCurves():
 		plt.colorbar()
 		plt.set_cmap('viridis')
 		plt.show()
-
 	#ax.matshow()
 '''
 def init():
@@ -47,7 +46,7 @@ def animate(i):
 	im.set_data(V)
 	return im
 
-df = pd.read_csv("../../logV.csv")
+df = pd.read_csv("logV.csv")
 nx = int(df.iloc[0]["nx"])
 ny = int(df.iloc[0]["ny"])
 n = len(df.index)
