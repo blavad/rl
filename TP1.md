@@ -1,26 +1,38 @@
 # TP 1 : Résolution d'un labyrinthe fixé
 
-Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque.
+
+Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cet activité sont les suivantes.
+
+- Retrouver, differentier formellement les equations d'optimalité de Bellman et les équations de Bellman.
+- Écrire en Python l'algorithme **Value Iteration** de résolution  d'un processus décisionnel de Markov, avec modèles connus. 
+- Écrire en Python l'algorithme **Q-Learning** de résolution  d'un processus décisionnel de Markov, avec modèles inconnus. 
+- Savoir conduire des simulations d'un algorithme d'apprentissage par renforcement via les hyper-paramètres d'apprentissage.
+- Savoir interpréter les courbes d'apprentissage en phase d'apprentissage de l'algorithme.   
+
+
 
 ## Partie 1 : Théorie (30min)
 
-1. Equations de Bellman pour la résolution d'un processus décisionnel de Markov
+1. Equations de Bellman pour la résolution d'un processus décisionnel de Markov avec connaissance parfaite des modèles.
 
-  1.a Soit un processus decisionnel de Markov donné par le tuple (S, A, p, r). Considerons une politique quelconque notée \pi. Ecrire l'expression d'evaluation de cette politique, dans le cadre du critère des recompenses décomptées de paramètres de décompte \gamma.
-  
-  1.b En déduire les **équations  de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la fonction de valeur en tout état de la politique fixée. 
-  
-  1.c Demontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
+  - Soit un processus decisionnel de Markov donné par le tuple (S, A, p, r). Considérons une politique quelconque notée **pi**. Écrire l'expression d'évaluation de cette politique, dans le cadre du critère des recompenses décomptées de paramètre de décompte **gamma**.
+  - En déduire les **équations de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la fonction de valeur en tout état de la politique fixée. 
+  - Demontrer de manière similaire les **équations d'optimalité de Bellman**, i.e., système d'équations dont la résolution permet de déterminer la politique optimale. 
 
-2. Calculer fonction de valeur V^* associer au labyrinthe suivant (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
-  - parameters : gamma = 1.0
+
+2. Calculer sur papier la fonction de valeur optimale associée aux labyrinthes suivants (dessiner un labyrinthe et le mettre dans un fichier .txt pour être utilisé dans les tests)
+  - paramètre de décompte : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition déterministes** 
+
+**TODO**: Il faut expliquer qu'est-ce que c'est ce labyrinthe. Comment est-il construit? Que signifie dessiner? Comment le faire? Quel modèle, language suivre? Il faut également en donner un exemple à la fois de son écriture et idéalement de sa visualisation. Autrement, on ne sait pas exactement de quoi il est question, c'est bien trop vague. 
 
 3. Calculer fonction de valeur V(s) associer au même labyrinthe (cette fois le modèle de transition est stochastique)
   - parameters : gamma = 1.0
   - R(s, a) = -1 pour tout s, pour tout a
   - **Transition stochastiques** (modèle à définir) 
+
+**TODO**: Que signifie définir le modèle? A-t-on un exemple de comment le faire?  
 
 ## Partie 2 : Implémenter l'algorithme "Value Iteration" (30min)
 
@@ -68,16 +80,5 @@ des informations au fil de l'eau, il est alors possible d'implementer des algori
 - Ecrire un script d'analyse du fichier logAnalysis.csv pour visualiser l'évolution de la Q-valeur
 - Visualiser la courbe d'évolution de la Q-valeur
 
-**Bonus**: Comparer avec SARSA et montrer que l'algo SARSA ne converge vers l'optimal que quand *epsilon* décroit vers 0 car c'est un algo d'évaluation de politique au même titre que TD-learning.
-
 ## Partie 4 : Reinforce (Bonus)
-- Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
-- Compléter reinforce.py (voir https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf, https://web.stanford.edu/class/cs234/CS234Win2019/slides/lnotes8.pdf)
-- Résoudre le problème en utilisant l'algorithme hsvi
-- Que constatez-vous des performances de Reinforce par rapport à VI & Q-learning?
-
-## Partie 5 : HSVI (Bonus)
-- Modéliser le problème comme un MDP (Markov Decision Process), voir http://researchers.lille.inria.fr/~lazaric/Webpage/MVA-RL_Course14_files/notes-lecture-02.pdf 
-- Compléter hsvi.py (voir https://arxiv.org/pdf/1207.4166.pdf)
-- Résoudre le problème en utilisant l'algorithme hsvi
-- Que constatez-vous des performances d'hsvi par rapport à VI & Q-learning?
+- En vous appuyant sur vos notes de cours, liser et compléter l'algorithme **Reinforce** décrit dans le fihier reinforce.py 
