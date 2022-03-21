@@ -71,5 +71,3 @@ pour déterminer la politique optimale.
 
 - Visualiser la courbe d'évolution de la Q-valeur
 
-## Partie 4 : Reinforce (Bonus)
-- En vous appuyant sur vos notes de cours, liser et compléter l'algorithme **Reinforce** décrit dans le fihier reinforce.py 
