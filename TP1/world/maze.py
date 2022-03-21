@@ -227,7 +227,7 @@ class Maze(gym.Env):
         img[self.loc[0]*self.pixel_per_case: (self.loc[0]+1)*self.pixel_per_case, self.loc[1] * self.pixel_per_case:(
             self.loc[1]+1)*self.pixel_per_case, :3] = self.robot_color #cv2.cvtColor(img_cv2, cv2.COLOR_BGR2RGB)
 
-    def T(self, state, action, next_state):
+    def getDynamics(self, state, action, next_state):
         action_name = self.actions[action]
         proba = 0.
         if (state == self.terminal_state):
@@ -256,7 +256,7 @@ class Maze(gym.Env):
 
         return proba
 
-    def R(self, state, action):
+    def getReward(self, state, action):
         if (state == self.terminal_state):
             return 0
         else:

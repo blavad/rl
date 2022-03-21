@@ -1,10 +1,10 @@
 import numpy as np
 from copy import deepcopy
+import pandas as pd
 
 from agent import AgentInterface
-from world.deterministic_maze import DeterministicMazeModel
+from world.maze import Maze
 
-import pandas as pd
 
 
 class VIAgent(AgentInterface):
@@ -13,7 +13,7 @@ class VIAgent(AgentInterface):
     sur les valeurs (VI = Value Iteration).
     """
 
-    def __init__(self, maze: DeterministicMazeModel, gamma: float):
+    def __init__(self, maze: Maze, gamma: float):
         """"À LIRE
         Ce constructeur initialise une nouvelle instance de la classe ValueIteration.
         Il stocke les différents paramètres nécessaires au fonctionnement de l'algorithme et initialise à 0 la 
