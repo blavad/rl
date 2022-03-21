@@ -1,5 +1,4 @@
 import numpy as np
-import gym
 from agent import AgentInterface
 from world.maze import Maze
 from epsilon_profile import EpsilonProfile
@@ -29,7 +28,7 @@ class QAgent(AgentInterface):
         :param alpha: Le learning rate 
         :type alpha: float
 
-        - Visualisation des données (vous n'avez pas à comprendre cette partie de visualisation)
+        - Visualisation des données
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
@@ -43,23 +42,23 @@ class QAgent(AgentInterface):
         self.maze = maze
         self.na = maze.na
 
-        # Algorithm parameters
-        self.eps_profile = eps_profile
-        self.epsilon = self.eps_profile.initial
-
+        # Paramètres de l'algorithme
         self.gamma = gamma
         self.alpha = alpha
 
+        self.eps_profile = eps_profile
+        self.epsilon = self.eps_profile.initial
+
         # Visualisation des données (vous n'avez pas besoin de comprendre cette partie)
         self.qvalues = pd.DataFrame(data={'episode': [], 'value': []})
-        self.mazeValues = pd.DataFrame(data={'nx': [maze.nx], 'ny': [maze.ny]})
+        self.values = pd.DataFrame(data={'nx': [maze.nx], 'ny': [maze.ny]})
 
     def learn(self, env, n_episodes, max_steps):
         """Cette méthode exécute l'algorithme de q-learning. 
         Il n'y a pas besoin de la modifier. Simplement la comprendre et faire le parallèle avec le cours.
 
         :param env: L'environnement 
-        :type env: gym.Env
+        :type env: gym.Envselect_action
         :param num_episodes: Le nombre d'épisode
         :type num_episodes: int
         :param max_num_steps: Le nombre maximum d'étape par épisode
@@ -70,8 +69,7 @@ class QAgent(AgentInterface):
         dans un fichier de log
         """
         n_steps = np.zeros(n_episodes) + max_steps
-        sum_rewards = np.zeros(n_episodes)  # total reward for each episode
-
+        
         # Execute N episodes 
         for episode in range(n_episodes):
             # Reinitialise l'environnement
@@ -84,34 +82,25 @@ class QAgent(AgentInterface):
                 next_state, reward, terminal = env.step(action)
                 # Mets à jour la fonction de valeur Q
                 self.updateQ(state, action, reward, next_state)
-                # Save data for upcoming analysis
-                sum_rewards[episode] += reward
                 
                 if terminal:
                     n_steps[episode] = step + 1  
                     break
 
-                state = next_state # fait évoluer le système dans le prochain état
-                epsilon = max(self.epsilon - self.eps_profile.dec_step, self.eps_profile.final) # mets à jour le critère de compromis exploration/exploitation
+                state = next_state
+            # Mets à jour la valeur du epsilon
+            self.epsilon = max(self.epsilon - self.eps_profile.dec_episode / (n_episodes - 1.), self.eps_profile.final)
 
+            # Sauvegarde et affiche les données d'apprentissage
             if n_episodes >= 0:
-                self.epsilon = max(epsilon - self.eps_profile.dec_episode / (n_episodes - 1.), self.eps_profile.final)
                 state = env.reset_using_existing_maze()
-                #stock la Q-valeur dans l'attribut self.qvalues
-                self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
-                print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
-                V = np.zeros((int(self.maze.ny),int(self.maze.nx)))
-                for y in range(self.maze.ny): # itère sur toutes les prochaines ordonnées possible sur le labyrinthe
-                    for x in range(self.maze.nx): # itère sur toutes les prochains abcisses possible sur le labyrinthe
-                        val = self.Q[int(y),int(x),self.select_action((y,x))]
-                        V[y,x] = val
-                #stock la fonction de valeur dans l'attribut self.mazeValues
-                self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
+                print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state][self.select_greedy_action(state)]), end =" ")
+                self.save_log(env, episode)
 
-        self.mazeValues.to_csv('partie_3/visualisation/logV.csv')
-        self.qvalues.to_csv('partie_3/visualisation/log.csv')
-        
-    def updateQ(self, state, action, reward, next_state):
+        self.values.to_csv('partie_3/visualisation/logV.csv')
+        self.qvalues.to_csv('partie_3/visualisation/logQ.csv')
+
+    def updateQ(self, state : 'Tuple[int, int]', action : int, reward : float, next_state : 'Tuple[int, int]'):
         """À COMPLÉTER!
         Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 
         Une transition est définie comme un tuple (état, action récompense, état suivant).
@@ -123,7 +112,7 @@ class QAgent(AgentInterface):
         """
         raise NotImplementedError("Q-learning NotImplementedError at Function updateQ.")
 
-    def select_action(self, state):
+    def select_action(self, state : 'Tuple[int, int]'):
         """À COMPLÉTER!
         Cette méthode retourne une action échantilloner selon le processus d'exploration (ici epsilon-greedy).
 
@@ -133,7 +122,7 @@ class QAgent(AgentInterface):
         raise NotImplementedError("Q-learning NotImplementedError at Function select_action.")
 
 
-    def select_greedy_action(self, state):
+    def select_greedy_action(self, state : 'Tuple[int, int]'):
         """
         Cette méthode retourne l'action gourmande.
 
@@ -143,3 +132,17 @@ class QAgent(AgentInterface):
         mx = np.max(self.Q[state])
         # greedy action with random tie break
         return np.random.choice(np.where(self.Q[state] == mx)[0])
+
+    def save_log(self, env, episode):
+        """Sauvegarde les données d'apprentissage.
+        :warning: Vous n'avez pas besoin de comprendre cette méthode
+        """
+        state = env.reset_using_existing_maze()
+        # Construit la fonction de valeur d'état associée à Q
+        V = np.zeros((int(self.maze.ny), int(self.maze.nx)))
+        for state in self.maze.getStates():
+            val = self.Q[state][self.select_action(state)]
+            V[state] = val
+
+        self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state][self.select_greedy_action(state)]}, ignore_index=True)
+        self.values = self.values.append({'episode': episode, 'value': np.reshape(V,(1, self.maze.ny*self.maze.nx))[0]},ignore_index=True)

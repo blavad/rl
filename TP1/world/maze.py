@@ -21,6 +21,7 @@ class Maze(gym.Env):
         Ce code n'a pas besoin d'être compris. On prendra simplement
         le soin savoir manipuler l'environnement "Maze" via ses méthodes:
             - __init__ (constructeur de Maze)
+            - getStates (renvoie l'ensemble des états)
             - getDynamics (accède à la dynamique)
             - getReward (accède aux récompenses)
             - reset 
@@ -55,6 +56,8 @@ class Maze(gym.Env):
         # Can be 'tabular' or 'nn' 
         self.mode = mode
         
+        self.states = [(y,x) for y in range(self.ny) for x in range(self.nx)]
+
         _ = self.reset()
 
         self.action_space = spaces.Discrete(4)
@@ -71,6 +74,11 @@ class Maze(gym.Env):
         self.robot_color = [0, 200, 100]
         self.init_color = [0, 0, 200]
         self.terminal_color = [200, 0, 0]
+
+    def getStates(self) -> 'List[Tuple[int,int]]':
+        """ Renvoie les états possibles du labyrinthe (i.e. les coordonnée (y, x))
+        """
+        return self.states
 
     def getDynamics(self, state, action, next_state):
         """ Retourne la probabilité de transition associé au problème déterministe
