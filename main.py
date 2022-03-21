@@ -49,18 +49,18 @@ def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, s
 
 def main(agent, opt):
 # 
-    env = Maze(5, 5, min_shortest_length=0) 
+    # env = Maze(5, 5, min_shortest_length=0) 
     # env = Maze(7, 7, min_shortest_length=15) 
     # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
     # env = Maze(14, 14, min_shortest_length=40) # Create a 15x15 maze
-    # env = Maze.from_file("tests/maze_ex1.txt") # Create a maze from a file
+    env = Maze.from_file("tests/maze_ex2.txt") # Create a maze from a file
     # env = DeterministicMazeModel(15, 15, min_shortest_length=30) # Create a deterministic maze model
         
     # WARNING : Pour Aurélien et Jilles : ces paramètres sont pour DQN (à changer pour VI et Q-learning tabulaire)  
-    n_episodes = 2000
+    n_episodes = 200
     max_steps = 50
     gamma = 1.
-    alpha = 0.001
+    alpha = 0.2
     eps_profile = EpsilonProfile(1.0, 0.1)
 
     # Hyperparamètres de DQN

@@ -81,7 +81,6 @@ class QAgent(AgentInterface):
                 state = env.reset_using_existing_maze()
                 self.qvalues = self.qvalues.append({'episode': episode, 'value': self.Q[state[0],state[1], self.select_greedy_action(state)]},ignore_index=True)
                 print("\r#> Ep. {}/{} Value {}".format(episode, n_episodes, self.Q[state[0],state[1], self.select_greedy_action(state)]), end =" ")
-                print("nx : ", self.maze.nx)
                 V = np.zeros((int(self.maze.nx),int(self.maze.ny)))
                 for y in range(self.maze.ny):
                     for x in range(self.maze.nx):
@@ -89,7 +88,6 @@ class QAgent(AgentInterface):
                         V[y,x] = val
                 self.mazeValues = self.mazeValues.append({'episode': episode, 'value': np.reshape(V,(1,self.maze.ny*self.maze.nx))[0]},ignore_index=True)
 
-        print(self.qvalues)
         self.mazeValues.to_csv('logVI.csv')
         self.qvalues.to_csv('log.csv')
         
