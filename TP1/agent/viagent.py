@@ -58,7 +58,7 @@ class VIAgent(AgentInterface):
             
             # Sauvegarde les valeurs intermédiaires
             self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(self.V, (1, self.maze.ny*self.maze.nx))[0]}, ignore_index=True)
-        self.mazeValues.to_csv('logV.csv')
+        self.mazeValues.to_csv('partie_2/visualisation/logV.csv')
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!
