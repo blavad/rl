@@ -1,5 +1,8 @@
+from fileinput import filename
 import os
 from tkinter import E
+
+from torch import from_file
 from world.maze import Maze
 import world.maze_generator
 from world.maze_generator import MazeGenerator
@@ -13,6 +16,11 @@ class DeterministicMazeModel(Maze):
 
     def __init__(self, nx, ny, min_shortest_length=0, mode='tabular'):
         Maze.__init__(self, nx, ny, min_shortest_length, mode)
+
+    @classmethod
+    def from_file(cls, filename: str):
+        sub_maze = Maze.from_file(filename)
+        return DeterministicMazeModel(sub_maze.nx, sub_maze.ny, sub_maze.min_shortest_length, sub_maze.mode)
 
     def T(self, state, action, next_state):
         action_name = self.actions[action]
