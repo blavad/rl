@@ -9,7 +9,6 @@ from agent.dqn_agent import DQNAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 from TP1.epsilon_profile import EpsilonProfile
-from networks import MLP, CNN
 from logAnalysis import *
 from world.maze import Maze
 from world.deterministic_maze import DeterministicMazeModel
@@ -81,14 +80,6 @@ def main(agent, opt):
         agent = QAgent(env, eps_profile, gamma, alpha)
         agent.learn(env, n_episodes, max_steps)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
-    elif (agent == "dqn"):
-        env.mode = "nn" # active le mode DeepRL (l'observation est la grille directement)
-        # A COMPLETER 
-        # nn = MLP(env.ny, env.nx, env.nf, env.na) 
-        nn = CNN(env.ny, env.nx, env.nf, env.na) 
-        agent = DQNAgent(nn, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
-        agent.learn(env, n_episodes, max_steps)
-        test_maze(env, agent, max_steps, 10, speed=0.1, display=True, same=False)
     elif (agent=="logAnalysis"):
         agent = logAnalysis(opt)
         agent.printCurves()

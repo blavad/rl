@@ -6,6 +6,7 @@ from world.deterministic_maze import DeterministicMazeModel
 
 import pandas as pd
 
+
 class VIAgent(AgentInterface):
     """ 
     Un agent capable de résoudre un labyrinthe donné grâce à l'algorithme d'itération 
@@ -33,7 +34,8 @@ class VIAgent(AgentInterface):
         self.gamma = gamma
         self.maze_model = maze_model
         self.V = np.zeros([maze_model.ny, maze_model.nx])
-        self.mazeValues = pd.DataFrame(data={'nx': maze_model.nx, 'ny': [maze_model.ny]})
+        self.mazeValues = pd.DataFrame(
+            data={'nx': maze_model.nx, 'ny': [maze_model.ny]})
 
     def solve(self, error: float):
         """
@@ -50,7 +52,8 @@ class VIAgent(AgentInterface):
                     if (not self.maze_model.maze[y, x]):
                         V_copy[y, x] = self.bellman_operator((y, x))
             if (True):
-                self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(self.V,(1,self.maze_model.ny*self.maze_model.nx))[0]},ignore_index=True)
+                self.mazeValues = self.mazeValues.append({'episode': n_iteration, 'value': np.reshape(
+                    self.V, (1, self.maze_model.ny*self.maze_model.nx))[0]}, ignore_index=True)
         self.mazeValues.to_csv('logVI.csv')
 
     def done(self, V, V_copy, error) -> bool:
@@ -60,7 +63,7 @@ class VIAgent(AgentInterface):
         """
         raise NotImplementedError("VI NotImplementedError at function done.")
 
-    def bellman_operator(self, s : 'Pair[int, int]') -> float:
+    def bellman_operator(self, s: 'Pair[int, int]') -> float:
         """À COMPLÉTER!
         Cette méthode calcul l'opérateur de mise à jour de bellman pour un état s.
 
@@ -77,6 +80,7 @@ class VIAgent(AgentInterface):
             for next_y in range(self.maze_model.ny):
                 for next_x in range(self.maze_model.nx):
                     # Compléter ici votre équation de Bellman
+                    raise NotImplementedError("Value Iteration NotImplementedError at Function bellman_operator.")
             if (q_s_a > max_value):
                 max_value = q_s_a
         return max_value
@@ -99,6 +103,7 @@ class VIAgent(AgentInterface):
             for next_y in range(self.maze_model.ny):
                 for next_x in range(self.maze_model.nx):
                     # Compléter ici votre équation de Bellman
+                    raise NotImplementedError("Value Iteration NotImplementedError at Function select_action")
             if (q_s_a > max_value):
                 max_value = q_s_a
                 amax = a
