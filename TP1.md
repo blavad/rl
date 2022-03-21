@@ -49,7 +49,7 @@ pour déterminer la politique optimale.
 
 ## Partie 2.5 : Visualisation
 
-- Visualiser l'évolution de la fonction de valeur 
+- Visualiser l'évolution de la fonction de valeur avec la commande python3 logAnalysisVi.py
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
@@ -66,8 +66,5 @@ pour déterminer la politique optimale.
 
 ## Partie 3.5 : Visualisation
 
-- Visualiser l'évolution de la fonction de valeur
-- Que constatez-vous?
-
-- Visualiser la courbe d'évolution de la Q-valeur
+- Visualiser la courbe d'évolution de la Q-valeur avec la commande python3 main.py logAnalysis
 
