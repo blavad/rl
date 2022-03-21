@@ -55,10 +55,10 @@ pour déterminer la politique optimale.
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
 
-**Intro** : Parfois, les modèles de la dynamique (T et R) sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer des informations au fil de l'eau, il est alors possible d'implémenter des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
+**Intro** : Parfois, les modèles de la dynamique sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer des informations au fil de l'eau, il est alors possible d'implémenter des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
 
 1. Lire et compléter le fichier Q-learning (agent/qagent.py)
-2. Lancer le fichier main.py pour vérifier les résultats `python main.py qlearning`
+2. Lancer le fichier main.py pour vérifier les résultats `python3 main.py qlearning`
 3. Augmenter la taille du labyrinthe à (14, 14) et recommencer l'apprentissage 
   - Que remarque-t-on ?
   - Quelle(s) solution peut-on apporter (jouer avec les paramètres d'apprentissage - i.e. `n_episodes` et `max_steps`) ?
