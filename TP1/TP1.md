@@ -43,6 +43,8 @@ pour déterminer la politique optimale.
 **Value Iteration**: Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite des modèles de la dynamique et des récompenses. L'algorithme procède de façon iterative, mettant à jour la fonction de valeur, d'une iteration à l'autre jusqu'à ce que l'écart entre deux mises à jour est inférieur à un seuil à fixer, e.g., 0.01. Chaque mise à jour consiste à l'application des équations d'optimalité de Bellman énoncées plus tôt. 
 
 - Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
+      
+  :warning: L'état `s` correspond au couple de coordonnées `(y,x)`
 - Lancer le programme principal avec comme paramètre `vi` 
   - Lancer `python3 main.py vi
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
