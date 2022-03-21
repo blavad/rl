@@ -15,12 +15,12 @@ cd IAT
 
 2. Installer des dépendances
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Vérifier l'installation
 ```bash
-python main.py random
+python3 main.py random
 ```
 
 ## TP 1. Résoudre un labyrinthe fixé
