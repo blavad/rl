@@ -23,7 +23,7 @@ class VIAgent(AgentInterface):
         :type V: un tableau de dimension : ny x nx 
 
         :attribut maze: Le modèle du labyrinthe. Il permet de récupérer la fonction de transition (maze.dynamics) et la récompense (maze.reward)
-        :type maze: DeterministicMazeModel
+        :type maze: Maze
 
         :attribut gamma: le facteur d'atténuation
         :type gamma: float
