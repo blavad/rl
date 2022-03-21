@@ -29,7 +29,7 @@ class QAgent(AgentInterface):
         :param alpha: Le learning rate 
         :type alpha: float
 
-        - Visualisation des données
+        - Visualisation des données (vous n'avez pas à comprendre cette partie de visualisation)
         :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
