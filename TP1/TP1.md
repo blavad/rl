@@ -44,7 +44,6 @@ pour déterminer la politique optimale.
 
 - Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
 - Lancer le programme principal avec comme paramètre `vi` 
-  - Dans le fichier `main.py` décommenter la ligne 52. 
   - Lancer `python3 main.py vi`
 - Comparer les résultats obtenus aux résultats théoriques
 
