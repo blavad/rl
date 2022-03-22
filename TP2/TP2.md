@@ -33,7 +33,7 @@ Pour cela on introduit les réseaux de neurones convolutifs (CNN) qui sont adapt
 3. Changer la taille du labyrinthe en 7x7 et relancer l'algorithme.
 4. Que se passe-t-il ?
 5. Mettez en place un processus d'amélioration des hyperparamètres
--> *Hint: On pourra tenter de combiner une ou plusieurs modifications suivantes*
+-> *Note: On pourra tenter de combiner une ou plusieurs modifications suivantes*
    1. Augmenter le nombre d'épisodes d'apprentissage
    2. Explorer plus longtemps
    3. Augmenter la taille du buffer
