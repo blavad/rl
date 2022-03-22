@@ -12,21 +12,21 @@ Pour cela, nous introduisons l'apprentissage par renforcement profond.
 2. Lire et compléter le fichier DQN (agent/dqn_agent.py)
    - *Rq: ce fichier utilise la bibliothèque logiciel [Pytorch](https://pytorch.org)*
 
-## Partie 3 : Multi Layer Perceptron (pour DQN)
+## Partie 2 : Multi Layer Perceptron (pour DQN)
 
-1. Lancer l'apprentissage DQN avec une architecture de réseau de neurones MLP (voir `main.py` et `networks.py`)
+1. Lancer le programme principal : `python3 main.py mlp`
 2. Questions :
    1. Obtient-on les résultats optimaux ?
    2. Selon vous, quels peuvent être les raisons de cette sous-optimalité ?
 3. Modifier des hyperparamètres d'apprentissage pour obtenir la quasi-optimalité *(i.e. success_ratio > 0.95)*
 4. Changer la taille du labyrinthe à 7x7 et relancer votre méthode. Que se passe-t-il ? 
 
-## Partie 4 : Convolutional Neural Network
+## Partie 3 : Convolutional Neural Network
 
 Dans cette partie, on propose d'améliorer l'architecture de réseau de neurones qui n'est pas la plus adaptée au problème.
-Pour cela on introduit les réseaux de neurones convolutifs (CNN) qui sont adaptés aux traitement de données ayant une représentation en grille. 
+Pour cela on introduit les réseaux de neurones convolutifs (CNN) qui sont adaptés aux traitement de données ayant une représentation "en grille". 
 
-1. Lancer l'apprentissage DQN avec une architecture de réseau de neurones CNN (voir `main.py` et `networks.py`)
+1. Lancer l'apprentissage DQN avec une architecture de réseau de neurones CNN : `python3 main.py cnn`
 2. Relancer les expérimentations sur 5x5
    1. Obtient-on les résultats optimaux ?
    2. Quelle différence par rapport à la partie précédente ?
