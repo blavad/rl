@@ -21,13 +21,34 @@
 ### Partie 1 : MLP
 
 **DQN Maze 5x5:** 
-*Params:*
-- n_episodes = 2000
-- max_steps = 50
-- gamma = 1.
-- alpha = 0.001
 
-*Archi:*
+----
+1. **Paramétrage initial**
+- *Paramètres:*
+    - n_episodes = 2000
+    - max_steps = 50
+    - gamma = 1.
+    - alpha = 0.001
+
+- *Archi:*
+
+```python
+self.flatten = nn.Flatten()
+self.layers = nn.Sequential(
+    nn.Linear(ny*nx*nf, 32),
+    nn.ReLU(),
+    nn.Linear(32, na),
+)
+```
+----
+2. **Proposition pour optimalité**
+- *Paramètres:*
+    - n_episodes = 10000
+    - max_steps = 50
+    - gamma = 1.
+    - alpha = 0.001
+
+- *Archi:*
 
 ```python
 self.flatten = nn.Flatten()
