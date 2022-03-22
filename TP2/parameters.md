@@ -3,17 +3,24 @@
 ## TP 1
 
 ### Q-Learning
-1. Maze 7x7
-- n_episodes = 200
-- max_steps = 50
-- gamma = 1.
-- alpha = 0.2
 
-2. Maze 14x14
-- n_episodes = 1000
-- max_steps = 200
-- gamma = 1.
-- alpha = 0.2
+
+----
+**Q-learning Maze 5x5:**
+
+- **Paramétrage initial et optimal**
+    - n_episodes = 200
+    - max_steps = 50
+    - gamma = 1.
+    - alpha = 0.2
+
+----
+**Q-learning Maze 14x14:**
+- **Proposition de paramétrage optimal**
+    - n_episodes = 1000
+    - max_steps = 200
+    - gamma = 1.
+    - alpha = 0.2
 
 
 ## TP 2
@@ -64,20 +71,21 @@ self.layers = nn.Sequential(
 
 **DQN Maze 5x5:**
 
-*Params:*
-- n_episodes = 2000
-- max_steps = 50
-- gamma = 1.
-- alpha = 0.001
-- 
-- eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
-- final_exploration_episode = 1000
-- batch_size = 32
-- replay_memory_size = 1000
-- target_update_frequency = 100
-- tau = 1.0
+----
+1. **Paramétrage initial et optimal**
+- *Paramètres:*
+    - n_episodes = 2000
+    - max_steps = 50
+    - gamma = 1.
+    - alpha = 0.001
+    - eps_profile = EpsilonProfile(1.0, 0.1)
+    - final_exploration_episode = 500
+    - batch_size = 32
+    - replay_memory_size = 1000
+    - target_update_frequency = 100
+    - tau = 1.0
 
-*Archi:*
+- *Architecture:*
 
 ```python
 self.layers = nn.Sequential(
@@ -94,19 +102,21 @@ self.layers = nn.Sequential(
 
 **DQN Maze 7x7: (pas top et assez long)**
 
-*Params:*
-- n_episodes = 15000
-- max_steps = 80
-- gamma = 1.
-- alpha = 0.00025
-- eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
-- final_exploration_episode = 10000
-- batch_size = 64
-- replay_memory_size = 10000
-- target_update_frequency = 1000
-- tau = 1.0
+----
+1. **Proposition de paramétrage optimal**
+- *Paramètres:*
+    - n_episodes = 15000
+    - max_steps = 80
+    - gamma = 1.
+    - alpha = 0.00025
+    - eps_profile = EpsilonProfile(1.0, 0.1, 1., 0.)
+    - final_exploration_episode = 10000
+    - batch_size = 64
+    - replay_memory_size = 10000
+    - target_update_frequency = 1000
+    - tau = 1.0
 
-*Archi:*
+- *Architecture:*
 
 ```python
 self.layers = nn.Sequential(
