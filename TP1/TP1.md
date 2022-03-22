@@ -45,7 +45,7 @@ pour déterminer la politique optimale.
 - Lire et compléter le fichier Value Iteration (`TP1/agent/viagent.py`)
       
   :warning: L'état `s` correspond au couple de coordonnées `(y,x)`
-- Lancer le programme principal avec comme paramètre `vi` 
+- Lancer le programme principal avec comme paramètre `vi` (pour **v**alue **i**teration)
   - Lancer `python3 main.py vi`
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
   -  Utiliser l'environnement `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
@@ -60,11 +60,12 @@ pour déterminer la politique optimale.
 **Intro** : Parfois, les modèles de la dynamique sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer des informations au fil de l'eau, il est alors possible d'implémenter des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
 
 1. Lire et compléter le fichier Q-learning (agent/qagent.py)
-2. Lancer le fichier main.py pour vérifier les résultats `python3 main.py qlearning`
-3. Augmenter la taille du labyrinthe à (14, 14) et recommencer l'apprentissage 
+2. Lancer le programme principal avec comme paramètre `qlearning` 
+  - Lancer`python3 main.py qlearning`
+4. Augmenter la taille du labyrinthe à (14, 14) et recommencer l'apprentissage 
   - Que remarque-t-on ?
   - Quelle(s) solution peut-on apporter (jouer avec les paramètres d'apprentissage - i.e. `n_episodes` et `max_steps`) ?
-4. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
+5. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
   - Analyser les résultats
   - Quel est l'intérêt de faire décroître ce paramètre ?
 
