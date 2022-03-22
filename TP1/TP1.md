@@ -64,7 +64,8 @@ pour déterminer la politique optimale.
   - Lancer`python3 main.py qlearning`
 4. Augmenter la taille du labyrinthe à (14, 14) et recommencer l'apprentissage 
   - Que remarque-t-on ?
-  - Quelle(s) solution peut-on apporter (jouer avec les paramètres d'apprentissage - i.e. `n_episodes` et `max_steps`) ?
+  - Quelle(s) solution peut-on apporter ?
+      - *Indice:* modifier les paramètres d'apprentissage `n_episodes` et `max_steps` par exemple
 5. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
   - Analyser les résultats
   - Quel est l'intérêt de faire décroître ce paramètre ?
