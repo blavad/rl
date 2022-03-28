@@ -2,8 +2,8 @@ import sys
 import time
 
 from agent.dqn_agent import DQNAgent
-from TP1.epsilon_profile import EpsilonProfile
-from TP1.world.maze import Maze
+from epsilon_profile import EpsilonProfile
+from world.maze import Maze
 
 from networks import MLP, CNN
 

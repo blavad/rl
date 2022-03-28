@@ -1,7 +1,7 @@
 import numpy as np
 from agent import AgentInterface
-from TP1.world.maze import Maze
-from TP1.epsilon_profile import EpsilonProfile
+from world.maze import Maze
+from epsilon_profile import EpsilonProfile
 import pandas as pd
 
 class QAgent(AgentInterface):
