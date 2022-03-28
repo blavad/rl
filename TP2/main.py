@@ -37,7 +37,7 @@ def main(nn, opt):
     """ INSTANCIE LE LABYRINTHE """ 
     env = Maze(5, 5, min_shortest_length=0) 
     env.mode = "nn" 
-    nn = None
+    model = None
 
     """ INITIALISE LES PARAMETRES D'APPRENTISSAGE """
     # Hyperparamètres basiques
@@ -56,20 +56,20 @@ def main(nn, opt):
 
     """ INSTANCIE LE RESEAU DE NEURONES """
     if (nn == "mlp"):
-        nn = MLP(env.ny, env.nx, env.nf, env.na)
+        model = MLP(env.ny, env.nx, env.nf, env.na)
     elif (nn == "cnn"):
-        nn = CNN(env.ny, env.nx, env.nf, env.na)
+        model = CNN(env.ny, env.nx, env.nf, env.na)
     else:
         print("Error : Unknown neural network (" + nn + ").")
     
 
     print('--- neural network ---')
-    num_params = sum(param.numel() for param in nn.parameters() if param.requires_grad)
+    num_params = sum(param.numel() for param in model.parameters() if param.requires_grad)
     print('number of parameters:', num_params)
-    print(nn)
+    print(model)
 
     """  LEARNING PARAMETERS"""
-    agent = DQNAgent(nn, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
+    agent = DQNAgent(model, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
     agent.learn(env, n_episodes, max_steps)
     test_maze(env, agent, max_steps, speed=0.1, display=False)
 
