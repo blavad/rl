@@ -29,8 +29,7 @@ Pour cela nous utilisons les réseaux de neurones convolutifs ([CNN](https://fr.
 
 1. Lancer DQN avec l'architecture de réseau de neurones CNN  `python3 main.py cnn`  avec `n_episodes = 2000`. Que constatez-vous?
 2.  Changer la taille du labyrinthe en 7x7 et relancer l'algorithme. Que pouvez-vous conclure sur l'architecture CNN?
-3.  Mettez en place un processus d'amélioration des hyperparamètres
--> *Note: On pourra tenter de combiner une ou plusieurs modifications suivantes*
+3.  Mettez en place un processus d'amélioration des hyperparamètres. Note: On pourra tenter de combiner une ou plusieurs modifications suivantes*
    - Augmenter le nombre d'épisodes d'apprentissage
    - Explorer plus longtemps
    - Augmenter la taille du buffer
