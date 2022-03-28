@@ -6,34 +6,39 @@ import torch.nn.functional as F
 import numpy as np
 import time
 
-from agent.qagent import QAgent
+from .qagent import QAgent
 from world.maze import Maze
 from epsilon_profile import EpsilonProfile
 
 
 class DQNAgent(QAgent):
     """ 
-    Cette classe d'agent représente un agent utilisant la méthode du Q-learning 
-    pour mettre à jour sa politique d'action.
+    Cette classe d'agent représente un agent utilisant l'algorithme DQN pour mettre 
+    à jour sa politique d'action.
     """
     TEST_FREQUENCY = 100
 
     def __init__(self, qnetwork: nn.Module, eps_profile: EpsilonProfile, gamma: float, alpha: float, replay_memory_size: int = 1000, batch_size: int = 32, target_update_freq: int = 100, tau: float = 1., final_exploration_episode : int = 500):
         """
         Ce constructeur initialise une nouvelle instance de la classe QAgent.
-        Il doit stocker les différents paramètres nécessaires au fonctionnement de l'algorithme et initialiser la 
-        fonction de valeur d'action, notée Q.
+        Il doit stocker les différents paramètres nécessaires au fonctionnement 
+        de l'algorithme et initialiser la fonction de valeur d'action, notée Q.
 
         :param maze: Le labyrinthe à résoudre 
         :type maze: Maze
         :param eps_profile: Le profil du paramètre d'exploration epsilon 
         :type eps_profile: EpsilonProfile
-        :param gamma: Le discount factor 
+        :param gamma: Le facteur d'atténuation
         :type gamma: float
-        :param alpha: Le learning rate 
+        :param alpha: Le taux d'apprentissage
         :type alpha: float
         :param tau: Le taux de mise à jour du réseau cible
         :type tau: float
+        :param target_update_frequency: La fréquence de mise à jour du réseau cible
+        :type target_update_frequency: int
+        :param batch_size: La taille de l'échantillon utilisé pour la mise à jour du 
+        réseau Q
+        :type batch_size: int
         """
         self.policy_net = qnetwork
         self.target_net = copy.deepcopy(qnetwork)
@@ -136,19 +141,20 @@ class DQNAgent(QAgent):
             n_ckpt = 10
             if episode % DQNAgent.TEST_FREQUENCY == DQNAgent.TEST_FREQUENCY - 1:   
                 test_score, test_extra_steps = self.run_tests(env, 100, max_steps)
-                print('episode: %4d, frames: %6d, train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f, test success ratio: %.2f, epsilon: %.2f, elapsed time: %.1f'
-                      % (episode + 1, self.ds, np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
+                # train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f,
+                #np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), 
+                print('Episode: %5d/%5d, steps: %6d, test success ratio: %.2f, epsilon: %.2f, time: %.1f'
+                      % (episode + 1, n_episodes, self.ds, np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
 
         n_test_runs = 100
         test_score, test_extra_steps = self.run_tests(env, n_test_runs, max_steps)
-        for k in range(n_test_runs):
-            print(test_extra_steps[k])
+        # for k in range(n_test_runs):
+        #     print(test_extra_steps[k])
         print('Final test score: %.1f' % test_score)
         print('Final test success ratio: %.2f' % (np.sum(test_extra_steps == 0) / n_test_runs))
 
     def updateQ(self, state, action, reward, next_state, terminal):
-        """À LIRE!
-        Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 
+        """ Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 
         Une transition est définie comme un tuple (état, action récompense, état suivant).
 
         :param state: L'état origine
@@ -167,7 +173,7 @@ class DQNAgent(QAgent):
         self.d = (self.d + 1) % self.replay_memory_size
         self.ds = self.ds + 1
 
-        # Commencer l'apprentissage quand le buffer est plein
+        # Commence l'apprentissage quand le buffer est plein
         if self.ds >= self.replay_memory_size:
 
             self.optimizer.zero_grad()
@@ -179,8 +185,9 @@ class DQNAgent(QAgent):
             x_batch, a_batch, r_batch, y_batch, t_batch = torch.from_numpy(self.Ds[c]), torch.from_numpy(
                 self.Da[c]), torch.from_numpy(self.Dr[c]),  torch.from_numpy(self.Dsn[c]), torch.from_numpy(self.Dt[c])
 
-            # Calcul de la valeur courante
+            # Calcul de la valeur courante 
             current_value = self.policy_net(x_batch).gather(1, a_batch.max(1).indices.unsqueeze(1)).squeeze(1)
+
             # Calcul de la valeur cible
             target_value = self.target_net(y_batch).max(1).values * self.gamma * (1. - t_batch) + r_batch
 
