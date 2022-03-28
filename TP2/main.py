@@ -41,10 +41,10 @@ def main(nn, opt):
 
     """ INITIALISE LES PARAMETRES D'APPRENTISSAGE """
     # Hyperparamètres basiques
-    n_episodes = 200
+    n_episodes = 2000
     max_steps = 50
     gamma = 1.
-    alpha = 0.2
+    alpha = 0.001
     eps_profile = EpsilonProfile(1.0, 0.1)
 
     # Hyperparamètres de DQN

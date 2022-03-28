@@ -15,9 +15,9 @@ class MLP(nn.Module):
         super(MLP, self).__init__()
         self.flatten = nn.Flatten()
         self.layers = nn.Sequential(
-            nn.Linear(ny*nx*nf, 64),
+            nn.Linear(ny*nx*nf, 32),
             nn.ReLU(),
-            nn.Linear(64, na),
+            nn.Linear(32, na),
         )
 
     def forward(self, x):
@@ -29,20 +29,6 @@ class MLP(nn.Module):
         x = self.flatten(x)
         qvalues = self.layers(x)
         return qvalues
-
-def truncated_normal_(tensor, mean=0, std=1):
-    size = tensor.shape
-    tmp = tensor.new_empty(size + (4,)).normal_()
-    valid = (tmp < 2) & (tmp > -2)
-    ind = valid.max(-1, keepdim=True)[1]
-    tensor.data.copy_(tmp.gather(-1, ind).squeeze(-1))
-    tensor.data.mul_(std).add_(mean)
-    return tensor
-
-def weights_init(m):
-    if isinstance(m, nn.Conv2d):
-        torch.nn.init.xavier_uniform_(m.weight)
-        torch.nn.init.zeros_(m.bias)
 
 class CNN(nn.Module):
     def __init__(self, ny: int, nx: int, nf: int, na: int):
@@ -77,3 +63,7 @@ class CNN(nn.Module):
         qvalues = self.layers(x)
         return qvalues
 
+def weights_init(m):
+    if isinstance(m, nn.Conv2d):
+        torch.nn.init.xavier_uniform_(m.weight)
+        torch.nn.init.zeros_(m.bias)
