@@ -46,9 +46,9 @@ def main(nn, opt):
     max_steps = 50
     alpha = 0.001
     eps_profile = EpsilonProfile(1.0, 0.1)
+    final_exploration_episode = 500
 
     # Hyperparamètres de DQN
-    final_exploration_episode = 500
     batch_size = 32
     replay_memory_size = 1000
     target_update_frequency = 100
