@@ -1,7 +1,7 @@
 # TP 2 : Résolution des labyrinthes
 
 Dans ce problème, on s'intéresse à la résolution de toutes les instances de labyrinthe de taille fixée (ici 7x7).
-Pour cela, nous utiliserons l'apprentissage par renforcement profond.
+Pour cela, nous utiliserons l'apprentissage par renforcement profond. 
 
 ## Partie 1 : Théorie
 
@@ -14,17 +14,19 @@ L'intérêt de la représentation des fonctions de action-valeur profondes par u
 
 ## Partie 2 : Multi Layer Perceptron (pour DQN)
 
-1. Lancer le programme principal : `python3 main.py mlp`
-2. Questions :
-   1. Obtient-on les résultats optimaux ?
-   2. Selon vous, quels peuvent être les raisons de ces résultats ?
-3. Modifier les hyperparamètres (i.e., n_episodes, max_steps, alpha, epsilon) de l'algorithme DQN (cf.  `main.py`) pour obtenir de meilleures performances *(e.g., success_ratio > 0.95)*
-4. Changer la taille du labyrinthe à 7x7 (cf.  `main.py` ligne 38) et relancer votre méthode. Que se passe-t-il ? 
+Dans cette partie, nous utiserons une architecture de réseaux de neurones simpliciste mais pas la plus adéquate pour notre problème, à savoir l'architecture [MLP](https://en.wikipedia.org/wiki/Multilayer_perceptron). 
+
+1. Lancer le programme principal : `python3 main.py mlp`, interpréter les traces d'exécution. 
+2. Modifier l'hyper-paramètre `n_episodes = 5000` et relancer le programme. Que constatez-vous? 
+3. Modifier l'hyper-paramètre `n_episodes = 50000` et relancer le programme. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `n_episodes`?
+4. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 16 de la couche interne. Que constatez-vous?
+5. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 128 de la couche interne. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `nombre de neurones` de la couche interne? 
+6. Changer la taille du labyrinthe à 7x7 (cf.  `main.py` ligne 38) et relancer votre méthode. Que se passe-t-il ? 
 
 ## Partie 3 : Convolutional Neural Network
 
 Dans cette partie, on propose de remplacer l'architecture de réseau de neurones précédente par une qui soit plus adaptée au problème.
-Pour cela nous utilisons les réseaux de neurones convolutifs (CNN) qui sont adaptés aux traitement de données ayant une représentation "en grille". 
+Pour cela nous utilisons les réseaux de neurones convolutifs ([CNN](https://fr.wikipedia.org/wiki/Réseau_neuronal_convolutif)) qui sont adaptés aux traitement de données ayant une représentation "en grille". 
 
 1. Lancer l'apprentissage DQN avec l'architecture de réseau de neurones CNN : `python3 main.py cnn`
 2. Relancer les expérimentations sur 5x5
