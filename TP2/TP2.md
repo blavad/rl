@@ -21,8 +21,8 @@ L'intérêt de la représentation des fonctions d'action-valeur (ou Q-valeur)  p
 Dans cette partie, nous utiserons une architecture de réseaux de neurones simpliciste mais pas la plus adéquate pour notre problème, à savoir l'architecture [MLP](https://en.wikipedia.org/wiki/Multilayer_perceptron). 
 
 1. Lancer le programme principal : `python3 main.py mlp`, interpréter les traces d'exécution. 
-2. Modifier l'hyper-paramètre `n_episodes = 5000` et relancer le programme. Que constatez-vous? 
-3. Modifier l'hyper-paramètre `n_episodes = 50000` et relancer le programme. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `n_episodes`?
+2. Modifier l'hyper-paramètre `n_episodes = 5000`, l'hyper-paramètre `final_exploration_epsidode = 2000` et relancer le programme. Que constatez-vous? 
+3. Modifier l'hyper-paramètre `n_episodes = 50000`, l'hyper-paramètre `final_exploration_epsidode = 10000` et relancer le programme. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `n_episodes`?
 4. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 16 de la couche interne. Que constatez-vous?
 5. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 128 de la couche interne. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `nombre de neurones` de la couche interne? 
 
