@@ -5,11 +5,11 @@ Pour cela, nous utiliserons l'apprentissage par renforcement profond.
 
 ## Partie 1 : Théorie
 
-1. Explication de l'intérêt de la représentation de Q par un réseau de neurones 
+L'intérêt de la représentation des fonctions de action-valeur profondes par un réseau de neurones est de faire face aux éléments suivants:
 - nombre d'états trop grands (potentiellement infini) 
 - nécessitée de généraliser à des instances inconnues
 
-2. Lire et compléter le fichier DQN (agent/dqn_agent.py)
+1. Lire et compléter le fichier DQN (agent/dqn_agent.py)
    - *Note: ce fichier utilise la bibliothèque logiciel [Pytorch](https://pytorch.org)*
 
 ## Partie 2 : Multi Layer Perceptron (pour DQN)
