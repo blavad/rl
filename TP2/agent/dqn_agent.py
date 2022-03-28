@@ -143,8 +143,8 @@ class DQNAgent(QAgent):
                 test_score, test_extra_steps = self.run_tests(env, 100, max_steps)
                 # train score: %.1f, mean steps: %.1f, test score: %.1f, test extra steps: %.1f,
                 #np.mean(sum_rewards[episode-(n_ckpt-1):episode+1]), np.mean(len_episode[episode-(n_ckpt-1):episode+1]), test_score, np.mean(test_extra_steps), 
-                print('Episode: %5d/%5d, steps: %6d, test success ratio: %.2f, epsilon: %.2f, time: %.1f'
-                      % (episode + 1, n_episodes, self.ds, np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
+                print('Episode: %5d/%5d, Test success ratio: %.2f, Epsilon: %.2f, Time: %.1f'
+                      % (episode + 1, n_episodes, np.sum(test_extra_steps == 0) / 100, self.epsilon, time.time() - start_time))
 
         n_test_runs = 100
         test_score, test_extra_steps = self.run_tests(env, n_test_runs, max_steps)
