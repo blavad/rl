@@ -2,7 +2,6 @@
 
 Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Télécoms aux méthodes récentes d'intelligence artificielle. Dans ce sous-module, nous nous interesserons tout particulièrement à l'apprentissage par renforcement et ses variantes profondes. 
 
-
 ## 0. Pour commencer
 10 min
 ### Mettre en place son environnement de travail
@@ -31,5 +30,10 @@ Lire les consignes dans `TP1.md`.
 
 ## TP 2. Résoudre tous les labyrinthes
 2h
+
+1. Installer les dépendances du TP 2. 
+```bash
+pip3 install -r TP2/requirements_2.txt
+```
 
 Lire les consignes dans `TP2.md`.
