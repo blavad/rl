@@ -21,20 +21,15 @@ Dans cette partie, nous utiserons une architecture de réseaux de neurones simpl
 3. Modifier l'hyper-paramètre `n_episodes = 50000` et relancer le programme. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `n_episodes`?
 4. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 16 de la couche interne. Que constatez-vous?
 5. Modifier l'architecture du réseau de neurones (cf. `networks.py`) en changeant le nombre de neurones à 128 de la couche interne. Que pouvez-vous conclure sur le choix adequat de l'hyper-paramètre `nombre de neurones` de la couche interne? 
-6. Changer la taille du labyrinthe à 7x7 (cf.  `main.py` ligne 38) et relancer votre méthode. Que se passe-t-il ? 
 
 ## Partie 3 : Convolutional Neural Network
 
 Dans cette partie, on propose de remplacer l'architecture de réseau de neurones précédente par une qui soit plus adaptée au problème.
 Pour cela nous utilisons les réseaux de neurones convolutifs ([CNN](https://fr.wikipedia.org/wiki/Réseau_neuronal_convolutif)) qui sont adaptés aux traitement de données ayant une représentation "en grille". 
 
-1. Lancer l'apprentissage DQN avec l'architecture de réseau de neurones CNN : `python3 main.py cnn`
-2. Relancer les expérimentations sur 5x5
-   1. Obtient-on les résultats optimaux ?
-   2. Quelle différence par rapport à la Partie 2 ?
-3. Changer la taille du labyrinthe en 7x7 et relancer l'algorithme.
-4. Que se passe-t-il ?
-5. Mettez en place un processus d'amélioration des hyperparamètres
+1. Lancer DQN avec l'architecture de réseau de neurones CNN  `python3 main.py cnn`  avec `n_episodes = 2000`. Que constatez-vous?
+2.  Changer la taille du labyrinthe en 7x7 et relancer l'algorithme. Que pouvez-vous conclure sur l'architecture CNN?
+3.  Mettez en place un processus d'amélioration des hyperparamètres
 -> *Note: On pourra tenter de combiner une ou plusieurs modifications suivantes*
    1. Augmenter le nombre d'épisodes d'apprentissage
    2. Explorer plus longtemps
