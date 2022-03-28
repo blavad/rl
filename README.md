@@ -36,4 +36,4 @@ Lire les consignes dans `TP1.md`.
 pip3 install -r TP2/requirements_2.txt
 ```
 
-Lire les consignes dans `TP2.md`.
+2. Lire les consignes dans `TP2.md`.
