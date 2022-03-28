@@ -7,7 +7,7 @@ import numpy as np
 import time
 
 from agent.qagent import QAgent
-from world.maze import Maze
+from TP1.world.maze import Maze
 from TP1.epsilon_profile import EpsilonProfile
 
 
