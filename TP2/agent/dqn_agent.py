@@ -147,7 +147,7 @@ class DQNAgent(QAgent):
         print('Final test success ratio: %.2f' % (np.sum(test_extra_steps == 0) / n_test_runs))
 
     def updateQ(self, state, action, reward, next_state, terminal):
-        """À COMPLÉTER!
+        """À LIRE!
         Cette méthode utilise une transition pour mettre à jour la fonction de valeur Q de l'agent. 
         Une transition est définie comme un tuple (état, action récompense, état suivant).
 
