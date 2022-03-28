@@ -9,7 +9,7 @@ L'intérêt de la représentation des fonctions de action-valeur profondes par u
 - nombre d'états trop grands (potentiellement infini) 
 - nécessitée de généraliser à des instances inconnues
 
-1. Lire et compléter le fichier DQN (agent/dqn_agent.py)
+1. Lire le fichier DQN (agent/dqn_agent.py)
    - *Note: ce fichier utilise la bibliothèque logiciel [Pytorch](https://pytorch.org)*
 
 ## Partie 2 : Multi Layer Perceptron (pour DQN)
@@ -18,8 +18,8 @@ L'intérêt de la représentation des fonctions de action-valeur profondes par u
 2. Questions :
    1. Obtient-on les résultats optimaux ?
    2. Selon vous, quels peuvent être les raisons de ces résultats ?
-3. Modifier des hyperparamètres d'apprentissage pour obtenir la quasi-optimalité *(e.g., success_ratio > 0.95)*
-4. Changer la taille du labyrinthe à 7x7 et relancer votre méthode. Que se passe-t-il ? 
+3. Modifier les hyperparamètres (i.e., n_episodes, max_steps, alpha, epsilon) de l'algorithme DQN (cf.  `main.py`) pour obtenir de meilleures performances *(e.g., success_ratio > 0.95)*
+4. Changer la taille du labyrinthe à 7x7 (cf.  `main.py` ligne 38) et relancer votre méthode. Que se passe-t-il ? 
 
 ## Partie 3 : Convolutional Neural Network
 
