@@ -9,6 +9,6 @@ class logAnalysis:
 		self.values = []
 
 	def printCurves(self):
-		df = pd.read_csv("TP1/partie_3/visualisation/logQ.csv")
+		df = pd.read_csv("partie_3/visualisation/logQ.csv")
 		fig = px.scatter(x=df["episode"], y=df["value"])
 		fig.show()
