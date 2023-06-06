@@ -14,7 +14,9 @@ cd IAT
 
 2. Installer des dépendances
 ```bash
-pip3 install -r requirements.txt
+pip3 install setuptools==65.4.0
+pip3 install git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
+pip3 install -r requirements.txt  install importlib-metadata==4.13.0
 ```
 
 ### Vérifier l'installation
