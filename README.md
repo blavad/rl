@@ -40,7 +40,11 @@ Lire les consignes dans `TP1.md`.
 
 1. Installer les dépendances du TP 2. 
 ```bash
-pip3 install -r TP2/requirements_2.txt
+python3 -m virtualenv venv
+source venv/bin/activate
+pip3 install setuptools==65.4.0
+pip3 install git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
+pip3 install -r requirements_2.txt  install importlib-metadata==4.13.0
 ```
 
 2. Lire les consignes dans `TP2.md`.
