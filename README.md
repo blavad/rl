@@ -18,6 +18,7 @@ pip3 install virtualenv
 python3 -m virtualenv venv
 source venv/bin/activate
 pip3 install "setuptools<=65.4.0"
+pip3 install git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
 pip3 install -r requirements.txt  install "importlib-metadata<=4.13.0"
 ```
 ## for having venv without python3 -m
