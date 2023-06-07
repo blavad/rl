@@ -49,3 +49,40 @@ pip3 install -r requirements_2.txt  install "importlib-metadata<=4.13.0"
 ```
 
 2. Lire les consignes dans `TP2.md`.
+
+
+## note : s'il y a des problèmes d'installations liés à gym, aller modifier render_human(..) de world/maze.py pour :
+
+```bash
+    def render_human(self, mode='human'):
+        '''
+        from gymgrid2.envs.classic_control import rendering
+        if self.viewer is None:
+            self.viewer = rendering.SimpleImageViewer()
+        return self.viewer.imshow(self.render(mode='rbg_array'))
+        '''
+        #for i in range(self.nx):
+        #    for j in range(self.ny):
+
+        print("\n")
+        for i in range(self.nx):
+            line = "|";
+            for j in range(self.ny):
+                if (i==self.terminal_state[0] and j==self.terminal_state[1]):
+                    sys.stdout.write(fg("blue")+"G")
+                    #line+="G"
+                elif (self.loc[0]==i and self.loc[1]==j):
+                    #line+="x"
+                    sys.stdout.write(fg("rosy_brown")+"x")
+                elif (i==self.init_state[0] and j==self.init_state[1]):
+                    #line+="s"
+                    sys.stdout.write(fg("grey_42")+"s")
+                elif (self.maze[i][j]==1):
+                    #line+="w"
+                    sys.stdout.write(fg("white")+"w")
+                else:
+                    #line+=" "
+                    sys.stdout.write(" ")
+            #print(fg('blue')+line+"|")        
+            print("")
+```
