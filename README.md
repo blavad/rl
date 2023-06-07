@@ -15,13 +15,14 @@ cd IAT
 2. Installer des dépendances
 ```bash
 pip3 install virtualenv
-echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
-source ~/.bashrc
 python3 -m virtualenv venv
 source venv/bin/activate
 pip3 install "setuptools<=65.4.0"
 pip3 install -r requirements.txt  install "importlib-metadata<=4.13.0"
 ```
+## for having venv without python3 -m
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+source ~/.bashrc
 
 ### Vérifier l'installation
 ```bash
