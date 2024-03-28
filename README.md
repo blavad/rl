@@ -1,18 +1,20 @@
-# Intelligence Artificielle pour les Télécoms (IAT), 2022
-
-Le cours d'IAT a pour objectif d'initier les étudiants de la spécialité Télécoms aux méthodes récentes d'intelligence artificielle. Dans ce sous-module, nous nous interesserons tout particulièrement à l'apprentissage par renforcement et ses variantes profondes. 
+# Introduction à l'apprentissage par renforcement, 2024
 
 ## 0. Pour commencer
+
 10 min
+
 ### Mettre en place son environnement de travail
 
-1. Récupérer le code source 
+1. Récupérer le code source
+
 ```bash
 git clone https://github.com/blavad/IAT.git
 cd IAT
 ```
 
 2. Installer des dépendances
+
 ```bash
 pip3 install virtualenv
 python3 -m virtualenv venv
@@ -21,25 +23,31 @@ pip3 install "setuptools<=65.4.0"
 pip3 install git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
 pip3 install -r requirements.txt  install "importlib-metadata<=4.13.0"
 ```
+
 ## for having venv without python3 -m
+
 echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 source ~/.bashrc
 
 ### Vérifier l'installation
+
 ```bash
 cd TP1
 python3 main.py random
 ```
 
 ## TP 1. Résoudre un labyrinthe fixé
+
 2h
 
 Lire les consignes dans `TP1.md`.
 
 ## TP 2. Résoudre tous les labyrinthes
+
 2h
 
-1. Installer les dépendances du TP 2. 
+1. Installer les dépendances du TP 2.
+
 ```bash
 python3 -m virtualenv venv
 source venv/bin/activate
@@ -49,7 +57,6 @@ pip3 install -r requirements_2.txt  install "importlib-metadata<=4.13.0"
 ```
 
 2. Lire les consignes dans `TP2.md`.
-
 
 ## note : s'il y a des problèmes d'installations liés à gym, aller modifier render_human(..) de world/maze.py pour :
 
@@ -83,6 +90,6 @@ pip3 install -r requirements_2.txt  install "importlib-metadata<=4.13.0"
                 else:
                     #line+=" "
                     sys.stdout.write(" ")
-            #print(fg('blue')+line+"|")        
+            #print(fg('blue')+line+"|")
             print("")
 ```
