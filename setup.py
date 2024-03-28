@@ -1,12 +1,12 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
-    name="iat",
+    name="rl",
     version="1.0.0",
-    description="TP 1 : IA pour les Telecoms",
-    url="https://github.com/blavad/iat-rl",
+    description="Apprentissage par renforcement",
+    url="https://github.com/blavad/rl",
     author="David Albert",
-    author_email="david.albert@insa-lyon.fr",
+    author_email="david@unboared.com",
     packages=[],
     install_requires=["scikit-build", "numpy", "matplotlib"],
 )
