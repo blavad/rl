@@ -2,13 +2,13 @@ import sys
 import time
 from agent import AgentInterface
 
-from agent.qagent import QAgent
+# from agent.qagent import QAgent
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
-from epsilon_profile import EpsilonProfile
-from logAnalysis import *
+
+# from epsilon_profile import EpsilonProfile
+# from logAnalysis import *
 from world.maze import Maze
-from logAnalysis import logAnalysis
 
 # parser = argparse.ArgumentParser(description='Maze parameters')
 # parser.add_argument('--algo', type=str, default="random", metavar='a', help='algorithm to use (default: 7)')
@@ -55,31 +55,30 @@ def main(agent, opt):
     #
     # env = Maze(5, 5, min_shortest_length=0)
     env = Maze(7, 7, min_shortest_length=15)
-    # env = Maze(9, 9, min_shortest_length=20) # Create a 9x9 maze
-    # env = Maze(14, 14, min_shortest_length=40) # Create a 15x15 maze
-    # env = Maze.from_file("tests/maze_ex2.txt") # Create a maze from a file
+    # env = Maze(9, 9, min_shortest_length=20)  # Create a 9x9 maze
+    # env = Maze.from_file("tests/maze_ex2.txt")  # Create a maze from a file
 
     n_episodes = 200
     max_steps = 50
     gamma = 1.0
-    alpha = 0.2
-    eps_profile = EpsilonProfile(1.0, 0.1)
+    # alpha = 0.2
+    # eps_profile = EpsilonProfile(1.0, 0.1)
 
     if agent == "random":
-        agent = RandomAgent(env.action_space.n)
+        agent = RandomAgent(len(env.action_space))
         test_maze(env, agent, max_steps, speed=0.1, display=True)
     elif agent == "vi":
         agent = VIAgent(env, gamma)
         agent.solve(0.01)
         test_maze(env, agent, max_steps, speed=0.1, display=True)
-    elif agent == "qlearning":
-        agent = QAgent(env, eps_profile, gamma, alpha)
-        agent.learn(env, n_episodes, max_steps)
-        test_maze(env, agent, max_steps, speed=0.1, display=True)
-    elif agent == "logAnalysisQ":
-        agent = logAnalysis(opt)
-        agent.printCurves()
-        return
+    # elif agent == "qlearning":
+    #     agent = QAgent(env, eps_profile, gamma, alpha)
+    #     agent.learn(env, n_episodes, max_steps)
+    #     test_maze(env, agent, max_steps, speed=0.1, display=True)
+    # elif agent == "logAnalysisQ":
+    #     agent = logAnalysis(opt)
+    #     agent.printCurves()
+    #     return
     else:
         print("Error : Unknown agent name (" + agent + ").")
 

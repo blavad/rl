@@ -13,7 +13,7 @@ L'apprentissage par renforcement est une branche de l'intelligence artificielle 
 Pour bien apprendre pendant ces travaux pratiques il est conseillé d'avoir les éléments suivants sur sa machine:
 
 - python (version >= 3.10)
-- un accès à terminal
+- un accès à un terminal
   - pour les utilisateurs `Windows`, l'utilisation de `wsl` est fortement recommandée
 - un éditeur de texte. Il existe des environnements de développements très performants que vous serez amené à utiliser en entreprise. Pourquoi ne pas les utiliser dès à présent ?
   - `Visual Studio Code`, `PyCharm`, `SublimeText`, ...
@@ -44,7 +44,7 @@ Pour bien apprendre pendant ces travaux pratiques il est conseillé d'avoir les 
 ### Vérifier l'installation
 
 ```bash
-cd TP1-ModelBased
+cd TP2-ModelBased
 python3 main.py random
 ```
 
