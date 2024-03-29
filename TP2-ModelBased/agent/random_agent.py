@@ -4,7 +4,7 @@ from . import AgentInterface
 
 
 class RandomAgent(AgentInterface):
-    """ 
+    """
     A random agent.
     """
 

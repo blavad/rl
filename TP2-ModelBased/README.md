@@ -30,7 +30,7 @@ Soit le labyrinthe ci-dessous :
 
 ## Partie 2 : Value Iteration
 
-30min
+1h00
 
 ### Intro
 
@@ -46,10 +46,14 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
 
   > L'état `s` correspond au couple de coordonnées `(y,x)`
 
-- Lancer le programme principal avec comme paramètre `vi` (pour **v**alue **i**teration)
-  - Lancer `python3 main.py vi`
+- Pour tester votre algorithme, lancer le programme principal avec l'argument `vi` (pour **v**alue **i**teration)
+
+  ```
+  python3 main.py vi
+  ```
+
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
-  - Utiliser l'environnement `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
+- Décommenter la ligne `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
 - Comparer les résultats obtenus aux résultats théoriques en affichant la fonction de valeur obtenue après résolution
 
 ## Partie 2.5 : Visualisation

@@ -1,7 +1,7 @@
 import numpy as np
 from copy import deepcopy
 
-# import pandas as pd
+import pandas as pd
 
 from agent import AgentInterface
 from world.maze import Maze
@@ -51,15 +51,15 @@ class VIAgent(AgentInterface):
         while (n_iteration == 0) or not self.done(self.V, V_copy, error):
             n_iteration += 1
             self.V = deepcopy(V_copy)
-            for state in self.maze.getStates():
+            for state in self.maze.state_space:
                 if not self.maze.maze[state]:
                     V_copy[state] = self.bellman_operator(state)
 
-            # Sauvegarde les valeurs intermédiaires
-            self.mazeValues = self.mazeValues.append(
-                {"episode": n_iteration, "value": np.reshape(self.V, (1, self.maze.ny * self.maze.nx))[0]},
-                ignore_index=True,
-            )
+        # Sauvegarde les valeurs intermédiaires
+        self.mazeValues = pd.concat(
+            [self.mazeValues, pd.DataFrame(np.reshape(self.V, (1, self.maze.ny * self.maze.nx))[0])],
+            ignore_index=True,
+        )
         self.mazeValues.to_csv("partie_2/visualisation/logV.csv")
 
     def done(self, V, V_copy, error) -> bool:
@@ -69,9 +69,9 @@ class VIAgent(AgentInterface):
         Pour garantie la convergence en tout état, il est préférable
         d'utiliser la norme infini comme critère d'arrêt.
         """
-        raise NotImplementedError("VI NotImplementedError at function done.")
+        raise NotImplementedError("VI NotImplementedError at function 'done'.")
 
-    def bellman_operator(self, state: "Tuple[int, int]") -> float:
+    def bellman_operator(self, state: tuple[int, int]) -> float:
         """À COMPLÉTER!
         Cette méthode calcul l'opérateur de mise à jour de bellman pour un état s.
 
@@ -79,18 +79,12 @@ class VIAgent(AgentInterface):
         :return: La valeur de mise à jour de la fonction de valeur
         """
         # Retourne une exception si l'état n'est pas valide
+        # Compléter ici votre équation de Bellman
+        # Note: On utilisera la fonction de récompense (self.maze.get_reward) et la fonction de transition (self.maze.get_dynamics).
         max_value = -np.infty
-        for a in range(self.maze.na):
-            q_s_a = 0.0
-            for next_state in self.maze.getStates():
-                # Compléter ici votre équation de Bellman
-                # Note: On utilisera la fonction de récompense (self.maze.getReward) et la fonction de transition (self.maze.getDynamics).
-                raise NotImplementedError("Value Iteration NotImplementedError at Function bellman_operator.")
-            if q_s_a > max_value:
-                max_value = q_s_a
-        return max_value
+        raise NotImplementedError("Value Iteration NotImplementedError at function 'bellman_operator'.")
 
-    def select_action(self, state: "Tuple[int, int]") -> int:
+    def select_action(self, state: tuple[int, int]) -> int:
         """À COMPLÉTER!
         Cette méthode retourne l'action optimale.
 
@@ -99,15 +93,7 @@ class VIAgent(AgentInterface):
 
         doit retourner une exception si l'état n'est pas valide
         """
+        # Compléter ici votre équation de Bellman
+        # Note: On utilisera la fonction de récompense (self.maze.get_reward) et la fonction de transition (self.maze.get_dynamics).
         max_value = -np.infty
-        amax = 0
-        for a in range(self.maze.na):
-            q_s_a = 0.0
-            for next_state in self.maze.getStates():
-                # Compléter ici votre équation de Bellman
-                # Note: On utilisera la fonction de récompense (self.maze.getReward) et la fonction de transition (self.maze.getDynamics).
-                raise NotImplementedError("Value Iteration NotImplementedError at Function select_action")
-            if q_s_a > max_value:
-                max_value = q_s_a
-                amax = a
-        return amax
+        raise NotImplementedError("Value Iteration NotImplementedError at Function select_action")

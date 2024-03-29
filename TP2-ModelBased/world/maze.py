@@ -19,9 +19,9 @@ class Maze:
         Ce code n'a pas besoin d'être compris. On prendra simplement
         le soin savoir manipuler l'environnement "Maze" via ses méthodes:
             - __init__ (constructeur de Maze)
-            - getStates (renvoie l'ensemble des états)
-            - getDynamics (accède à la dynamique)
-            - getReward (accède aux récompenses)
+            - state_space (renvoie l'ensemble des états)
+            - get_dynamics (accède à la dynamique)
+            - get_reward (accède aux récompenses)
             - reset
             - reset_using_existing_maze
             - step
@@ -41,14 +41,14 @@ class Maze:
         3	    Right
     """
 
-    actions = ["up", "down", "left", "right"]
+    ACTIONS = ["up", "down", "left", "right"]
     URL_ROBOT = os.path.join(os.path.dirname(assets.__file__), "dav.png")
     URL_WALL = os.path.join(os.path.dirname(assets.__file__), "wall.png")
     URL_GROUND = os.path.join(os.path.dirname(assets.__file__), "ground.png")
     URL_START = os.path.join(os.path.dirname(assets.__file__), "start.png")
     URL_EXIT = os.path.join(os.path.dirname(assets.__file__), "exit.png")
 
-    def __init__(self, nx, ny, min_shortest_length=0, mode="tabular"):
+    def __init__(self, nx: int, ny: int, min_shortest_length: int = 0, mode: str = "tabular"):
         self.nx = (nx // 2) * 2 + 1
         self.ny = (ny // 2) * 2 + 1
         self.min_shortest_length = min_shortest_length
@@ -79,31 +79,30 @@ class Maze:
     @property
     def action_space(self) -> list[str]:
         """Renvoie les actions possibles"""
-        return Maze.actions
+        return Maze.ACTIONS
 
     @property
     def state_space(self) -> list[tuple[int, int]]:
         """Renvoie les états possibles du labyrinthe (i.e. les coordonnée (y, x))"""
         return self.states
 
-    def getDynamics(self, state, action, next_state):
+    def get_dynamics(self, state: tuple[int, int], action: str, next_state: tuple[int, int]):
         """Retourne la probabilité de transition associé au problème déterministe"""
-        action_name = self.actions[action]
         proba = 0.0
         if state == self.terminal_state:
             return next_state == self.terminal_state
 
-        if action_name == "up":  # up
+        if action == "up":  # up
             if (self.maze[state[0] - 1, state[1]] == 0) and (next_state == (state[0] - 1, state[1])):  # can go up
                 proba = 1
             elif (self.maze[state[0] - 1, state[1]] == 1) and (next_state == state):  # cant go up
                 proba = 1
-        elif action_name == "down":  # down
+        elif action == "down":  # down
             if (self.maze[state[0] + 1, state[1]] == 0) and (next_state == (state[0] + 1, state[1])):  # can go down
                 proba = 1
             elif (self.maze[state[0] + 1, state[1]] == 1) and (next_state == state):  # cant go down
                 proba = 1
-        elif action_name == "left":  # left
+        elif action == "left":  # left
             if (self.maze[state[0], state[1] - 1] == 0) and (next_state == (state[0], state[1] - 1)):  # can go left
                 proba = 1
             elif (self.maze[state[0], state[1] - 1] == 1) and (next_state == state):  # cant go left
@@ -116,7 +115,7 @@ class Maze:
 
         return proba
 
-    def getReward(self, state, action):
+    def get_reward(self, state: tuple[int, int], action: str):
         """Retourne la récompense."""
         return 0 if state == self.terminal_state else -1
 
@@ -188,7 +187,7 @@ class Maze:
                         maze_.init_state = (y, x)
         return maze_
 
-    def step(self, action):
+    def step(self, action: str):
         """Execute une action dans l'environnement et retourne l'état suivant, la récompense et un booléen
         indiquant si le système se trouve dans un état terminal.
         """
@@ -199,13 +198,13 @@ class Maze:
             else:
                 return np.copy(self.s), 0.0, self.terminal
         loc_new = self.loc
-        if action == 0:  # up
+        if action == "up":  # up
             if self.maze[self.loc[0] - 1, self.loc[1]] == 0:  # can go up
                 loc_new = self.loc[0] - 1, self.loc[1]
-        elif action == 1:  # down
+        elif action == "down":  # down
             if self.maze[self.loc[0] + 1, self.loc[1]] == 0:
                 loc_new = self.loc[0] + 1, self.loc[1]
-        elif action == 2:  # left
+        elif action == "left":  # left
             if self.maze[self.loc[0], self.loc[1] - 1] == 0:
                 loc_new = self.loc[0], self.loc[1] - 1
         else:  # right

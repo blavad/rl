@@ -1,4 +1,4 @@
-#import plotly.express as px
+# import plotly.express as px
 import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
@@ -6,13 +6,16 @@ import seaborn as sns
 import time
 from matplotlib import animation
 
-def isfloat(num): 
-	try:
-		float(num)
-		return True
-	except ValueError:
-		return False
-'''
+
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+
+"""
 def printCurves():
 	df = pd.read_csv("logV.csv")
 	nx = int(df.iloc[0]["episode"])
@@ -36,16 +39,20 @@ def printCurves():
 		plt.show()
 
 	#ax.matshow()
-'''
+"""
+
+
 def init():
     im.set_data(np.zeros((nx, ny)))
 
+
 def animate(i):
-	V=df.iloc[i+1]["value"].replace("[","").replace("]","").split(" ")
-	V= [float(x) for x in V if isfloat(x)]
-	V = np.abs(np.asarray(np.reshape(np.asarray(list(map(float,V))),(int(nx),int(ny)))))
-	im.set_data(V)
-	return im
+    V = df.iloc[i + 1]["value"].replace("[", "").replace("]", "").split(" ")
+    V = [float(x) for x in V if isfloat(x)]
+    V = np.abs(np.asarray(np.reshape(np.asarray(list(map(float, V))), (int(nx), int(ny)))))
+    im.set_data(V)
+    return im
+
 
 df = pd.read_csv("logV.csv")
 nx = int(df.iloc[0]["nx"])
@@ -53,15 +60,14 @@ ny = int(df.iloc[0]["ny"])
 n = len(df.index)
 
 
-V=df.iloc[n-1]["value"].replace("[","").replace("]","").split(" ")
-V= [float(x) for x in V if isfloat(x)]
-V = np.abs(np.asarray(np.reshape(np.asarray(list(map(float,V))),(int(nx),int(ny)))))
+V = df.iloc[n - 1]["value"].replace("[", "").replace("]", "").split(" ")
+V = [float(x) for x in V if isfloat(x)]
+V = np.abs(np.asarray(np.reshape(np.asarray(list(map(float, V))), (int(nx), int(ny)))))
 vmax = np.amax(V)
 fig = plt.figure()
 data = np.zeros((nx, ny))
-im = plt.imshow(data, cmap='gist_gray_r', vmin=0, vmax=vmax)
+im = plt.imshow(data, cmap="gist_gray_r", vmin=0, vmax=vmax)
 
 
-anim = animation.FuncAnimation(fig, animate, init_func=init, frames=n-1,
-                               interval=50,repeat=False)
+anim = animation.FuncAnimation(fig, animate, init_func=init, frames=n - 1, interval=50, repeat=False)
 plt.show()
