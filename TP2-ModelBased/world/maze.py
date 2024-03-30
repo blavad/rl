@@ -1,9 +1,3 @@
-# EE807 Special Topics in EE <Deep Reinforcement Learning and AlphaGo>
-# Fall 2019, School of EE, KAIST
-# written by Sae-Young Chung
-# revision history
-# 11/02/2018: written for EE807B
-
 import os
 import pygame
 
@@ -42,11 +36,6 @@ class Maze:
     """
 
     ACTIONS = ["up", "down", "left", "right"]
-    URL_ROBOT = os.path.join(os.path.dirname(assets.__file__), "dav.png")
-    URL_WALL = os.path.join(os.path.dirname(assets.__file__), "wall.png")
-    URL_GROUND = os.path.join(os.path.dirname(assets.__file__), "ground.png")
-    URL_START = os.path.join(os.path.dirname(assets.__file__), "start.png")
-    URL_EXIT = os.path.join(os.path.dirname(assets.__file__), "exit.png")
 
     def __init__(self, nx: int, ny: int, min_shortest_length: int = 0, mode: str = "tabular"):
         self.nx = (nx // 2) * 2 + 1
@@ -74,7 +63,7 @@ class Maze:
         pygame.display.set_caption("Introduction à l'apprentissage par renforcement")
 
         # Load assets
-        self.load_assets()
+        self.load_assets(self.pixel_per_case)
 
     @property
     def action_space(self) -> list[str]:
@@ -230,46 +219,54 @@ class Maze:
 
     def render(self):
         self.render_maze()
-        self.render_robot()
+        self.render_agent()
         pygame.display.flip()
 
     def render_maze(self) -> None:
+        """
+        Affiche le labyrinthe
+        """
+
+        # Affiche le sol
         for lig in range(len(self.maze)):
             for col in range(len(self.maze[lig])):
                 self.window.blit(self.img_ground, (lig * self.pixel_per_case, col * self.pixel_per_case))
 
+        # Affiche le point de départ
         self.window.blit(
             self.img_start, (self.init_state[0] * self.pixel_per_case, self.init_state[1] * self.pixel_per_case)
         )
 
+        # Affiche le point d'arrivée
         self.window.blit(
             self.img_exit,
             (self.terminal_state[0] * self.pixel_per_case, self.terminal_state[1] * self.pixel_per_case),
         )
 
-        self.render_walls()
-
-    def render_walls(self):
+        # Affiche les murs
         for lig in range(len(self.maze)):
             for col in range(len(self.maze[lig])):
                 if self.maze[lig, col]:
                     self.window.blit(self.img_wall, (lig * self.pixel_per_case, col * self.pixel_per_case))
 
-    def render_robot(self) -> None:
-        self.window.blit(self.img_robot, (self.loc[0] * self.pixel_per_case, self.loc[1] * self.pixel_per_case))
+    def render_agent(self) -> None:
+        """
+        Affiche l'agent autonome dans le labyrinthe
+        """
+        self.window.blit(self.img_agent, (self.loc[0] * self.pixel_per_case, self.loc[1] * self.pixel_per_case))
 
-    def load_assets(self) -> None:
-        self.img_robot = pygame.image.load(Maze.URL_ROBOT)
-        self.img_robot = pygame.transform.scale(self.img_robot, (self.pixel_per_case, self.pixel_per_case))
+    def load_assets(self, sprite_size: int) -> None:
+        """
+        Charge les assets du jeu
+        """
 
-        self.img_wall = pygame.image.load(Maze.URL_WALL)
-        self.img_wall = pygame.transform.scale(self.img_wall, (self.pixel_per_case, self.pixel_per_case))
+        def load_image(filename: str) -> pygame.Surface:
+            path = os.path.join(os.path.dirname(assets.__file__), filename)
+            img = pygame.image.load(path)
+            return pygame.transform.scale(img, (sprite_size, sprite_size))
 
-        self.img_ground = pygame.image.load(Maze.URL_GROUND)
-        self.img_ground = pygame.transform.scale(self.img_ground, (self.pixel_per_case, self.pixel_per_case))
-
-        self.img_start = pygame.image.load(Maze.URL_START)
-        self.img_start = pygame.transform.scale(self.img_start, (self.pixel_per_case, self.pixel_per_case))
-
-        self.img_exit = pygame.image.load(Maze.URL_EXIT)
-        self.img_exit = pygame.transform.scale(self.img_exit, (self.pixel_per_case, self.pixel_per_case))
+        self.img_agent = load_image("dav.png")
+        self.img_wall = load_image("wall.png")
+        self.img_ground = load_image("ground.png")
+        self.img_start = load_image("start.png")
+        self.img_exit = load_image("exit.png")

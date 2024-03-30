@@ -1,8 +1,12 @@
-class AgentInterface:
+from abc import ABC, abstractmethod
+
+
+class AgentInterface(ABC):
     """
     L'interface requise par tous les agents.
     """
 
+    @abstractmethod
     def select_action(self, state):
         """
         Select an action given the current policy and a state
