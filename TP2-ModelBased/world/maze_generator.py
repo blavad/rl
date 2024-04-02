@@ -1,11 +1,12 @@
 import numpy as np
 from numpy.random import random_integers as rand
 
+
 # maze generator using randomized Prim's algorithm
 # from https://en.wikipedia.org/wiki/Maze_generation_algorithm
 class MazeGenerator:
     @classmethod
-    def make(cls, width, height, complexity=.75, density=.75):
+    def make(cls, width, height, complexity=0.75, density=0.75):
         # Only odd shapes
         nx = (width // 2) * 2 + 1
         ny = (height // 2) * 2 + 1
@@ -16,14 +17,13 @@ class MazeGenerator:
         # size of components
         density = int(density * ((shape[0] // 2) * (shape[1] // 2)))
         # Build actual maze
-        Z = np.zeros(shape, dtype=np.int)
+        Z = np.zeros(shape, dtype=np.int32)
         # Fill borders
         Z[0, :] = Z[-1, :] = 1
         Z[:, 0] = Z[:, -1] = 1
         # Make aisles
         for i in range(density):
-            x, y = rand(0, shape[1] // 2) * 2, rand(0,
-                                                    shape[0] // 2) * 2  # pick a random position
+            x, y = rand(0, shape[1] // 2) * 2, rand(0, shape[0] // 2) * 2  # pick a random position
             Z[y, x] = 1
             for j in range(complexity):
                 neighbours = []
@@ -78,22 +78,22 @@ class MazeGenerator:
             if p2 == (-1, -1):
                 return 0, p1, p2
         # run value iteration to find the shortest path from p1 to p2
-        v = np.zeros(m.shape, dtype=np.int)
+        v = np.zeros(m.shape, dtype=np.int32)
         vn = np.copy(v)
         for i in range(nx * ny):
             for y, x in ((y, x) for y in range(ny) for x in range(nx)):
                 if (y, x) == p2:
-                    continue       # v[p2] is always 0 since p2 is the goal
+                    continue  # v[p2] is always 0 since p2 is the goal
                 if m[y, x] == 0:
                     vn[y, x] = nx * ny
-                    if x > 0 and m[y, x-1] == 0:
-                        vn[y, x] = min([vn[y, x], 1 + v[y, x-1]])
-                    if x < nx-1 and m[y, x+1] == 0:
-                        vn[y, x] = min([vn[y, x], 1 + v[y, x+1]])
-                    if y > 0 and m[y-1, x] == 0:
-                        vn[y, x] = min([vn[y, x], 1 + v[y-1, x]])
-                    if y < ny-1 and m[y+1, x] == 0:
-                        vn[y, x] = min([vn[y, x], 1 + v[y+1, x]])
+                    if x > 0 and m[y, x - 1] == 0:
+                        vn[y, x] = min([vn[y, x], 1 + v[y, x - 1]])
+                    if x < nx - 1 and m[y, x + 1] == 0:
+                        vn[y, x] = min([vn[y, x], 1 + v[y, x + 1]])
+                    if y > 0 and m[y - 1, x] == 0:
+                        vn[y, x] = min([vn[y, x], 1 + v[y - 1, x]])
+                    if y < ny - 1 and m[y + 1, x] == 0:
+                        vn[y, x] = min([vn[y, x], 1 + v[y + 1, x]])
                     if vn[y, x] == nx * ny:
                         vn[y, x] = 0
             v = np.copy(vn)

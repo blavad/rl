@@ -1,15 +1,14 @@
-import numpy as np
-
+import random
 from . import AgentInterface
 
 
 class RandomAgent(AgentInterface):
-    """ 
+    """
     A random agent.
     """
 
-    def __init__(self, num_actions):
-        self.num_actions = num_actions
+    def __init__(self, action_space: list[any]):
+        self.action_space = action_space
 
     def select_action(self, state):
-        return np.random.randint(self.num_actions)
+        return random.choice(self.action_space)
