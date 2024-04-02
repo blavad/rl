@@ -46,3 +46,7 @@ l’indication des probabilités. La fonction de récompenses est deterministe e
 
 1. Si un agent effectue la séquence d’action $(work,work,rest)$ à partir de l’état $x_1$, dans quels états peut-il se retrouver et avec quelle probabilité ?
 2. Définissez une politique $\pi$ et écrivez le système linéaire qui définit $v_{\pi}$ pour cette politique. Votre réponse finale devrait être prête pour faire l’application numérique si on avait accès à un solveur de système linéaire.
+
+## Et ensuite ?
+
+Déjà terminé ? Vous pouvez commencer [le TP n°2 sur les algorithmes de programmation dynamique](../TP2-ModelBased/README.md).

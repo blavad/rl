@@ -151,6 +151,10 @@ Pour cela :
       test_maze(env, agent, max_steps, speed=0.1, display=True)
   ```
 
+## Et ensuite ?
+
+Déjà terminé ? Vous pouvez commencer [le TP n°3 sur les algorithmes d'apprentissage par renforcement](../TP3-ModelFree/README.md).
+
 <!--
 
 ## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
