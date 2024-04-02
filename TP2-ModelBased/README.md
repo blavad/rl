@@ -6,6 +6,38 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 - Implémenter l'algorithme **Value Iteration**
 - Implémenter l'algorithme **Policy Iteration**
 
+## Partie 0 : Pour commencer
+
+### Récupération des travaux pratiques
+
+1. Récupérer le code source
+
+   ```bash
+   git clone https://github.com/blavad/rl.git
+   cd rl
+   ```
+
+2. Créer un environnement virtuel python
+
+   ```bash
+    pip3 install virtualenv # installation virtualenv
+    python3 -m venv .venv # création d'un environnement
+    source .venv/bin/activate # activation de l'environnement
+   ```
+
+3. Installer des dépendances des TPs
+
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+### Vérifier l'installation
+
+```bash
+cd TP2-ModelBased
+python3 main.py random
+```
+
 ## Partie 1 : Théorie
 
 30min
