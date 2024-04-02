@@ -1,8 +1,10 @@
-# TP n°1 : Résolution d'un labyrinthe fixé
+# TP n°2 : Résolution d'un labyrinthe fixé
 
 Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cet activité sont les suivantes.
 
-- Écrire en Python l'algorithme **Value Iteration** de résolution d'un processus décisionnel de Markov, avec modèle connu.
+- Résoudre un problème de décision de Markov avec modèle de l'environnement connu.
+- Implémenter l'algorithme **Value Iteration**
+- Implémenter l'algorithme **Policy Iteration**
 
 ## Partie 1 : Théorie
 
@@ -28,20 +30,27 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 
   <img src="./tests/MazeEx2NR.png" width="400" title="hover text">
 
-### Cas 1 : Transitions déterministes
+### Exercice
+
+Sur papier et pour chacun des cas suivants :
+
+1. Représenter le problème sous forme d'un graphe orienté.
+2. Calculer la fonction de valeur optimale $v_*$ liée au labyrinthe ci-dessus.
+
+**Cas 1 : Transitions déterministes**
 
 On considèrera une dynamique déterministe.
 
-**Sur papier, calculer la fonction de valeur d'états optimale pour le labyrinthe ci-dessus.**
+**Cas 2 : Nouvelle Récomponse**
 
-### Cas 2 : Transitions stochastiques
+On considère désormais la fonction de récompense $R(s, a) = 0$ si $s \neq s_{exit}$ et $R(s_{exit}, a) = 100$.
+
+**Cas 3 : Transitions stochastiques**
 
 On considèrera maintenant que la fonction de transition est stochastique et on distingue deux cas :
 
 1.  Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante.
 2.  Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante.
-
-**Sur papier, calculer la fonction de valeur d'états optimale pour le labyrinthe ci-dessus.**
 
 ## Partie 2 : Value Iteration
 
@@ -104,7 +113,7 @@ Pour cela :
 - Modifier le fichier `main.py` pour tester votre algorithme. On pourra notamment insérer les lignes suivantes à l'endroit voulu :
 
   ```python
-  elif agent == "vi":
+  elif agent == "pi":
       agent = PIAgent(env, gamma)
       agent.solve(0.01)
       test_maze(env, agent, max_steps, speed=0.1, display=True)
