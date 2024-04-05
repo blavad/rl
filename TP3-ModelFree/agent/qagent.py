@@ -42,7 +42,8 @@ class QAgent(AgentInterface):
         self.epsilon = self.eps_profile.initial
 
     def learn(self, env, n_episodes, max_steps):
-        """Cette méthode exécute l'algorithme de q-learning.
+        """A LIRE
+        Cette méthode exécute l'algorithme de q-learning.
         Il n'y a pas besoin de la modifier. Simplement la comprendre et faire le parallèle avec le cours.
 
         :param env: L'environnement

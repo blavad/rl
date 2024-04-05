@@ -8,6 +8,8 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 ## Partie 0 : Pour commencer
 
+10min
+
 ### Récupération des travaux pratiques
 
 1. Récupérer le code source
@@ -113,6 +115,8 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
 1. Comparer les résultats obtenus aux résultats théoriques
 
 ## Partie 3 : Policy Iteration
+
+1h00
 
 ### Policy Iteration
 

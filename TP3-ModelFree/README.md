@@ -26,12 +26,6 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
     source .venv/bin/activate # activation de l'environnement
    ```
 
-3. Installer les dépendances du TP n°3.
-   ```bash
-   # Dans le dossier TP3-ModelFree
-   pip3 install -r requirements.txt
-   ```
-
 ### Vérifier l'installation
 
 ```bash
@@ -39,9 +33,9 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 python3 main.py random
 ```
 
-## Partie 2 : Algorithme Q-Learning
+## Partie 1 : Algorithme Q-Learning
 
-40min
+45min
 
 ### Intro
 
@@ -65,3 +59,42 @@ Parfois, les modèles de la dynamique ($\mathcal{T}$ et $\mathcal{R}$) sont inco
 
 7.  Analyser les résultats
 8.  Quel est l'intérêt de faire décroître ce paramètre ?
+
+## Partie 2 : SARSA
+
+1h00
+
+Il s'agit d'une autre méthode de d'estimation d'une fonction de valeur Q. Cette méthode met à jour directement la politique d'action mais est plus coûteuse en temps.
+
+### A faire
+
+Sur un modèle similaire au fichier `qagent.py`, créer un fichier `sarsa.py` qui implémente l'algorithme de SARSA.
+
+Pour cela :
+
+1. Créer le fichier `sarsa.py` dans le dossier `agents`
+1. Créer une classe `SarsaAgent` qui hérite de `AgentInterface`
+1. Implémenter un constructeur avec la signature suivante :
+
+   > `def __init__(self, maze: Maze, gamma: float, alpha: float)`
+
+1. Implémenter la méthode `updateQ`
+
+1. Implémenter la méthode `solve` qui résout le problème de décision
+
+   > `def solve(self, error: float)`
+
+1. Surcharger la méthode `select_action`
+
+1. Modifier le fichier `main.py` pour tester votre algorithme. On pourra notamment insérer les lignes suivantes à l'endroit voulu :
+
+   ```python
+   elif agent == "sarsa":
+        agent = SarsaAgent(env, gamma, alpha)
+        agent.learn(env, n_episodes, max_steps)
+        test_maze(env, agent, max_steps, speed=0.1, display=True)
+   ```
+
+## Et ensuite ?
+
+Déjà terminé ? Vous pouvez commencer [le TP n°4 sur les algorithmes d'apprentissage par renforcement profond](../TP4-ModelFree/README.md).
