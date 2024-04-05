@@ -35,7 +35,7 @@ def test_maze(env: Maze, agent: DQNAgent, max_steps: int, nepisodes : int = 1, s
 def main(nn, opt):
  
     """ INSTANCIE LE LABYRINTHE """ 
-    env = Maze(5, 5, min_shortest_length=0) 
+    env = Maze(5, 5, min_shortest_length=3) 
     env.mode = "nn" 
     model = None
 
@@ -71,7 +71,7 @@ def main(nn, opt):
     """  LEARNING PARAMETERS"""
     agent = DQNAgent(model, eps_profile, gamma, alpha, replay_memory_size, batch_size, target_update_frequency, tau, final_exploration_episode)
     agent.learn(env, n_episodes, max_steps)
-    test_maze(env, agent, max_steps, speed=0.1, display=False)
+    test_maze(env, agent, max_steps, nepisodes=10, same=False, speed=0.1, display=True)
 
 if __name__ == '__main__':
     """ Usage : python main.py [ARGS]
