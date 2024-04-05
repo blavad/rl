@@ -2,7 +2,7 @@ import numpy as np
 from copy import deepcopy
 
 from agent import AgentInterface
-from world.maze import Maze
+from env.maze import Maze
 
 
 class VIAgent(AgentInterface):
@@ -26,11 +26,6 @@ class VIAgent(AgentInterface):
         :attribut gamma: le facteur d'atténuation
         :type gamma: float
         :requirement: 0 <= gamma <= 1
-
-        - Visualisation des données
-        :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
-        :type mazeValues: data frame pandas
-        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
         """
         self.gamma = gamma
         self.maze = maze
