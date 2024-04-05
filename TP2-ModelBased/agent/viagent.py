@@ -1,8 +1,6 @@
 import numpy as np
 from copy import deepcopy
 
-import pandas as pd
-
 from agent import AgentInterface
 from world.maze import Maze
 
@@ -36,10 +34,7 @@ class VIAgent(AgentInterface):
         """
         self.gamma = gamma
         self.maze = maze
-        self.V = np.zeros([maze.ny, maze.nx])
-
-        # Visualisation des données (vous n'avez pas besoin de comprendre cette partie)
-        self.mazeValues = pd.DataFrame(data={"nx": maze.nx, "ny": [maze.ny]})
+        self.V = np.zeros([maze.nx, maze.ny])
 
     def solve(self, error: float):
         """
@@ -47,20 +42,13 @@ class VIAgent(AgentInterface):
         Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logV.csv)
         """
         n_iteration = 0
-        V_copy = np.zeros([self.maze.ny, self.maze.nx])
+        V_copy = np.zeros([self.maze.nx, self.maze.ny])
         while (n_iteration == 0) or not self.done(self.V, V_copy, error):
             n_iteration += 1
             self.V = deepcopy(V_copy)
             for state in self.maze.state_space:
                 if not self.maze.maze[state]:
                     V_copy[state] = self.bellman_operator(state)
-
-        # Sauvegarde les valeurs intermédiaires
-        self.mazeValues = pd.concat(
-            [self.mazeValues, pd.DataFrame(np.reshape(self.V, (1, self.maze.ny * self.maze.nx))[0])],
-            ignore_index=True,
-        )
-        self.mazeValues.to_csv("partie_2/visualisation/logV.csv")
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!

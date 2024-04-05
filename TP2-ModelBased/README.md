@@ -1,8 +1,8 @@
 # TP n°2 : Résolution d'un labyrinthe fixé
 
-Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cet activité sont les suivantes.
+Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cette activité sont les suivantes :
 
-- Résoudre un problème de décision de Markov avec modèle de l'environnement connu.
+- Résoudre un problème de décision de Markov avec modèle de l'environnement connu
 - Implémenter l'algorithme **Value Iteration**
 - Implémenter l'algorithme **Policy Iteration**
 
@@ -56,11 +56,11 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 
 > **_Remarque :_** l'objectif est atteint quand l'agent atteint le point _exit_ et dans ce cas, l'agent perçoit une récompense nulle.
 
-**Le gain $G_t$**
+<!-- **Le gain $G_t$** -->
 
  <!-- est donné par $G_t = \sum_{k=0}^{N} \gamma^{k} R(s_{t+k+1}, a_{t+k +1})$ avec $\gamma = 1$ -->
 
-  <img src="./tests/MazeEx2NR.png" width="400" title="hover text">
+  <img src="./assets/MazeEx2NR.png" width="400" title="hover text">
 
 ### Exercice
 
@@ -100,7 +100,7 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
 
 - Lire et compléter le fichier Value Iteration (`TP2-ModelBased/agent/viagent.py`)
 
-  > L'état `s` correspond au couple de coordonnées `(y,x)`
+  > L'état `s` correspond au couple de coordonnées `(x,y)`
 
 - Pour tester votre algorithme, lancer le programme principal avec l'argument `vi` (pour **v**alue **i**teration)
 
@@ -111,10 +111,6 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
 - Décommenter la ligne `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
 - Comparer les résultats obtenus aux résultats théoriques en affichant la fonction de valeur obtenue après résolution
-
-## Partie 2.5 : Visualisation
-
-- Visualiser l'évolution de la fonction de valeur avec la commande `python3 logAnalysisV.py` dans le dossier `partie_2/visualisation/`
 
 ## Partie 3 : Policy Iteration
 

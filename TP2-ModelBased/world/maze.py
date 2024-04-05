@@ -48,18 +48,18 @@ class Maze:
         # Can be 'tabular' or 'nn'
         self.mode = mode
 
-        self.states = [(y, x) for y in range(self.ny) for x in range(self.nx)]
+        self.states = [(x, y) for x in range(self.nx) for y in range(self.ny)]
 
         _ = self.reset()
 
         # Window dimensions
-        max_width = 700
-        max_height = 700
+        max_width = 1200
+        max_height = 800
         self.pixel_per_case = min(max_width // nx, max_height // ny)
 
         # Init pygame
         pygame.init()
-        self.window = pygame.display.set_mode((self.ny * self.pixel_per_case, self.nx * self.pixel_per_case), 0)
+        self.window = pygame.display.set_mode((self.nx * self.pixel_per_case, self.ny * self.pixel_per_case), 0)
         pygame.display.set_caption("Introduction à l'apprentissage par renforcement")
 
         # Load assets
@@ -230,30 +230,30 @@ class Maze:
         # Affiche le sol
         for lig in range(len(self.maze)):
             for col in range(len(self.maze[lig])):
-                self.window.blit(self.img_ground, (lig * self.pixel_per_case, col * self.pixel_per_case))
+                self.window.blit(self.img_ground, (col * self.pixel_per_case, lig * self.pixel_per_case))
 
         # Affiche le point de départ
         self.window.blit(
-            self.img_start, (self.init_state[0] * self.pixel_per_case, self.init_state[1] * self.pixel_per_case)
+            self.img_start, (self.init_state[1] * self.pixel_per_case, self.init_state[0] * self.pixel_per_case)
         )
 
         # Affiche le point d'arrivée
         self.window.blit(
             self.img_exit,
-            (self.terminal_state[0] * self.pixel_per_case, self.terminal_state[1] * self.pixel_per_case),
+            (self.terminal_state[1] * self.pixel_per_case, self.terminal_state[0] * self.pixel_per_case),
         )
 
         # Affiche les murs
         for lig in range(len(self.maze)):
             for col in range(len(self.maze[lig])):
                 if self.maze[lig, col]:
-                    self.window.blit(self.img_wall, (lig * self.pixel_per_case, col * self.pixel_per_case))
+                    self.window.blit(self.img_wall, (col * self.pixel_per_case, lig * self.pixel_per_case))
 
     def render_agent(self) -> None:
         """
         Affiche l'agent autonome dans le labyrinthe
         """
-        self.window.blit(self.img_agent, (self.loc[0] * self.pixel_per_case, self.loc[1] * self.pixel_per_case))
+        self.window.blit(self.img_agent, (self.loc[1] * self.pixel_per_case, self.loc[0] * self.pixel_per_case))
 
     def load_assets(self, sprite_size: int) -> None:
         """
