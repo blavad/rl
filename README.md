@@ -26,6 +26,6 @@ Ce cours a été réalisé par David Albert, @blavad
 
 ## Mentions
 
-Si vous souhaitez réutiliser ces supports, veuillez inclure la mention d'attribution suivante de façon claire et visible.
+Si vous souhaitez réutiliser ces supports, veuillez inclure la mention d'attribution suivante de façon claire et visible. ⬇️
 
 > Ce support utilise _Travaux Pratiques d'apprentissage par renforcement_, développé par David Albert @blavad, disponible à https://github.com/blavad/rl.
