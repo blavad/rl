@@ -100,7 +100,7 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
 
 - Lire et compléter le fichier Value Iteration (`TP2-ModelBased/agent/viagent.py`)
 
-  > L'état `s` correspond au couple de coordonnées `(x,y)`
+  > L'état `s` correspond au couple de coordonnées `(y, x)`
 
 - Pour tester votre algorithme, lancer le programme principal avec l'argument `vi` (pour **v**alue **i**teration)
 
@@ -109,8 +109,8 @@ Il s'agit d'une méthode de résolution des processus décisionnels de Markov av
   ```
 
 - Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
-- Décommenter la ligne `env = Maze.from_file("tests/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
-- Comparer les résultats obtenus aux résultats théoriques en affichant la fonction de valeur obtenue après résolution
+- Décommenter la ligne `env = Maze.from_file("data/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
+- Comparer les résultats obtenus aux résultats théoriques
 
 ## Partie 3 : Policy Iteration
 
