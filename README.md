@@ -20,8 +20,12 @@ Pour bien apprendre pendant ces travaux pratiques il est conseillé d'avoir les 
 
 > Si votre environnement de travail est près. Vous pouvez commencer [le TP n°1 sur les processus de décision de Markov](./TP1-MDP/README.md).
 
-## Auteurs et mentions
+## Auteur
+
+Ce cours a été réalisé par David Albert, @blavad
+
+## Mentions
 
 Si vous souhaitez réutiliser ces supports, veuillez inclure la mention d'attribution suivante de façon claire et visible.
 
-"Ce support est basé sur les Travaux Pratiques d'apprentissage par renforcement , développé par David Albert (@blavad), disponible à https://github.com/blavad/rl. "
+> Ce support utilise _Travaux Pratiques d'apprentissage par renforcement_, développé par David Albert @blavad, disponible à https://github.com/blavad/rl.
