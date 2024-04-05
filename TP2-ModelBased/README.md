@@ -46,7 +46,7 @@ python3 main.py random
 
 Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d'un labyrinthe. On peut formuler ce problème comme un problème de décision markovien.
 
-**L'espace d'états $\mathcal{S}$** est constitué des coordonnées $(x, y)$ du labyrinthe. Pour un labyrinthe de dimension $(n, m)$ il y a donc $n \times m$ états possibles.
+**L'espace d'états $\mathcal{S}$** est constitué des coordonnées $(y, x)$ du labyrinthe. Pour un labyrinthe de dimension $(n_y, n_x)$ il y a donc $n_y \times n_x$ états possibles.
 
 **L'espace d'actions $\mathcal{A}$** comprend quatre actions distinctes (`up`, `down`, `left`, `right`).
 
