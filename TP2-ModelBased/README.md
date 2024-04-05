@@ -1,4 +1,4 @@
-# TP n°2 : Résolution d'un labyrinthe fixé
+# TP n°2 : Résolution d'un labyrinthe fixé par planification
 
 Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de taille quelconque. Les compétences travaillées durant cette activité sont les suivantes :
 
@@ -48,7 +48,7 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 
 **L'espace d'états $\mathcal{S}$** est constitué des coordonnées $(y, x)$ du labyrinthe. Pour un labyrinthe de dimension $(n_y, n_x)$ il y a donc $n_y \times n_x$ états possibles.
 
-**L'espace d'actions $\mathcal{A}$** comprend quatre actions distinctes (`up`, `down`, `left`, `right`).
+**L'espace d'actions $\mathcal{A}$** comprend quatre actions distinctes (`0` pour `up`, `1` pour `down`, `2` pour `left`, `3` pour `right`).
 
 **La fonction de récompense R** est donnée tel que suit :
 
@@ -96,21 +96,21 @@ Quand le modèle de la dynamique est connu (`p(s' | s, a)` et `r(s,a)` connus) o
 
 Il s'agit d'une méthode de résolution des processus décisionnels de Markov avec connaissance parfaite du modèle de l'environnement. L'algorithme procède de façon itérative, mettant à jour la fonction de valeur jusqu'à ce que l'écart entre deux mises à jour soit inférieur à un seuil fixé, e.g., 0.01.
 
-### A faire
+### Résolution
 
-- Lire et compléter le fichier Value Iteration (`TP2-ModelBased/agent/viagent.py`)
+1. Lire et compléter le fichier Value Iteration (`TP2-ModelBased/agent/viagent.py`)
 
-  > L'état `s` correspond au couple de coordonnées `(y, x)`
+   > L'état `s` correspond au couple de coordonnées `(y, x)`
 
-- Pour tester votre algorithme, lancer le programme principal avec l'argument `vi` (pour **v**alue **i**teration)
+1. Pour tester votre algorithme, lancer le programme principal avec l'argument `vi` (pour **v**alue **i**teration)
 
-  ```
-  python3 main.py vi
-  ```
+   ```
+   python3 main.py vi
+   ```
 
-- Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
-- Décommenter la ligne `env = Maze.from_file("data/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
-- Comparer les résultats obtenus aux résultats théoriques
+1. Commenter la ligne `env = Maze(7, 7, min_shortest_length=15)`
+1. Décommenter la ligne `env = Maze.from_file("data/maze_ex2.txt")` qui correspond au labyrinthe de la partie 1
+1. Comparer les résultats obtenus aux résultats théoriques
 
 ## Partie 3 : Policy Iteration
 
@@ -124,56 +124,29 @@ Sur un modèle similaire au fichier `viagent.py`, créer un fichier `piagent.py`
 
 Pour cela :
 
-- Créer le fichier `piagent.py` dans le dossier `agents`
-- Créer une classe `PIAgent` qui hérite de `AgentInterface`
-- Implémenter un constructeur avec la signature suivante :
+1. Créer le fichier `piagent.py` dans le dossier `agents`
+1. Créer une classe `PIAgent` qui hérite de `AgentInterface`
+1. Implémenter un constructeur avec la signature suivante :
 
-  > `def __init__(self, maze: Maze, gamma: float)`
+   > `def __init__(self, maze: Maze, gamma: float)`
 
-- Implémenter les méthodes `policy_evaluation` et `policy_improvement`
+1. Implémenter les méthodes `policy_evaluation` et `policy_improvement`
 
-- Implémenter la méthode `solve` qui résout le problème de décision
+1. Implémenter la méthode `solve` qui résout le problème de décision
 
-  > `def solve(self, error: float)`
+   > `def solve(self, error: float)`
 
-- Surcharger la méthode `select_action`
+1. Surcharger la méthode `select_action`
 
-- Modifier le fichier `main.py` pour tester votre algorithme. On pourra notamment insérer les lignes suivantes à l'endroit voulu :
+1. Modifier le fichier `main.py` pour tester votre algorithme. On pourra notamment insérer les lignes suivantes à l'endroit voulu :
 
-  ```python
-  elif agent == "pi":
-      agent = PIAgent(env, gamma)
-      agent.solve(0.01)
-      test_maze(env, agent, max_steps, speed=0.1, display=True)
-  ```
+   ```python
+   elif agent == "pi":
+       agent = PIAgent(env, gamma)
+       agent.solve(0.01)
+       test_maze(env, agent, max_steps, speed=0.1, display=True)
+   ```
 
 ## Et ensuite ?
 
 Déjà terminé ? Vous pouvez commencer [le TP n°3 sur les algorithmes d'apprentissage par renforcement](../TP3-ModelFree/README.md).
-
-<!--
-
-## Partie 3 : Implémenter l'algorithme "Q-Learning" (40min)
-
-**Intro** : Parfois, les modèles de la dynamique sont inconnus ou gigantesques. S'il est possible d'interagir avec le système directement et récupérer des informations au fil de l'eau, il est alors possible d'implémenter des algorithmes d'apprentissage par renforcement pour déterminer la politique optimale.
-
-1. Lire et compléter le fichier Q-learning (agent/qagent.py)
-2. Lancer le programme principal avec comme paramètre `qlearning`
-
-- Lancer`python3 main.py qlearning`
-
-4. Augmenter la taille du labyrinthe à (14, 14) et recommencer l'apprentissage
-
-- Que remarque-t-on ?
-- Quelle(s) solution peut-on apporter ?
-  - _Indice:_ modifier les paramètres d'apprentissage `n_episodes` et `max_steps` par exemple
-
-5. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration ?
-
-- Analyser les résultats
-- Quel est l'intérêt de faire décroître ce paramètre ?
-
-## Partie 3.5 : Visualisation
-
-- Visualiser la courbe d'évolution de la Q-valeur avec la commande `python3 main.py logAnalysisQ`
-- Visualiser l'évolution de la fonction de valeur avec la commande `python3 logAnalysisV.py` dans le dossier `partie_3/visualisation/` -->

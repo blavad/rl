@@ -1,6 +1,7 @@
 .venv
 .venv2
 TP2-ModelBased/correction
+TP3-ModelFree/correction
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
