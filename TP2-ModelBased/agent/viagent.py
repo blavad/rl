@@ -26,10 +26,15 @@ class VIAgent(AgentInterface):
         :attribut gamma: le facteur d'atténuation
         :type gamma: float
         :requirement: 0 <= gamma <= 1
+
+        - Visualisation des données
+        :attribut mazeValues: la fonction de valeur stockée qui sera écrite dans un fichier de log après la résolution complète
+        :type mazeValues: data frame pandas
+        :penser à bien stocker aussi la taille du labyrinthe (nx,ny)
         """
         self.gamma = gamma
         self.maze = maze
-        self.V = np.zeros([maze.nx, maze.ny])
+        self.V = np.zeros([maze.ny, maze.nx])
 
     def solve(self, error: float):
         """
@@ -37,13 +42,18 @@ class VIAgent(AgentInterface):
         Elle doit proposer l'option de stockage de la fonction de valeur dans un fichier de log (logV.csv)
         """
         n_iteration = 0
-        V_copy = np.zeros([self.maze.nx, self.maze.ny])
+        V_copy = np.zeros([self.maze.ny, self.maze.nx])
         while (n_iteration == 0) or not self.done(self.V, V_copy, error):
             n_iteration += 1
             self.V = deepcopy(V_copy)
             for state in self.maze.state_space:
                 if not self.maze.maze[state]:
                     V_copy[state] = self.bellman_operator(state)
+
+        print("---- Value Iteration ----")
+        print(f"Nombre d'itérations : {n_iteration}")
+        print(f"Fonction de valeur : \n{self.V}")
+        print("-------------------------")
 
     def done(self, V, V_copy, error) -> bool:
         """À COMPLÉTER!
@@ -52,7 +62,7 @@ class VIAgent(AgentInterface):
         Pour garantie la convergence en tout état, il est préférable
         d'utiliser la norme infini comme critère d'arrêt.
         """
-        raise NotImplementedError("VI NotImplementedError at function 'done'.")
+        raise NotImplementedError("Value Iteration NotImplementedError at function 'done'.")
 
     def bellman_operator(self, state: tuple[int, int]) -> float:
         """À COMPLÉTER!

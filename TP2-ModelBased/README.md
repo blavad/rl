@@ -25,16 +25,16 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
     source .venv/bin/activate # activation de l'environnement
    ```
 
-3. Installer des dépendances des TPs
-
+3. Installer des dépendances du TP 2.
    ```bash
+   # Dans le dossier TP2-ModelBased
    pip3 install -r requirements.txt
    ```
 
 ### Vérifier l'installation
 
 ```bash
-cd TP2-ModelBased
+# Dans le dossier TP2-ModelBased
 python3 main.py random
 ```
 
@@ -52,7 +52,7 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 
 **La fonction de récompense R** est donnée tel que suit :
 
-- `R(s, a) = -1` pour tout $s$, pour tout $a$
+- `R(s, a) = -1` pour tout $s \neq s_{exit}$, pour tout $a$
 
 > **_Remarque :_** l'objectif est atteint quand l'agent atteint le point _exit_ et dans ce cas, l'agent perçoit une récompense nulle.
 
@@ -67,22 +67,22 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 Sur papier et pour chacun des cas suivants :
 
 1. Représenter le problème sous forme d'un graphe orienté.
-2. Calculer la fonction de valeur optimale $v_*$ liée au labyrinthe ci-dessus.
+2. Calculer la fonction de valeur optimale $v_*$ liée au labyrinthe ci-dessus pour chacun des cas suivant.
 
-**Cas 1 : Transitions déterministes**
+   **Cas 1 : Transitions déterministes**
 
-On considèrera une dynamique déterministe.
+   On considèrera une dynamique déterministe.
 
-**Cas 2 : Nouvelle Récomponse**
+   **Cas 2 : Nouvelle Récomponse**
 
-On considère désormais la fonction de récompense $R(s, a) = 0$ si $s \neq s_{exit}$ et $R(s_{exit}, a) = 100$.
+   On considère désormais la fonction de récompense $R(s, a) = 0$ si $s \neq s_{exit}$ et $R(s_{exit}, a) = 100$.
 
-**Cas 3 : Transitions stochastiques**
+   **Cas 3 : Transitions stochastiques**
 
-On considèrera maintenant que la fonction de transition est stochastique et on distingue deux cas :
+   La récompense est la même que celle du 1er cas. On considèrera par contre que la fonction de transition est stochastique et on distingue deux cas :
 
-1.  Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante.
-2.  Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante.
+   1. Si l'action est exécutable, c'est-à-dire qu'elle ne mène pas à un mur, alors la probabilité de succès est de 80%, la probabilité qu'elle échoue est de 20%. Lorsqu'une action échoue, l'agent reste dans la cellule courante.
+   2. Si l'action est non exécutable, alors l'action échoue systématiquement et l'agent demeure dans la cellule courante.
 
 ## Partie 2 : Value Iteration
 

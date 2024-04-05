@@ -46,7 +46,7 @@ def main(agent, opt):
     env = Maze(7, 7, min_shortest_length=15)
     # env = Maze(20, 8, min_shortest_length=10)
     # env = Maze(9, 9, min_shortest_length=20)  # Create a 9x9 maze
-    # env = Maze.from_file("data/maze_ex2.txt")  # Create a maze from a file
+    env = Maze.from_file("data/maze_ex2.txt")  # Create a maze from a file
 
     max_steps = 50
     gamma = 1.0

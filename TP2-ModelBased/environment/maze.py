@@ -48,7 +48,7 @@ class Maze:
         # Can be 'tabular' or 'nn'
         self.mode = mode
 
-        self.states = [(x, y) for x in range(self.nx) for y in range(self.ny)]
+        self.states = [(y, x) for y in range(self.ny) for x in range(self.nx)]
 
         _ = self.reset()
 
