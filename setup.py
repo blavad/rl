@@ -8,5 +8,5 @@ setup(
     author="David Albert",
     author_email="david@unboared.com",
     packages=[],
-    install_requires=["numpy", "pytorch"],
+    install_requires=["numpy", "pygame", "torch"],
 )

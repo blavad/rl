@@ -18,6 +18,10 @@ Pour bien apprendre pendant ces travaux pratiques il est conseillé d'avoir les 
 - un éditeur de texte. Il existe des environnements de développements très performants que vous serez amené à utiliser en entreprise. Pourquoi ne pas les utiliser dès à présent ?
   - `Visual Studio Code`, `PyCharm`, `SublimeText`, ...
 
-## Et ensuite ?
+> Si votre environnement de travail est près. Vous pouvez commencer [le TP n°1 sur les processus de décision de Markov](./TP1-MDP/README.md).
 
-Si votre environnement de travail est près. Vous pouvez commencer [le TP n°1 sur les processus de décision de Markov](./TP1-MDP/README.md).
+## Auteurs et mentions
+
+Si vous souhaitez réutiliser ces supports, veuillez inclure la mention d'attribution suivante de façon claire et visible.
+
+"Ce support est basé sur les Travaux Pratiques d'apprentissage par renforcement , développé par David Albert (@blavad), disponible à https://github.com/blavad/rl. "

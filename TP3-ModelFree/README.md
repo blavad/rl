@@ -89,4 +89,4 @@ Pour cela :
 
 ## Et ensuite ?
 
-Déjà terminé ? Vous pouvez commencer [le TP n°4 sur les algorithmes d'apprentissage par renforcement profond](../TP4-ModelFree/README.md).
+Déjà terminé ? Vous pouvez commencer [le TP n°4 sur les algorithmes d'apprentissage par renforcement profond](../TP4-DeepRL/README.md).
