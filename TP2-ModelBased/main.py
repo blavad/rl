@@ -5,7 +5,7 @@ from agent import AgentInterface
 from agent.viagent import VIAgent
 from agent.random_agent import RandomAgent
 
-from env.maze import Maze
+from environment.maze import Maze
 
 
 # test once by taking greedy actions based on Q values
@@ -42,8 +42,8 @@ def test_maze(
 
 
 def main(agent, opt):
-    env = Maze(5, 5, min_shortest_length=0)
-    # env = Maze(7, 7, min_shortest_length=15)
+    # env = Maze(5, 5, min_shortest_length=0)
+    env = Maze(7, 7, min_shortest_length=15)
     # env = Maze(20, 8, min_shortest_length=10)
     # env = Maze(9, 9, min_shortest_length=20)  # Create a 9x9 maze
     # env = Maze.from_file("data/maze_ex2.txt")  # Create a maze from a file

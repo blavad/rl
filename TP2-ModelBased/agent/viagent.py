@@ -2,7 +2,7 @@ import numpy as np
 from copy import deepcopy
 
 from agent import AgentInterface
-from env.maze import Maze
+from environment.maze import Maze
 
 
 class VIAgent(AgentInterface):
