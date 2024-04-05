@@ -11,6 +11,26 @@ Les compétences travaillées durant cette activité sont les suivantes :
 - Manipuler des hyperparamètres d'apprentissage
 - Comprendre l'impact des hyperparamètres sur l'apprentissage
 
+## Partie 0 : Pour commencer
+
+10min
+
+### Récupération des travaux pratiques
+
+1. Ouvrir le dossier des TPs dans un terminal
+
+2. Activer l'environnement virtuel python créé lors du TP n°2
+
+   ```bash
+    source .venv/bin/activate # activation de l'environnement
+   ```
+
+3. Installer des dépendances du TP 4.
+   ```bash
+   # Dans le dossier TP4-DeepRL
+   pip3 install -r requirements.txt
+   ```
+
 ## Partie 1 : Théorie
 
 40min

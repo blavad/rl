@@ -10,15 +10,7 @@ Dans ce problème, on s'intéresse à la résolution d'un labyrinthe fixé de ta
 
 10min
 
-### Récupération des travaux pratiques
-
-1. Récupérer les modifications
-
-   ```bash
-   # Mise à jour
-   cd rl
-   git pull origin main
-   ```
+1. Ouvrir le dossier des TPs dans un terminal
 
 2. Activer l'environnement virtuel python créé lors du TP n°2
 
