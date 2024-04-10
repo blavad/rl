@@ -54,7 +54,7 @@ Considérons la tâche qui consiste pour un agent à se diriger vers la sortie d
 
 **La fonction de récompense R** est donnée tel que suit :
 
-- `R(s, a) = -1` pour tout $s \neq s_{exit}$, pour tout $a$ ($R(s_{exit}, a) = 0$).
+- `R(s, a) = -1` pour tout $s \neq s_{exit}$, pour tout $a$ et $R(s_{exit}, a) = 0$.
 
 > **_Remarque :_** l'objectif est atteint quand l'agent atteint le point _exit_ et dans ce cas, l'agent perçoit une récompense nulle.
 
