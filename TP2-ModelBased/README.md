@@ -73,11 +73,12 @@ Sur papier et pour chacun des cas suivants :
 
    **Cas 1 : Transitions déterministes**
 
-   On considèrera une dynamique déterministe.
+   On considèrera une dynamique déterministe. C'est-à-dire que l'agent est sûre d'aller dans la direction qu'il a choisit.
+   > Dans le cas où il se situe sur $s_{exit}$, si reste en $s_{exit}$ avec la probabilité 1, quelquesoit $a$.
 
    **Cas 2 : Nouvelle Récomponse**
 
-   On considère désormais la fonction de récompense $R(s, a) = 0$ si $s \neq s_{exit}$ et $R(s_{exit}, a) = 100$.
+   On considère désormais la fonction de récompense $R(s, a, s') = 0$ si $s' \neq s_{exit}$ et $R(s, a, s_{exit}) = 100$.
 
    **Cas 3 : Transitions stochastiques**
 
