@@ -52,6 +52,14 @@ Parfois, les modèles de la dynamique ($\mathcal{T}$ et $\mathcal{R}$) sont inco
 7.  Analyser les résultats
 8.  Quel est l'intérêt de faire décroître ce paramètre ?
 
+### Visualisation
+20min
+
+1. Modifier le code existant afin de visualiser l'apprentissage
+
+    > Indice : On pourra en fin d'apprentissage afficher $\max_{a}q(s_{start}, a)$ en fonction des $épisodes$.
+   
+
 ## Partie 2 : SARSA
 
 1h00
