@@ -61,6 +61,7 @@ Parfois, les modèles de la dynamique ($\mathcal{T}$ et $\mathcal{R}$) sont inco
    > Indice : On pourra, en fin d'apprentissage, afficher $\max_{a}q(s_{start}, a)$ en fonction des $épisodes$ en utilisant une librairie python au choix (`plotly`, `matplotlib.pyplot`, ...).
 
 2. Lancer l'apprentissage sur le labyrinthe et avec les paramètres de votre choix. En se basant uniquement sur le graphique généré, expliquez si oui ou non l'apprentissage est terminé.
+3. Modifier les paramètres d'apprentissage dans le but d'obtenir la convergence du modèle.
 
 ## Partie 2 : SARSA
 
