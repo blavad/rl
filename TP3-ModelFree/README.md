@@ -47,18 +47,20 @@ Parfois, les modèles de la dynamique ($\mathcal{T}$ et $\mathcal{R}$) sont inco
 
     > Indice : Jouez avec les paramètres d'apprentissage - i.e. `n_episodes` et `max_steps`
 
-6.  Modifier le paramètre `eps_profile` pour ne faire que de l'exploration.
+6.  Dans le fichier `main.py`. Modifier le paramètre `eps_profile` pour ne faire que de l'exploration.
 
 7.  Analyser les résultats
 8.  Quel est l'intérêt de faire décroître ce paramètre ?
 
 ### Visualisation
+
 20min
 
 1. Modifier le code existant afin de visualiser l'apprentissage
 
-    > Indice : On pourra en fin d'apprentissage afficher $\max_{a}q(s_{start}, a)$ en fonction des $épisodes$.
-   
+   > Indice : On pourra, en fin d'apprentissage, afficher $\max_{a}q(s_{start}, a)$ en fonction des $épisodes$ en utilisant une librairie python au choix (`plotly`, `matplotlib.pyplot`, ...).
+
+2. Lancer l'apprentissage sur le labyrinthe et avec les paramètres de votre choix. En se basant uniquement sur le graphique généré, expliquez si oui ou non l'apprentissage est terminé.
 
 ## Partie 2 : SARSA
 
